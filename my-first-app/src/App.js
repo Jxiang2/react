@@ -43,7 +43,7 @@ function App() {
     setShowModal(false)
   }
 
-  const sub = "All latest events in Marioland" // test props
+  const sub = "All the latest events in Marioland" // test props
 
   return (
     <div className="App">
