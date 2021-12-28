@@ -1,6 +1,6 @@
 import "./Modal.css"
 
-export default function Modal({children, handleClose, isSalesModal}) {
+export default function Modal({children, isSalesModal}) {
     return (
         <div className="modal-backdrop">
             <div className="modal" style={{
@@ -8,11 +8,6 @@ export default function Modal({children, handleClose, isSalesModal}) {
                 borderColor: isSalesModal ? "#ff4500": "#555",
                 textAlign: "center"}}>
                 {children}
-
-                <button 
-                    onClick={handleClose}
-                    className={isSalesModal ? "sales-btn": ""}
-                >Close</button>
             </div>
         </div>
     )
