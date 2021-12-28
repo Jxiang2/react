@@ -19,7 +19,8 @@ function App() {
     setEvents(
       (prevEvents)=> {
         console.log(prevEvents)
-        return prevEvents.filter((event)=>{return event.id !== id})
+        return prevEvents.filter((event)=>{
+          return event.id !== id})
       })
   }
 
