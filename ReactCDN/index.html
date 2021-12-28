@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script crossorigin src="https://unpkg.com/react@17/umd/react.development.js"></script> 
+    <script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <h1>my website</h1>
+
+    <div id="banner"></div>
+
+    <footer>
+        <p>footer</p>
+    </footer>
+
+    <script type="text/babel">
+        // component Banner
+        const Banner = () => {
+            const title = "Welcome!"
+            const subtitle = "Learn React"
+            const address = "https://github.com/Jxiang2"
+
+            const handleClick = (e) => {
+                console.log(this)
+                console.log(e)
+                console.log("The site tile is: ", title)
+
+            }
+
+            // the rendering template
+            return (
+                <div className="banner">
+                    <h3>{title.toUpperCase()}</h3>
+                    <p>{subtitle}</p>
+                    <p>Today's date is: {new Date().toString()}</p>
+                    <p>Random number: {Math.random() * 100}</p>
+                    <a href={address}>visit my profile</a>
+
+                    <button onClick={(e) => console.log(e)}>Click Me</button>
+                </div>
+            )
+        }
+        // render a component template to the div with id = banner
+        ReactDOM.render(<Banner />, document.getElementById('banner'))
+    </script>
+</body>
+</html>

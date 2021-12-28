@@ -1,0 +1,18 @@
+.title-block .title {
+  display: inline;
+  padding: 100px;
+  background-color: whitesmoke;
+  border-radius: 8px;
+  font-weight: normal;
+  margin-bottom: 10px;
+}
+
+.title-block .subtitle {
+  display: inline-block;
+  background-color: whitesmoke;
+  padding-bottom: 20px;
+  font-weight: normal;
+  border-bottom: 1px solid wheat;
+  margin-top: 10px;
+  margin-bottom: 60px;
+}
