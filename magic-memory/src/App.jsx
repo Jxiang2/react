@@ -31,6 +31,7 @@ function App() {
   const handleChoice = (card) => {
     choiceOne ? setChoiceTwo(card) : setChoiceOne(card)
   }
+  console.log(choiceOne, choiceTwo)
 
   // compare 2 selected cards
   useEffect(()=>{
@@ -56,7 +57,7 @@ function App() {
   const resetTurn =() => {
     setChoiceOne(null)
     setChoiceTwo(null)
-    setTurns(prevTurns => prevTurns + 1)
+    setTurns(prevTurns => {return prevTurns + 1})
   }
 
   return (
