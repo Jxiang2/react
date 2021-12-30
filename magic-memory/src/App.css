@@ -12,7 +12,18 @@ button {
   cursor: pointer;
   font-size: 1em;
 }
+
 button:hover {
   background: #c23866;
   color: #fff;
+}
+
+.card-grid {
+  margin-top: 40px;
+  margin-left: 100px;
+  margin-right: 100px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  row-gap: 20px;
+  column-gap: 20px;
 }
