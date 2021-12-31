@@ -18,7 +18,7 @@
 }
 
 .navbar a:last-child {
-    color: #fff;
+    color:#fff;
     text-decoration: none;
     margin-left: 40px;
     padding: 8px;
@@ -27,6 +27,6 @@
 
 .navbar a:last-child:hover {
     background-color: #fff;
-    color: brown;
+    color: #333;
 }
 
