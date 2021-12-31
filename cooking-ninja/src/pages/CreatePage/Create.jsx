@@ -13,6 +13,12 @@ export default function Create() {
     const handleSubmit = (e) => {
         e.preventDefault()
         console.log(title, method, cookingTime, ingredients);
+
+        setTitile('')
+        setMethod('')
+        setCookingTime('')
+        setNewIngredient('')
+        SetIngredients([])
     }
 
     const handleAdd = (e) => {
