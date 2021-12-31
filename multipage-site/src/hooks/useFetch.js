@@ -3,13 +3,13 @@ import { useState, useEffect } from "react";
 export const useFetch = (url) => {
     const [data, setData] = useState(null)
     const [isPending, setIsPending] = useState(false)
-    const [error, setError] = useEffect(null)
+    const [error, setError] = useState(null)
 
     useEffect(()=>{
         const controller = new AbortController()
 
         const fetchData = async() => {
-            setIsPending(ture)
+            setIsPending(true)
             try{
                 const res = await fetch(url, {signal: controller.signal})
                 if (!res.ok){
