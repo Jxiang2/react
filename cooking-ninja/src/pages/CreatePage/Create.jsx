@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useRef } from 'react'
 import './Create.css'
 
 export default function Create() {
@@ -6,12 +6,24 @@ export default function Create() {
     const [title, setTitile] = useState('')
     const [method, setMethod] = useState('')
     const [cookingTime, setCookingTime] = useState('')
+    const [newIngredient, setNewIngredient] = useState('')
+    const [ingredients, SetIngredients] =useState([])
+    const ingredientInput = useRef(null)
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        console.log(title, method, cookingTime);
+        console.log(title, method, cookingTime, ingredients);
     }
- 
+
+    const handleAdd = (e) => {
+        e.preventDefault()
+        const ing = newIngredient.trim()
+        if (ing && !ingredients.includes(ing)) {
+            SetIngredients(PrevIngredients => [...PrevIngredients, ing])
+        }
+        setNewIngredient('')
+        ingredientInput.current.focus()
+    } 
     return (
         <div className='create'>
             <h2 className='page-title'>Add a New Recipe</h2>
@@ -32,7 +44,20 @@ export default function Create() {
                      required/>
                 </label>
 
-                {/*ingredients go here*/}
+                <label>
+                    <span>Recipe ingredients</span>
+                    <div className="ingredients">
+                        <input type="text"
+                         onChange={(e)=>setNewIngredient(e.target.value)}
+                         value = {newIngredient}
+                         ref = {ingredientInput}/>
+                        <button className='btn' onClick={handleAdd}>add</button>
+                    </div>
+                </label>
+                <p>
+                    Current Ingredients: 
+                    {ingredients.map(ing=>(<em key={ing}>{ing}, </em>))}
+                </p>
 
                 <label>
                     <span>Cooking time in minutes</span>
