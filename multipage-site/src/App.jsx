@@ -1,5 +1,5 @@
 import './App.css';
-import { BrowserRouter, Route } from 'react-router-dom'
+import { BrowserRouter, Route, Switch, NavLink } from 'react-router-dom'
 
 // pages
 import Home from './pages/Home'
@@ -12,11 +12,17 @@ function App() {
       <BrowserRouter>
         <nav>
           <h1>My Articles</h1>
+          {/* NavLink auto-apply an active class to currently active link */}
+          <NavLink exact to="/">home</NavLink>
+          <NavLink exact to="/about">about</NavLink>
+          <NavLink exact to="/contact">contact</NavLink>
         </nav>
 
-        <Route path="/"><Home/></Route>
-        <Route path="/about"><About/></Route>
-        <Route path="/contact"><Contact/></Route>
+        <Switch>
+          <Route exact path="/"><Home/></Route>
+          <Route exact path="/about"><About/></Route>
+          <Route exact path="/contact"><Contact/></Route>
+        </Switch>
       </BrowserRouter>
     </div>
   );

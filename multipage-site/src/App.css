@@ -7,6 +7,7 @@ nav {
   margin: 0 auto 60px;
   gap: 10px;
   align-items: center;
+  background-color: antiquewhite;
 }
 nav h1 {
   margin-right: auto;
@@ -14,4 +15,10 @@ nav h1 {
 nav a {
   color: #333;
   padding: 4px 10px;
+}
+
+nav a.active {
+  color: white;
+  background-color: #333;
+  text-decoration: none;
 }
