@@ -1,4 +1,4 @@
-import 'Recipie.css'
+import './Recipie.css'
 
 export default function Recipie() {
     return (
