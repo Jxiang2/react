@@ -8,7 +8,7 @@ export default function Home() {
     const {data, isPending, error} = useFetch(url)
 
     console.log(data)
-
+    
     return (
         <div className='home'>
             {error && <p className='error'>{error}</p>}
