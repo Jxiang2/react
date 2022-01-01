@@ -15,7 +15,7 @@ export default function Create() {
     const history = useHistory()
 
     //custom hooks
-    const {postData, data: recipie, error} = useFetch('http://127.0.0.1:3000/recipes', 'POST')
+    const {postData, data: recipie} = useFetch('http://127.0.0.1:3000/recipes', 'POST')
 
     const handleSubmit = (e) => {
         e.preventDefault() // prevent refresh

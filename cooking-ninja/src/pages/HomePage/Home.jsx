@@ -7,6 +7,8 @@ export default function Home() {
     const url = 'http://localhost:3000/recipes'
     const {data, isPending, error} = useFetch(url)
 
+    console.log(data)
+
     return (
         <div className='home'>
             {error && <p className='error'>{error}</p>}
