@@ -20,6 +20,7 @@ export default function Create() {
     const handleSubmit = (e) => {
         e.preventDefault() // prevent refresh
         postData({title, ingredients, method, cookingTime: cookingTime+'minutes'})
+        console.log(recipie) // no log at this time as fetchData is async
     }
 
     // redirect user to home when postData completes
