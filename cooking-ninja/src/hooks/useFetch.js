@@ -19,10 +19,10 @@ export const useFetch = (url, method="GET") => {
     useEffect(()=>{
         const controller = new AbortController()
 
-        const fetchData = async(fetchpayloads) => {
+        const fetchData = async(fetchPayload) => {
             setIsPending(true)
             try{
-                const res = await fetch(url, {...fetchpayloads, signal:controller.signal})
+                const res = await fetch(url, {...fetchPayload, signal:controller.signal})
                 if (!res.ok){
                     throw new Error(res.statusText) // error to be catched later
                 }
