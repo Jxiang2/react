@@ -2,6 +2,11 @@ import { Link } from 'react-router-dom'
 import './RecipieList.css'
 
 export default function RecipieList({recipies}) {
+
+    if (recipies.length === 0) {
+        return <div className='error'>No recipies to load...</div>
+    }
+
     return (
         <div className='recipe-list'>
             {recipies.map((recipie)=>(
