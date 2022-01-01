@@ -1,28 +1,37 @@
-import { useState, useRef } from 'react'
+import { useState, useRef, useEffect } from 'react'
+import { useHistory } from 'react-router-dom'
+import { useFetch } from '../../hooks/useFetch'
 import './Create.css'
 
 export default function Create() {
 
+    // hooks
     const [title, setTitile] = useState('')
     const [method, setMethod] = useState('')
     const [cookingTime, setCookingTime] = useState('')
     const [newIngredient, setNewIngredient] = useState('')
     const [ingredients, SetIngredients] =useState([])
     const ingredientInput = useRef(null)
+    const history = useHistory()
+
+    //custom hooks
+    const {postData, data: recipie, error} = useFetch('http://127.0.0.1:3000/recipes', 'POST')
 
     const handleSubmit = (e) => {
-        e.preventDefault()
-        console.log(title, method, cookingTime, ingredients);
-
-        setTitile('')
-        setMethod('')
-        setCookingTime('')
-        setNewIngredient('')
-        SetIngredients([])
+        e.preventDefault() // prevent refresh
+        postData({title, ingredients, method, cookingTime: cookingTime+'minutes'})
     }
 
+    // redirect user to home when postData completes
+    useEffect(()=>{
+        if (recipie) {
+            console.log(recipie)
+            history.push('/')
+        }
+    }, [recipie])
+
     const handleAdd = (e) => {
-        e.preventDefault()
+        e.preventDefault() // prevent refresh
         const ing = newIngredient.trim()
         if (ing && !ingredients.includes(ing)) {
             SetIngredients(PrevIngredients => [...PrevIngredients, ing])
