@@ -6,7 +6,7 @@ import './Navbar.css'
 export default function Navbar() {
 
     const {color} = useTheme()
-    console.log(color);
+    // console.log(color);
 
     return (
         <div className='navbar' style={{background: color}}>

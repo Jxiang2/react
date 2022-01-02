@@ -13,7 +13,7 @@ export default function RecipieList({recipies}) {
 
     const handleClick = async (id) => {
         await projectFirestore.collection('recipes').doc(id).delete()
-        console.log('delete success')
+        // console.log('delete success')
     }
 
     return (
