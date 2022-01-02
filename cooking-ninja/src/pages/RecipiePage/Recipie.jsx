@@ -31,7 +31,7 @@ export default function Recipie() {
             }
         })
 
-        return () => {unsub()}  // fire when the home component unmount
+        return () => {unsub()}  // fire when the recipie component unmount
     }, [id])
 
     return (
