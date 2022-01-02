@@ -1,5 +1,4 @@
 import { Link } from 'react-router-dom'
-import SearchBar from './SearchBar'
 import { useTheme } from '../hooks/useTheme'
 import './Navbar.css'
 
@@ -12,7 +11,6 @@ export default function Navbar() {
         <div className='navbar' style={{background: color}}>
             <nav>
                 <Link className="logo" to={"/"}><h1>Cooking Ninja</h1></Link>
-                <SearchBar/>
                 <Link to={"/create"}>Create Recipie</Link>
             </nav>
             
