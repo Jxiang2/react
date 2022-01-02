@@ -1,5 +1,4 @@
 import {Switch, BrowserRouter, Route} from 'react-router-dom'
-
 import { useTheme } from './hooks/useTheme'
 import Navbar from './components/Navbar'
 import ThemeSelector from './components/ThemeSelector'
@@ -10,9 +9,6 @@ import Recipie from './pages/RecipiePage/Recipie'
 
 // styles
 import './App.css';
-
-
-
 
 function App() {
 

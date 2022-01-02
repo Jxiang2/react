@@ -17,6 +17,7 @@ export default function Recipie() {
         setIsPending(true)
         projectFirestore.collection('recipes').doc(id).get().then((doc)=>{
             if (doc.exists) {
+                console.log('I am here');
                 setIsPending(false)
                 setRecipe(doc.data())
             } else {
@@ -28,6 +29,7 @@ export default function Recipie() {
 
     return (
         <div className={`recipe ${mode}`}>
+            <p>recipe detail</p>
             {error && <p className='error'>{error}</p>}
             {isPending && <p className='loading'>Loading...</p>}
             {recipe && (
