@@ -11,7 +11,7 @@ export default function Home() {
 
     useEffect(()=>{
         setIsPending(true)
-        // a listener, if firebase collection changed, send back a new snapshot
+        // setup a realtime listner for firebase collection at the start of evaluation instead of get()
         const unsub = projectFirestore.collection('recipes').onSnapshot((snapshot)=>{
             if (snapshot.empty) {
                 setError('No recipes to load')
@@ -29,7 +29,7 @@ export default function Home() {
             setError(err.message)
             setIsPending(false)
         })
-        return () => unsub() // fire when the home component unmount
+        return () => unsub() // fire when the home component unmount to stop realtime listner
     }, [])
 
     return (
