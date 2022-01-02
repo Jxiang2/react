@@ -22,11 +22,12 @@ export default function ThemeSelector() {
                  style={{filter: mode === 'dark' ? 'invert(100%)' : 'invert(20%)'}}
                  />
             </div>
-            <div className='theme-btns'>
+            <div className='theme-buttons'>
                 {themeColors.map((color)=>(
-                    <button
+                    <div
                         key={color}
                         onClick={()=>changeColor(color)}
+                        style={{background: color}}
                     />
                 ))}
             </div>
