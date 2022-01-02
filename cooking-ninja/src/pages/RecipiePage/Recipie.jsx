@@ -17,7 +17,6 @@ export default function Recipie() {
         setIsPending(true)
         projectFirestore.collection('recipes').doc(id).get().then((doc)=>{
             if (doc.exists) {
-                console.log('I am here');
                 setIsPending(false)
                 setRecipe(doc.data())
             } else {
