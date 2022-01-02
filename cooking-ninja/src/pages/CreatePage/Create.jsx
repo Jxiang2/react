@@ -1,6 +1,6 @@
-import { useState, useRef, useEffect } from 'react'
+import { useState, useRef } from 'react'
 import { useHistory } from 'react-router-dom'
-import { useFetch } from '../../hooks/useFetch'
+import { projectFirestore } from '../../firebase/config'
 import './Create.css'
 
 export default function Create() {
@@ -14,26 +14,22 @@ export default function Create() {
     const ingredientInput = useRef(null)
     const history = useHistory()
 
-    //custom hooks
-    const {postData, data: recipie} = useFetch('http://127.0.0.1:3000/recipes', 'POST')
-
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault() // prevent refresh
-        postData({
+        const doc = {
             title: title,
             ingredients: ingredients,
             method: method,
-            cookingTime: cookingTime+'minutes'})
-        console.log(recipie) // no log at this time as fetchData is async
-    }
-
-    // redirect user to home when postData completes
-    useEffect(()=>{
-        if (recipie) {
-            console.log(recipie)
+            cookingTime: cookingTime+'minutes'}
+        
+        try {
+            await projectFirestore.collection('recipes').add(doc)
             history.push('/')
+        } catch(err) {
+            console.log(err)
         }
-    }, [recipie, history])
+        
+    }
 
     const handleAdd = (e) => {
         e.preventDefault() // prevent refresh

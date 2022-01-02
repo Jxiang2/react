@@ -20,11 +20,11 @@ export default function ThemeSelector() {
                  src={modeIcon} alt='img error'
                  onClick={toggleMode}
                  style={{filter: mode === 'dark' ? 'invert(100%)' : 'invert(20%)'}}
-                />
+                 />
             </div>
             <div className='theme-btns'>
                 {themeColors.map((color)=>(
-                    <div
+                    <button
                         key={color}
                         onClick={()=>changeColor(color)}
                     />
