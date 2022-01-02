@@ -13,9 +13,15 @@ export default function Recipie() {
     const [isPending, setIsPending] = useState(false)
     const [error, setError] = useState(null)
 
+    const handleClick = () => {
+        projectFirestore.collection('recipes').doc(id).update({
+            title: "something completely different"
+        })
+    }
+
     useEffect(()=>{
         setIsPending(true)
-        projectFirestore.collection('recipes').doc(id).get().then((doc)=>{
+        const unsub = projectFirestore.collection('recipes').doc(id).onSnapshot((doc)=>{
             if (doc.exists) {
                 setIsPending(false)
                 setRecipe(doc.data())
@@ -24,6 +30,8 @@ export default function Recipie() {
                 setError('Could not find that recipe')
             }
         })
+
+        return () => {unsub()}  // fire when the home component unmount
     }, [id])
 
     return (
@@ -39,6 +47,7 @@ export default function Recipie() {
                         {recipe.ingredients.map(ing=>(<li key={ing}>{ing}</li>))}
                     </ul>
                     <p className='method'>{recipe.method}</p>
+                    <button onClick={handleClick}>Update me</button>
                 </>
             )}
         </div>

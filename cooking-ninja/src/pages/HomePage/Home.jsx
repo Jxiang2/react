@@ -11,7 +11,8 @@ export default function Home() {
 
     useEffect(()=>{
         setIsPending(true)
-        projectFirestore.collection('recipes').get().then((snapshot)=>{
+        // a listener, if firebase collection changed, send back a new snapshot
+        const unsub = projectFirestore.collection('recipes').onSnapshot((snapshot)=>{
             if (snapshot.empty) {
                 setError('No recipes to load')
                 setIsPending(false)
@@ -24,10 +25,11 @@ export default function Home() {
                 setData(res)
                 setIsPending(false)
             } 
-        }).catch((err)=>{
+        }, (err) => {
             setError(err.message)
             setIsPending(false)
         })
+        return () => unsub() // fire when the home component unmount
     }, [])
 
     return (
