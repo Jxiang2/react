@@ -16,7 +16,7 @@ export default function Home() {
                 setError('No recipes to load')
                 setIsPending(false)
             } else {
-                console.log(snapshot)
+                // console.log(snapshot)
                 let res = []
                 snapshot.docs.forEach((doc)=>{
                     res.push({id: doc.id, ...doc.data()})
