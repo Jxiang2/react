@@ -8,6 +8,7 @@ import styles from './Navbar.module.css'
 export default function Navbar() {
 
     const { logout } = useLogout()
+    // when user property in the context is changed by reducer, all components using the property re-renders
     const { user } = useAuthContext() 
 
     return (
