@@ -1,5 +1,4 @@
 # remove .DS_Store
 .DS_Store
 node_modules
-cooking-ninja-tutorial
 .env
