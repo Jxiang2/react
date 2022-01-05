@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react"
 import { projectFirestore } from "../config/config"
 
-export const useCollection = (collection, _query) => {
+export const useCollection = (collection, _query, _orderBy) => {
 
     const [documents, setDocuments] = useState(null)
     const [error, setError] = useState(null)
@@ -9,11 +9,15 @@ export const useCollection = (collection, _query) => {
     // if don't use a ref --> infinite loop in useEffect
     // _query is am reference ary and is diffrerent in memeory on every function call
     const query = useRef(_query).current // current ary value
+    const orderBy = useRef(_orderBy).current
 
     useEffect(()=>{
         let ref = projectFirestore.collection(collection)
         if (query) {
             ref = ref.where(...query)
+        }
+        if (orderBy) {
+            ref = ref.orderBy(...orderBy)
         }
         const unsub = ref.onSnapshot((snapshot)=> {
             let resource = []
@@ -30,7 +34,7 @@ export const useCollection = (collection, _query) => {
         })
         // clearup function: unsubscribe on unmount
         return () => unsub()
-    }, [collection, query])
+    }, [collection, query, orderBy])
 
     return {documents, error}
 }
