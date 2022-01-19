@@ -28,7 +28,7 @@ export default function Articles() {
           </div>
         ))}
 
-        {!articles && [1,2,3,4,5,6,7,8,9,10].map((n) => <SkeletonArticle key={n}/>)}
+        {!articles && [1,2,3,4,5,6,7,8,9,10].map((n) => <SkeletonArticle theme='dark' key={n}/>)}
     </div>
   )
 }
