@@ -26,7 +26,7 @@ export default function User() {
           </div>
         )}
 
-        {!profile && <SkeletonProfile theme='dark'/>}
+        {!profile && <SkeletonProfile/>}
     </div>
   )
 }

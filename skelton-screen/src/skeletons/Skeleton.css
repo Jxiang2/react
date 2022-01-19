@@ -40,16 +40,3 @@
     gap: 30px;
     align-items: center;
 }
-
-/* theme */
-.skeleton-wrapper.light {
-    background: #f2f2f2; /*light grey*/
-}
-
-.skeleton-wrapper.dark {
-    background-color: #444;
-}
-
-.skeleton-wrapper.dark.skeleton {
-    background: #777;
-}

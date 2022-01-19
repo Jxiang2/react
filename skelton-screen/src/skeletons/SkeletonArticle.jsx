@@ -1,12 +1,10 @@
 import React from 'react';
 import SkeletonElement from './SkeletonElement';
 
-export default function SkeletonArticle({ theme }) {
-
-  const themeClass = theme || 'light'
+export default function SkeletonArticle() {
 
   return (
-    <div className={`skeleton-wrapper ${themeClass}`}>
+    <div className='skeleton-wrapper'>
         <div className='skeleton-article'>
             <SkeletonElement type='title'/>
             <SkeletonElement type='text'/>
