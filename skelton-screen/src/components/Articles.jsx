@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import SkeletonElement from '../skeletons/SkeletonElement';
 
 export default function Articles() {
 
@@ -17,6 +18,11 @@ export default function Articles() {
   return (
     <div className='articles'>
         <h2>Articles</h2>
+
+        <SkeletonElement type={'title'}/>
+        <SkeletonElement type={'text'}/>
+        <SkeletonElement type={'thunbmail'}/>
+        <SkeletonElement type={'avatar'}/>
 
         {articles && articles.map(article => (
           <div className='article' key={article.id}>
