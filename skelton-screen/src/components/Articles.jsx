@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import SkeletonElement from '../skeletons/SkeletonElement';
+import SkeletonArticle from '../skeletons/SkeletonArticle';
 
 export default function Articles() {
 
@@ -7,6 +7,8 @@ export default function Articles() {
   const currentArticles = useRef(articles).current
 
   useEffect(()=>{
+
+
     setTimeout(async()=>{
       const res = await fetch('https://jsonplaceholder.typicode.com/posts')
       const data = await res.json()
@@ -19,11 +21,6 @@ export default function Articles() {
     <div className='articles'>
         <h2>Articles</h2>
 
-        <SkeletonElement type={'title'}/>
-        <SkeletonElement type={'text'}/>
-        <SkeletonElement type={'thunbmail'}/>
-        <SkeletonElement type={'avatar'}/>
-
         {articles && articles.map(article => (
           <div className='article' key={article.id}>
             <h3>{article.title}</h3>
@@ -31,7 +28,7 @@ export default function Articles() {
           </div>
         ))}
 
-        {!articles && <div>loading...</div>}
+        {!articles && [1,2,3,4,5,6,7,8,9,10].map((n) => <SkeletonArticle key={n}/>)}
     </div>
   )
 }
