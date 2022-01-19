@@ -7,13 +7,11 @@ export default function Articles() {
   const currentArticles = useRef(articles).current
 
   useEffect(()=>{
-
-
     setTimeout(async()=>{
       const res = await fetch('https://jsonplaceholder.typicode.com/posts')
       const data = await res.json()
       setArticles(data)
-    }, 1500)
+    }, 3000)
   }, [currentArticles])
 
 
