@@ -16,11 +16,11 @@ export default function Articles() {
 
 
   return (
-    <div className='articles'>
+    <div>
         <h2>Articles</h2>
 
         {articles && articles.map(article => (
-          <div className='article' key={article.id}>
+          <div key={article.id}>
             <h3>{article.title}</h3>
             <p>{article.body}</p>
           </div>

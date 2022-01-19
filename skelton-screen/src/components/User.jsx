@@ -15,11 +15,11 @@ export default function User() {
   }, [currentProfile])
 
   return (
-    <div className='user'>
+    <div>
         <h2>User Profile</h2>
 
         {profile && (
-          <div className='profile'>
+          <div>
             <h3>{profile.username}</h3>
             <p>{profile.email}</p>
             <a href={profile.website}>{profile.website}</a>
