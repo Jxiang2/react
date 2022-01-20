@@ -1,10 +1,9 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import SkeletonArticle from '../skeletons/SkeletonArticle';
 
 export default function Articles() {
 
   const [articles, setArticles] = useState(null)
-  const currentArticles = useRef(articles).current
 
   useEffect(()=>{
     setTimeout(async()=>{
@@ -12,8 +11,9 @@ export default function Articles() {
       const data = await res.json()
       setArticles(data)
     }, 3000)
-  }, [currentArticles])
+  }, [])
 
+  console.log(articles)
 
   return (
     <div>

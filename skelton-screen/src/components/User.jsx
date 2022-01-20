@@ -1,10 +1,9 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import SkeletonProfile from '../skeletons/SkeletonProfile';
 
 export default function User() {
 
   const [profile, setProfile] = useState(null)
-  const currentProfile = useRef(profile).current
 
   useEffect(()=>{
     setTimeout(async()=>{
@@ -12,7 +11,7 @@ export default function User() {
       const data = await res.json()
       setProfile(data)
     }, 3000)
-  }, [currentProfile])
+  }, [])
 
   return (
     <div>
