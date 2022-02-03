@@ -44,11 +44,16 @@ export default function List({ places }) {
 			</FormControl>
 
 			<Grid container spaceing={3} className={clasess.list}>
-				{places?.map((place, i) => (
-					<Grid item key={i} xs={12}>
-						<PlaceDetails place={place} />
-					</Grid>
-				))}
+				{places && places.length > 0 ? (
+					places?.map((place, i) => (
+						<Grid item key={i} xs={12}>
+							<PlaceDetails place={place} />
+							<br />
+						</Grid>
+					))
+				) : (
+					<div style={{ margin: "auto auto" }}>Loading ...</div>
+				)}
 			</Grid>
 		</div>
 	);

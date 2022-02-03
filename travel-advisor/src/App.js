@@ -11,7 +11,7 @@ import { CssBaseline, Grid } from "@material-ui/core";
 function App() {
 	const [places, setPlaces] = useState([]);
 	const [coordinates, setCoordinates] = useState({});
-	const [bounds, setBounds] = useState(null);
+	const [bounds, setBounds] = useState({});
 
 	// initialize google map
 	useEffect(() => {
@@ -29,6 +29,10 @@ function App() {
 				setPlaces(data);
 			});
 		}
+
+		return () => {
+			controller.abort();
+		};
 	}, [coordinates, bounds]);
 
 	return (
