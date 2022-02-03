@@ -22,10 +22,13 @@ function App() {
 
 	// get local place data
 	useEffect(() => {
-		bounds &&
-			getPlacesData(bounds.sw, bounds.ne).then((data) => {
+		const controller = new AbortController();
+
+		if (bounds) {
+			getPlacesData(bounds.sw, bounds.ne, controller).then((data) => {
 				setPlaces(data);
 			});
+		}
 	}, [coordinates, bounds]);
 
 	return (
