@@ -10,7 +10,7 @@ import { LocationCityOutlined } from "@material-ui/icons";
 import LocationOnOutlinedIcon from "@material-ui/icons/LocationOnOutlined";
 
 // styles
-import useStyles from "./styles";
+import useStyles from "./mapStyles";
 
 export default function Map({ coordinates, setCoordinates, setBounds }) {
 	const classes = useStyles();

@@ -13,7 +13,7 @@ import {
 } from "@material-ui/core";
 
 // styles
-import useStyles from "./styles";
+import useStyles from "./listStyles";
 
 export default function List({ places }) {
 	const clasess = useStyles();

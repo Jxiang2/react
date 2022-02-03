@@ -3,17 +3,11 @@ import React from "react";
 import { Autocomplete } from "@react-google-maps/api";
 
 // mui
-import {
-	AppBar,
-	Toolbar,
-	Typography,
-	InputBase,
-	Box,
-} from "@material-ui/core";
+import { AppBar, Toolbar, Typography, InputBase, Box } from "@material-ui/core";
 import SearchIcon from "@material-ui/icons/Search";
 
 // styles
-import useStyles from "./styles";
+import useStyles from "./headerStyles";
 
 export default function Header() {
 	const classes = useStyles();
@@ -26,9 +20,7 @@ export default function Header() {
 				</Typography>
 
 				<Box display='flex'>
-					<Typography
-						variant='h6'
-						className={classes.title}>
+					<Typography variant='h6' className={classes.title}>
 						Explore more places
 					</Typography>
 
