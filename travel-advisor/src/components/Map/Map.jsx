@@ -20,7 +20,7 @@ export default function Map({ coordinates, setCoordinates, setBounds }) {
 	return (
 		<div className={classes.mapContainer}>
 			<GoogleMapReact
-				defaultCenter={coordinates}
+				defaultCenter={{ lat: 0, lng: 0 }}
 				center={coordinates}
 				defaultZoom={14}
 				margin={[50, 50, 50, 50]}
