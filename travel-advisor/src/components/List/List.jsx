@@ -19,44 +19,24 @@ export default function List() {
 	const clasess = useStyles();
 	const [type, setType] = useState("restaurants");
 	const [rating, setRating] = useState(0);
-	const places = [
-		{ name: "Cool Place" },
-		{ name: "Best Beer" },
-		{ name: "Best stack" },
-		{ name: "Cool Place" },
-		{ name: "Best Beer" },
-		{ name: "Best stack" },
-		{ name: "Cool Place" },
-		{ name: "Best Beer" },
-		{ name: "Best stack" },
-	];
+	const places = [];
 
 	return (
 		<div className={clasess.container}>
-			<Typography variant='h4'>
-				Restraurant, Hotels & Attractions Around you
-			</Typography>
+			<Typography variant='h4'>Restraurant, Hotels & Attractions Around you</Typography>
 
 			<FormControl className={clasess.formControl}>
 				<InputLabel>Type</InputLabel>
-				<Select
-					value={type}
-					onChange={(e) => setType(e.target.value)}>
-					<MenuItem value='restaurants'>
-						Restaurants
-					</MenuItem>
+				<Select value={type} onChange={(e) => setType(e.target.value)}>
+					<MenuItem value='restaurants'>Restaurants</MenuItem>
 					<MenuItem value='hotels'>Hotels</MenuItem>
-					<MenuItem value='attractions'>
-						Attractions
-					</MenuItem>
+					<MenuItem value='attractions'>Attractions</MenuItem>
 				</Select>
 			</FormControl>
 
 			<FormControl className={clasess.formControl}>
 				<InputLabel>Rating</InputLabel>
-				<Select
-					value={rating}
-					onChange={(e) => setRating(e.target.value)}>
+				<Select value={rating} onChange={(e) => setRating(e.target.value)}>
 					<MenuItem value={0}>ALL</MenuItem>
 					<MenuItem value={3}>Above 3</MenuItem>
 					<MenuItem value={4}>Above 4</MenuItem>
