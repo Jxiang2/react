@@ -1,24 +1,6 @@
 {
   "trips": [
     {
-      "title": "Two Night Stay in Venice",
-      "price": "£195",
-      "id": 1,
-      "loc": "europe"
-    },
-    {
-      "title": "Three Night Stay in Paris",
-      "price": "£295",
-      "id": 2,
-      "loc": "europe"
-    },
-    {
-      "title": "Seven Night Stay in Toronto",
-      "price": "£295",
-      "loc": "canada",
-      "id": 3
-    },
-    {
       "title": "Seven Night Stay in Toronto",
       "price": "£295",
       "loc": "canada",
@@ -29,12 +11,6 @@
       "price": "£20",
       "loc": "japan",
       "id": 5
-    },
-    {
-      "title": "Three Night Stay in Moscow",
-      "price": "$1200",
-      "loc": "europe",
-      "id": 6
     }
   ]
 }

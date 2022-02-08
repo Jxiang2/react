@@ -3,7 +3,7 @@ import ChangePriceComponent from "./ChangePriceComponent";
 import "./TripList.css";
 
 export default function TripList() {
-	const options = {
+	const getOptions = {
 		method: "GET",
 		url: "http://127.0.0.1:3000/trips",
 		headers: {
@@ -11,7 +11,8 @@ export default function TripList() {
 			"Content-Type": "application/json;charset=UTF-8",
 		},
 	};
-	const { response: trips, updateOptions } = useAxios(options);
+
+	const { response, updateOptions } = useAxios(getOptions);
 
 	const deleteTrip = (tripId) => {
 		console.log(`delete the trip with id ${tripId}`);
@@ -21,12 +22,12 @@ export default function TripList() {
 		<div className='trip-list'>
 			<h2>Trip List</h2>
 
-			{trips.error && <div>{trips.error}</div>}
-			{trips.isPending && <div>Loading...</div>}
+			{response.error && <div>{response.error}</div>}
+			{response.isPending && <div>Loading...</div>}
 
 			<ul>
-				{trips.data &&
-					trips.data.map((t) => (
+				{response.data &&
+					response.data.map((t) => (
 						<li key={t.id}>
 							<h3>{t.title}</h3>
 							<p>{t.price}</p>
@@ -39,12 +40,13 @@ export default function TripList() {
 			<div className='filters'>
 				<button
 					onClick={() =>
-						updateOptions({ ...options, url: "http://127.0.0.1:3000/trips?loc=europe" })
+						updateOptions({ ...getOptions, url: "http://127.0.0.1:3000/trips?loc=europe" })
 					}>
 					European Trips
 				</button>
 
-				<button onClick={() => updateOptions({ ...options, url: "http://127.0.0.1:3000/trips" })}>
+				<button
+					onClick={() => updateOptions({ ...getOptions, url: "http://127.0.0.1:3000/trips" })}>
 					All Trips
 				</button>
 			</div>

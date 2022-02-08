@@ -16,7 +16,7 @@ function App() {
 	const [title, setTitle] = useState("");
 	const [price, setPrice] = useState("");
 	const [location, setLocation] = useState("");
-	const { response, updateOptions } = useAxios(options);
+	const { updateOptions } = useAxios(options);
 
 	const resetForm = () => {
 		setTitle("");

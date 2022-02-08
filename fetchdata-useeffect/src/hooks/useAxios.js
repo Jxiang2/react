@@ -11,21 +11,31 @@ let initialState = {
 const axiosReducer = (state, action) => {
 	switch (action.type) {
 		case "INVALID_INPUT":
-			return { isPending: false, data: null, success: false, error: action.payload };
+			return {
+				name: "invalidInput",
+				isPending: false,
+				data: null,
+				success: false,
+				error: action.payload,
+			};
 		case "IS_PENDING":
-			return { isPending: true, data: null, success: false, error: null };
+			return { name: "isPending", isPending: true, data: null, success: false, error: null };
 		case "ERROR":
-			return { isPending: false, data: null, success: false, error: action.payload };
-		case "CREATED":
-			return { isPending: false, data: action.payload, success: true, error: null };
+			return {
+				name: "error",
+				isPending: false,
+				data: null,
+				success: false,
+				error: action.payload,
+			};
 		case "RETRIEVED":
-			return { isPending: false, data: action.payload, success: true, error: null };
-		case "UPDATED":
-			return { isPending: false, data: action.payload, success: true, error: null };
-		case "DELETED":
-			return { isPending: false, data: null, success: true, error: null };
-		default:
-			return state;
+			return {
+				name: "retrieved",
+				isPending: false,
+				data: action.payload,
+				success: true,
+				error: null,
+			};
 	}
 };
 
@@ -68,8 +78,8 @@ export const useAxios = (_options) => {
 
 		// process crud requests
 		const processRequest = async (axiosPayload) => {
-			if (!["GET", "POST", "PUT", "PATCH", "DELETE"].includes(httpMethod)) {
-				throw new Error("Http method can not be recognized");
+			if (!["GET"].includes(httpMethod)) {
+				throw new Error("useAxiosGet can only get data");
 			}
 
 			dispatch({ type: "IS_PENDING" });
@@ -85,18 +95,8 @@ export const useAxios = (_options) => {
 				const axiosData = await axiosResponse.data;
 
 				switch (httpMethod) {
-					case "POST":
-						dispatch({ type: "CREATED", payload: axiosData });
-						break;
 					case "GET":
 						dispatch({ type: "RETRIEVED", payload: axiosData });
-						break;
-					case "PUT":
-					case "PATCH":
-						dispatch({ type: "UPDATED", payload: axiosData });
-						break;
-					case "DELETED":
-						dispatch({ type: "DELETED", payload: axiosData });
 						break;
 					default:
 						break;
@@ -110,14 +110,6 @@ export const useAxios = (_options) => {
 
 		if (isInputValid()) {
 			if (httpMethod === "GET") {
-				processRequest(options);
-			}
-
-			if (httpMethod === "POST" && options.data) {
-				processRequest(options);
-			}
-
-			if (httpMethod === "DELETE") {
 				processRequest(options);
 			}
 		}
