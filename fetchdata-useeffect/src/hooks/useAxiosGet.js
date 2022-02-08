@@ -23,7 +23,7 @@ const axiosReducer = (state, action) => {
 	}
 };
 
-export const useAxios = (_options) => {
+export const useAxiosGet = (_options) => {
 	const [response, dispatch] = useReducer(axiosReducer, initialState);
 	const [options, setOptions] = useState({ ..._options, method: "GET" });
 

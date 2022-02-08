@@ -1,4 +1,4 @@
-import { useAxios } from "../hooks/useAxiosGet";
+import { useAxiosGet } from "../hooks/useAxiosGet";
 import ChangePriceComponent from "./ChangePriceComponent";
 import "./TripList.css";
 
@@ -11,7 +11,7 @@ export default function TripList() {
 		},
 	};
 
-	const { response, updateOptions } = useAxios(getOptions);
+	const { response, updateOptions } = useAxiosGet(getOptions);
 
 	const deleteTrip = (tripId) => {
 		console.log(`delete the trip with id ${tripId}`);
