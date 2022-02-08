@@ -13,40 +13,28 @@
       "loc": "europe"
     },
     {
-      "title": "Four Night Stay in London",
-      "price": "£345",
-      "id": 3,
-      "loc": "europe"
-    },
-    {
-      "title": "Three Night Stay in HK",
-      "price": "£325",
-      "id": 4,
-      "loc": "china"
-    },
-    {
-      "title": "Five Night Stay in SH",
-      "price": "£925",
-      "id": 5,
-      "loc": "china"
+      "title": "Seven Night Stay in Toronto",
+      "price": "£295",
+      "loc": "canada",
+      "id": 3
     },
     {
       "title": "Seven Night Stay in Toronto",
       "price": "£295",
       "loc": "canada",
-      "id": 6
-    },
-    {
-      "title": "Seven Night Stay in Toronto",
-      "price": "£295",
-      "loc": "canada",
-      "id": 7
+      "id": 4
     },
     {
       "title": "One Night Stay in Tokyo",
       "price": "£20",
       "loc": "japan",
-      "id": 8
+      "id": 5
+    },
+    {
+      "title": "Three Night Stay in Moscow",
+      "price": "$1200",
+      "loc": "europe",
+      "id": 6
     }
   ]
 }

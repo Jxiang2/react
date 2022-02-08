@@ -4,7 +4,7 @@ import TripList from "./components/TripList";
 
 const options = {
 	method: "POST",
-	url: "http://127.0.0.1:3000/trips",
+	url: "http://127.0.0.1:3000/tris",
 	headers: {
 		Accept: "application/json",
 		"Content-Type": "application/json;charset=UTF-8",
@@ -16,7 +16,7 @@ function App() {
 	const [title, setTitle] = useState("");
 	const [price, setPrice] = useState("");
 	const [location, setLocation] = useState("");
-	const { response: addedTrip, updateOptions } = useAxios(options);
+	const { response, updateOptions } = useAxios(options);
 
 	const resetForm = () => {
 		setTitle("");
@@ -24,7 +24,7 @@ function App() {
 		setLocation("");
 	};
 
-	const addNewtrip = (e) => {
+	const addNewtrip = async (e) => {
 		e.preventDefault();
 		if (title && price && location) {
 			updateOptions({
@@ -35,7 +35,6 @@ function App() {
 					loc: location,
 				},
 			});
-			console.log(addedTrip.data);
 			resetForm();
 		} else {
 			console.log("input can not be empty!");

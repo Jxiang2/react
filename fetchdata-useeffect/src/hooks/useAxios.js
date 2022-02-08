@@ -30,35 +30,11 @@ const axiosReducer = (state, action) => {
 };
 
 export const useAxios = (_options) => {
-	// input must be an object that including 3 properties: method: String, url: String and headers: Object,
-	const checkInput = () => {
-		if (Object.keys(_options).length < 3) {
-			dispatch({
-				type: "INVALID_INPUT",
-				payload: "input options is invalid, make sure it at least includes method, url and headers",
-			});
-		}
-
-		if (
-			!(
-				Object.keys(_options).includes("method") &&
-				Object.keys(_options).includes("url") &&
-				Object.keys(_options).includes("headers")
-			)
-		) {
-			dispatch({
-				type: "INVALID_INPUT",
-				payload: "input options is invalid, make sure it at least includes method, url and headers",
-			});
-		}
-	};
-
-	checkInput();
-
 	const [response, dispatch] = useReducer(axiosReducer, initialState);
 	const [options, setOptions] = useState(_options);
 	const httpMethod = options.method;
 
+	// update options to perform post, update, delete
 	const updateOptions = (newOptions) => {
 		setOptions(newOptions);
 	};
@@ -66,6 +42,31 @@ export const useAxios = (_options) => {
 	useEffect(() => {
 		const controller = new AbortController();
 
+		const isInputValid = () => {
+			if (Object.keys(options).length < 3) {
+				console.log(
+					"input must be an object that including 3 properties: method: String, url: String and headers: Object"
+				);
+				return false;
+			}
+
+			if (
+				!(
+					Object.keys(options).includes("method") &&
+					Object.keys(options).includes("url") &&
+					Object.keys(options).includes("headers")
+				)
+			) {
+				console.log(
+					"input must be an object that including 3 properties: method: String, url: String and headers: Object"
+				);
+				return false;
+			}
+
+			return true;
+		};
+
+		// process crud requests
 		const processRequest = async (axiosPayload) => {
 			if (!["GET", "POST", "PUT", "PATCH", "DELETE"].includes(httpMethod)) {
 				throw new Error("Http method can not be recognized");
@@ -107,14 +108,18 @@ export const useAxios = (_options) => {
 			}
 		};
 
-		if (httpMethod === "GET") {
-			console.log("get is running");
-			processRequest(options);
-		}
+		if (isInputValid()) {
+			if (httpMethod === "GET") {
+				processRequest(options);
+			}
 
-		if (httpMethod === "POST" && options.data) {
-			console.log("post is running");
-			processRequest(options);
+			if (httpMethod === "POST" && options.data) {
+				processRequest(options);
+			}
+
+			if (httpMethod === "DELETE") {
+				processRequest(options);
+			}
 		}
 
 		return () => {
