@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { useAxios } from "./hooks/useAxios";
 import TripList from "./components/TripList";
 
 function App() {

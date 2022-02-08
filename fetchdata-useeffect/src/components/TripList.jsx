@@ -1,4 +1,4 @@
-import { useAxios } from "../hooks/useAxios";
+import { useAxios } from "../hooks/useAxiosGet";
 import ChangePriceComponent from "./ChangePriceComponent";
 import "./TripList.css";
 

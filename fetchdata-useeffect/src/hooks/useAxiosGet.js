@@ -36,6 +36,8 @@ const axiosReducer = (state, action) => {
 				success: true,
 				error: null,
 			};
+		default:
+			return state;
 	}
 };
 
