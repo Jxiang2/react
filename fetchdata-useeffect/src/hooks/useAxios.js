@@ -27,7 +27,7 @@ const axiosReducer = (state, action) => {
 	}
 };
 
-export const useAxios = (_options = {}) => {
+export const useAxios = () => {
 	const [response, dispatch] = useReducer(axiosReducer, initialState);
 	const [isCancelled, setIsCancelled] = useState(false);
 
@@ -41,12 +41,12 @@ export const useAxios = (_options = {}) => {
 
 	const axiosUpdate = () => {};
 
-	const axiosDelete = async (url) => {
+	const axiosDelete = async (url, options = {}) => {
 		try {
 			const axiosResponse = await axios({
-				..._options,
-				url: url,
 				method: "DELETE",
+				url: url,
+				headers: { ...options },
 			});
 
 			const axiosResponseOk = axiosResponse && axiosResponse.status < 400;

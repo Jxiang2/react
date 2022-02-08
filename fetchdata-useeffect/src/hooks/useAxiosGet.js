@@ -23,18 +23,20 @@ const axiosGetReducer = (state, action) => {
 	}
 };
 
-export const useAxiosGet = (_options) => {
+export const useAxiosGet = (url, headers = {}) => {
 	const [response, dispatch] = useReducer(axiosGetReducer, initialState);
-	const [options, setOptions] = useState({ ..._options, method: "GET" });
+	const [options, setOptions] = useState({ method: "GET", url: url, headers: { ...headers } });
 	const [requestAgain, setRequestAgain] = useState(false);
 
-	// update options to perform post, update, delete
-	const updateOptions = (newOptions) => {
-		setOptions(newOptions);
+	const updateUrl = (url) => {
+		setOptions({ ...options, url });
+	};
+
+	const updateHeaders = (headers) => {
+		setOptions({ ...options, headers });
 	};
 
 	const requstAfterChange = () => {
-		console.log(requestAgain);
 		setRequestAgain((prevRequestAgain) => !prevRequestAgain);
 	};
 
@@ -84,7 +86,7 @@ export const useAxiosGet = (_options) => {
 		return () => {
 			controller.abort();
 		};
-	}, [options]);
+	}, [options, requestAgain]);
 
-	return { response, updateOptions, requstAfterChange };
+	return { response, updateUrl, updateHeaders, requstAfterChange };
 };

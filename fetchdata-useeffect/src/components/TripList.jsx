@@ -1,28 +1,21 @@
 import { useAxiosGet } from "../hooks/useAxiosGet";
 import { useAxios } from "../hooks/useAxios";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import ChangePriceComponent from "./ChangePriceComponent";
 import "./TripList.css";
 
 export default function TripList() {
-	const getOptions = {
-		url: "http://127.0.0.1:3000/trips",
-		headers: {
-			Accept: "application/json",
-			"Content-Type": "application/json;charset=UTF-8",
-		},
-	};
-
-	const { response, updateOptions, requstAfterChange } = useAxiosGet(getOptions);
+	const { response, updateUrl, requstAfterChange } = useAxiosGet("http://127.0.0.1:3000/trips");
 	const { response: deleteRes, axiosDelete } = useAxios();
+	const refRequstAfterChange = useRef(requstAfterChange).current;
 
-	const deleteTrip = (tripId) => {
-		axiosDelete(`http://127.0.0.1:3000/trips/${tripId}`);
+	const deleteTrip = async (tripId) => {
+		await axiosDelete(`http://127.0.0.1:3000/trips/${tripId}`);
 	};
 
 	useEffect(() => {
-		requstAfterChange();
-	}, [deleteRes]);
+		refRequstAfterChange();
+	}, [deleteRes, refRequstAfterChange]);
 
 	return (
 		<div className='trip-list'>
@@ -44,17 +37,11 @@ export default function TripList() {
 			</ul>
 
 			<div className='filters'>
-				<button
-					onClick={() =>
-						updateOptions({ ...getOptions, url: "http://127.0.0.1:3000/trips?loc=europe" })
-					}>
+				<button onClick={() => updateUrl("http://127.0.0.1:3000/trips?loc=europe")}>
 					European Trips
 				</button>
 
-				<button
-					onClick={() => updateOptions({ ...getOptions, url: "http://127.0.0.1:3000/trips" })}>
-					All Trips
-				</button>
+				<button onClick={() => updateUrl("http://127.0.0.1:3000/trips")}>All Trips</button>
 			</div>
 		</div>
 	);
