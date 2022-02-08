@@ -11,31 +11,13 @@ let initialState = {
 const axiosReducer = (state, action) => {
 	switch (action.type) {
 		case "INVALID_INPUT":
-			return {
-				name: "invalidInput",
-				isPending: false,
-				data: null,
-				success: false,
-				error: action.payload,
-			};
+			return { isPending: false, data: null, success: false, error: action.payload };
 		case "IS_PENDING":
-			return { name: "isPending", isPending: true, data: null, success: false, error: null };
+			return { isPending: true, data: null, success: false, error: null };
 		case "ERROR":
-			return {
-				name: "error",
-				isPending: false,
-				data: null,
-				success: false,
-				error: action.payload,
-			};
+			return { isPending: false, data: null, success: false, error: action.payload };
 		case "RETRIEVED":
-			return {
-				name: "retrieved",
-				isPending: false,
-				data: action.payload,
-				success: true,
-				error: null,
-			};
+			return { isPending: false, data: action.payload, success: true, error: null };
 		default:
 			return state;
 	}
@@ -43,8 +25,7 @@ const axiosReducer = (state, action) => {
 
 export const useAxios = (_options) => {
 	const [response, dispatch] = useReducer(axiosReducer, initialState);
-	const [options, setOptions] = useState(_options);
-	const httpMethod = options.method;
+	const [options, setOptions] = useState({ ..._options, method: "GET" });
 
 	// update options to perform post, update, delete
 	const updateOptions = (newOptions) => {
@@ -55,35 +36,17 @@ export const useAxios = (_options) => {
 		const controller = new AbortController();
 
 		const isInputValid = () => {
-			if (Object.keys(options).length < 3) {
-				console.log(
-					"input must be an object that including 3 properties: method: String, url: String and headers: Object"
-				);
+			if (Object.keys(options).length < 2) {
 				return false;
 			}
-
-			if (
-				!(
-					Object.keys(options).includes("method") &&
-					Object.keys(options).includes("url") &&
-					Object.keys(options).includes("headers")
-				)
-			) {
-				console.log(
-					"input must be an object that including 3 properties: method: String, url: String and headers: Object"
-				);
+			if (!(Object.keys(options).includes("url") && Object.keys(options).includes("headers"))) {
 				return false;
 			}
-
 			return true;
 		};
 
 		// process crud requests
 		const processRequest = async (axiosPayload) => {
-			if (!["GET"].includes(httpMethod)) {
-				throw new Error("useAxiosGet can only get data");
-			}
-
 			dispatch({ type: "IS_PENDING" });
 
 			try {
@@ -95,14 +58,7 @@ export const useAxios = (_options) => {
 				}
 
 				const axiosData = await axiosResponse.data;
-
-				switch (httpMethod) {
-					case "GET":
-						dispatch({ type: "RETRIEVED", payload: axiosData });
-						break;
-					default:
-						break;
-				}
+				dispatch({ type: "RETRIEVED", payload: axiosData });
 			} catch (error) {
 				error.name === "AbortError"
 					? dispatch({ type: "ERROR", payload: "the axios request is aborted" })
@@ -111,15 +67,19 @@ export const useAxios = (_options) => {
 		};
 
 		if (isInputValid()) {
-			if (httpMethod === "GET") {
-				processRequest(options);
-			}
+			processRequest(options);
+		} else {
+			dispatch({
+				type: "INVALID_INPUT",
+				payload:
+					"input must be an object that including 3 properties: method: String, url: String and headers: Object",
+			});
 		}
 
 		return () => {
 			controller.abort();
 		};
-	}, [options, httpMethod]);
+	}, [options]);
 
 	return { response, updateOptions };
 };
