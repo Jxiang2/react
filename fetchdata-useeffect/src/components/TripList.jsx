@@ -1,11 +1,17 @@
-import { useState } from "react";
-import { useFetch } from "../hooks/useFetch";
+import { useAxios } from "../hooks/useAxios";
 import ChangePriceComponent from "./ChangePriceComponent";
 import "./TripList.css";
 
 export default function TripList() {
-	const [url, setUrl] = useState("http://127.0.0.1:3000/trips");
-	const { data: trips, isPending, error } = useFetch(url, { type: "GET" });
+	const options = {
+		method: "GET",
+		url: "http://127.0.0.1:3000/trips",
+		headers: {
+			Accept: "application/json",
+			"Content-Type": "application/json;charset=UTF-8",
+		},
+	};
+	const { response: trips, updateOptions } = useAxios(options);
 
 	const deleteTrip = (tripId) => {
 		console.log(`delete the trip with id ${tripId}`);
@@ -15,27 +21,32 @@ export default function TripList() {
 		<div className='trip-list'>
 			<h2>Trip List</h2>
 
-			{error && <div>{error}</div>}
-			{isPending && <div>Loading...</div>}
+			{trips.error && <div>{trips.error}</div>}
+			{trips.isPending && <div>Loading...</div>}
 
 			<ul>
-				{trips &&
-					trips.map((trip) => (
-						<li key={trip.id}>
-							<h3>{trip.title}</h3>
-							<p>{trip.price}</p>
-							<ChangePriceComponent trip={trip} />
-							<button onClick={() => deleteTrip(trip.id)}>delete</button>
+				{trips.data &&
+					trips.data.map((t) => (
+						<li key={t.id}>
+							<h3>{t.title}</h3>
+							<p>{t.price}</p>
+							<ChangePriceComponent trip={t} />
+							<button onClick={() => deleteTrip(t.id)}>delete</button>
 						</li>
 					))}
 			</ul>
 
 			<div className='filters'>
-				<button onClick={() => setUrl("http://127.0.0.1:3000/trips?loc=europe")}>
+				<button
+					onClick={() =>
+						updateOptions({ ...options, url: "http://127.0.0.1:3000/trips?loc=europe" })
+					}>
 					European Trips
 				</button>
 
-				<button onClick={() => setUrl("http://127.0.0.1:3000/trips")}>All Trips</button>
+				<button onClick={() => updateOptions({ ...options, url: "http://127.0.0.1:3000/trips" })}>
+					All Trips
+				</button>
 			</div>
 		</div>
 	);

@@ -13,6 +13,7 @@ export const useFetch = (url, _options) => {
 		const controller = new AbortController();
 
 		const fetchData = async () => {
+			console.log(options);
 			setIsPending(true);
 
 			try {
