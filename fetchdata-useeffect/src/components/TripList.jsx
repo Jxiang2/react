@@ -1,4 +1,6 @@
 import { useAxiosGet } from "../hooks/useAxiosGet";
+import { useAxios } from "../hooks/useAxios";
+import { useEffect, useRef } from "react";
 import ChangePriceComponent from "./ChangePriceComponent";
 import "./TripList.css";
 
@@ -11,11 +13,18 @@ export default function TripList() {
 		},
 	};
 
-	const { response, updateOptions } = useAxiosGet(getOptions);
+	const { response, updateOptions, requstAfterChange } = useAxiosGet(getOptions);
+	const { response: deleteRes, axiosDelete } = useAxios();
+	const refRequstAfterChange = useRef(requstAfterChange).current;
 
 	const deleteTrip = (tripId) => {
-		console.log(`delete the trip with id ${tripId}`);
+		axiosDelete(`http://127.0.0.1:3000/trips/${tripId}`);
 	};
+
+	useEffect(() => {
+		console.log(deleteRes);
+		refRequstAfterChange();
+	}, [deleteRes, refRequstAfterChange]);
 
 	return (
 		<div className='trip-list'>

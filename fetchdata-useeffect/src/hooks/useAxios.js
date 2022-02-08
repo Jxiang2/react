@@ -1,6 +1,5 @@
-import { useReducer, useState } from "react";
+import { useReducer, useState, useEffect } from "react";
 import axios from "axios";
-import { useEffect } from "react/cjs/react.production.min";
 
 let initialState = {
 	data: null,
@@ -28,19 +27,9 @@ const axiosReducer = (state, action) => {
 	}
 };
 
-export const useAxios = (_options) => {
-	const [response, dispatch] = useReducer(axiosGetReducer, initialState);
+export const useAxios = (_options = {}) => {
+	const [response, dispatch] = useReducer(axiosReducer, initialState);
 	const [isCancelled, setIsCancelled] = useState(false);
-
-	const isInputValid = () => {
-		if (Object.keys(options).length < 2) {
-			return false;
-		}
-		if (!(Object.keys(options).includes("url") && Object.keys(options).includes("headers"))) {
-			return false;
-		}
-		return true;
-	};
 
 	const dispatchIfNotCancelled = (action) => {
 		if (!isCancelled) {
@@ -48,24 +37,35 @@ export const useAxios = (_options) => {
 		}
 	};
 
-	const axiosCreate = () => {
-		if (isInputValid()) {
-		}
-	};
+	const axiosCreate = () => {};
 
-	const axiosUpdate = () => {
-		if (isInputValid()) {
-		}
-	};
+	const axiosUpdate = () => {};
 
-	const axiosDelete = () => {
-		if (isInputValid()) {
+	const axiosDelete = async (url) => {
+		try {
+			const axiosResponse = await axios({
+				..._options,
+				url: url,
+				method: "DELETE",
+			});
+
+			const axiosResponseOk = axiosResponse && axiosResponse.status < 400;
+			if (!axiosResponseOk) {
+				throw new Error(axiosResponse.statusText);
+			}
+
+			const axiosData = await axiosResponse.data;
+			dispatchIfNotCancelled({ type: "DELETED", payload: axiosData });
+			return;
+		} catch (error) {
+			dispatchIfNotCancelled({ type: "ERROR", payload: error.message });
+			return;
 		}
 	};
 
 	useEffect(() => {
 		return () => setIsCancelled(true);
-	});
+	}, []);
 
 	return { axiosCreate, axiosUpdate, axiosDelete, response };
 };

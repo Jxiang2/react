@@ -26,10 +26,16 @@ const axiosGetReducer = (state, action) => {
 export const useAxiosGet = (_options) => {
 	const [response, dispatch] = useReducer(axiosGetReducer, initialState);
 	const [options, setOptions] = useState({ ..._options, method: "GET" });
+	const [requestAgain, setRequestAgain] = useState(false);
 
 	// update options to perform post, update, delete
 	const updateOptions = (newOptions) => {
 		setOptions(newOptions);
+	};
+
+	const requstAfterChange = () => {
+		console.log(requestAgain);
+		setRequestAgain((prevRequestAgain) => !prevRequestAgain);
 	};
 
 	useEffect(() => {
@@ -51,8 +57,8 @@ export const useAxiosGet = (_options) => {
 
 			try {
 				const axiosResponse = await axios({ ...axiosPayload, signal: controller.signal });
-				const axiosResponseOk = axiosResponse && axiosResponse.status < 400;
 
+				const axiosResponseOk = axiosResponse && axiosResponse.status < 400;
 				if (!axiosResponseOk) {
 					throw new Error(axiosResponse.statusText);
 				}
@@ -80,5 +86,5 @@ export const useAxiosGet = (_options) => {
 		};
 	}, [options]);
 
-	return { response, updateOptions };
+	return { response, updateOptions, requstAfterChange };
 };
