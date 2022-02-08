@@ -10,8 +10,6 @@ let initialState = {
 
 const axiosReducer = (state, action) => {
 	switch (action.type) {
-		case "INVALID_INPUT":
-			return { isPending: false, data: null, success: false, error: action.payload };
 		case "IS_PENDING":
 			return { isPending: true, data: null, success: false, error: null };
 		case "ERROR":
@@ -37,7 +35,28 @@ export const useAxios = () => {
 		}
 	};
 
-	const axiosCreate = () => {};
+	const axiosCreate = async (url, options = {}) => {
+		try {
+			const axiosResponse = await axios({
+				method: "POST",
+				url: url,
+				headers: options.headers ? { ...options.headers } : {},
+				data: options.data ? { ...options.data } : {},
+			});
+
+			const axiosResponseOk = axiosResponse && axiosResponse.status < 400;
+			if (!axiosResponseOk) {
+				throw new Error(axiosResponse.statusText);
+			}
+
+			const axiosData = await axiosResponse.data;
+			dispatchIfNotCancelled({ type: "CREATED", payload: axiosData });
+			return;
+		} catch (error) {
+			dispatchIfNotCancelled({ type: "ERROR", payload: error.message });
+			return;
+		}
+	};
 
 	const axiosUpdate = () => {};
 

@@ -10,8 +10,6 @@ const initialState = {
 
 const axiosGetReducer = (state, action) => {
 	switch (action.type) {
-		case "INVALID_INPUT":
-			return { isPending: false, data: null, success: false, error: action.payload };
 		case "IS_PENDING":
 			return { isPending: true, data: null, success: false, error: null };
 		case "ERROR":

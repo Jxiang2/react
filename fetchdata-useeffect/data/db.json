@@ -13,12 +13,6 @@
       "id": 6
     },
     {
-      "title": "Ten Night Stay in Paris",
-      "price": "£1820",
-      "loc": "europe",
-      "id": 7
-    },
-    {
       "title": "Ten Night Stay in london",
       "price": "£1820",
       "loc": "europe",
@@ -35,6 +29,12 @@
       "price": "£1820",
       "loc": "japan",
       "id": 10
+    },
+    {
+      "title": "Seven Night Stay in Singapore",
+      "price": "$980",
+      "loc": "singapore",
+      "id": 11
     }
   ]
 }

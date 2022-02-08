@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useAxios } from "./hooks/useAxios";
 import TripList from "./components/TripList";
 
 function App() {
@@ -6,6 +7,7 @@ function App() {
 	const [title, setTitle] = useState("");
 	const [price, setPrice] = useState("");
 	const [location, setLocation] = useState("");
+	const { axiosCreate } = useAxios();
 
 	const resetForm = () => {
 		setTitle("");
@@ -16,7 +18,17 @@ function App() {
 	const addNewtrip = async (e) => {
 		e.preventDefault();
 		if (title && price && location) {
-			console.log(title, price, location);
+			axiosCreate("http://127.0.0.1:3000/trips", {
+				headers: {
+					Accept: "application/json",
+					"Content-Type": "application/json;charset=UTF-8",
+				},
+				data: {
+					title: title,
+					price: price,
+					loc: location,
+				},
+			});
 			resetForm();
 		} else {
 			console.log("input can not be empty!");
