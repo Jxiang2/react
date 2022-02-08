@@ -8,7 +8,7 @@ let initialState = {
 	success: false,
 };
 
-const axiosReducer = (state, action) => {
+const axiosGetReducer = (state, action) => {
 	switch (action.type) {
 		case "INVALID_INPUT":
 			return { isPending: false, data: null, success: false, error: action.payload };
@@ -24,7 +24,7 @@ const axiosReducer = (state, action) => {
 };
 
 export const useAxiosGet = (_options) => {
-	const [response, dispatch] = useReducer(axiosReducer, initialState);
+	const [response, dispatch] = useReducer(axiosGetReducer, initialState);
 	const [options, setOptions] = useState({ ..._options, method: "GET" });
 
 	// update options to perform post, update, delete
@@ -71,8 +71,7 @@ export const useAxiosGet = (_options) => {
 		} else {
 			dispatch({
 				type: "INVALID_INPUT",
-				payload:
-					"input must be an object that including 3 properties: method: String, url: String and headers: Object",
+				payload: "input must be an object that including url: String and headers: Object",
 			});
 		}
 
