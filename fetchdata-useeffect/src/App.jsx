@@ -1,11 +1,22 @@
 import { useState } from "react";
+import { useAxios } from "./hooks/useAxios";
 import TripList from "./components/TripList";
+
+const options = {
+	method: "POST",
+	url: "http://127.0.0.1:3000/trips",
+	headers: {
+		Accept: "application/json",
+		"Content-Type": "application/json;charset=UTF-8",
+	},
+};
 
 function App() {
 	const [showTrips, setShowTrips] = useState(true);
 	const [title, setTitle] = useState("");
 	const [price, setPrice] = useState("");
 	const [location, setLocation] = useState("");
+	const { response: addedTrip, updateOptions } = useAxios(options);
 
 	const resetForm = () => {
 		setTitle("");
@@ -16,7 +27,15 @@ function App() {
 	const addNewtrip = (e) => {
 		e.preventDefault();
 		if (title && price && location) {
-			console.log(title, price, location);
+			updateOptions({
+				...options,
+				data: {
+					title: title,
+					price: price,
+					loc: location,
+				},
+			});
+			console.log(addedTrip.data);
 			resetForm();
 		} else {
 			console.log("input can not be empty!");
@@ -27,9 +46,9 @@ function App() {
 	return (
 		<div className='App'>
 			{showTrips ? (
-				<button onClick={(e) => setShowTrips((prevShowTips) => !prevShowTips)}>hide trips</button>
-			) : (
 				<button onClick={(e) => setShowTrips((prevShowTips) => !prevShowTips)}>add trip</button>
+			) : (
+				<button onClick={(e) => setShowTrips((prevShowTips) => !prevShowTips)}>show trips</button>
 			)}
 
 			{showTrips && <TripList />}

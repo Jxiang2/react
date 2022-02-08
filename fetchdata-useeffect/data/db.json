@@ -1,34 +1,52 @@
 {
   "trips": [
     {
-      "title": "2 Night Stay in Venice",
+      "title": "Two Night Stay in Venice",
       "price": "£195",
       "id": 1,
       "loc": "europe"
     },
     {
-      "title": "3 Night Stay in Paris",
+      "title": "Three Night Stay in Paris",
       "price": "£295",
       "id": 2,
       "loc": "europe"
     },
     {
-      "title": "4 Night Stay in London",
+      "title": "Four Night Stay in London",
       "price": "£345",
       "id": 3,
       "loc": "europe"
     },
     {
-      "title": "3 Night Stay in HK",
+      "title": "Three Night Stay in HK",
       "price": "£325",
       "id": 4,
       "loc": "china"
     },
     {
-      "title": "5 Night Stay in SH",
+      "title": "Five Night Stay in SH",
       "price": "£925",
       "id": 5,
       "loc": "china"
+    },
+    {
+      "title": "Seven Night Stay in Toronto",
+      "price": "£295",
+      "loc": "canada",
+      "id": 6
+    },
+    {
+      "title": "Seven Night Stay in Toronto",
+      "price": "£295",
+      "loc": "canada",
+      "id": 7
+    },
+    {
+      "title": "One Night Stay in Tokyo",
+      "price": "£20",
+      "loc": "japan",
+      "id": 8
     }
   ]
 }

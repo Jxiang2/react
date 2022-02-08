@@ -10,6 +10,8 @@ let initialState = {
 
 const axiosReducer = (state, action) => {
 	switch (action.type) {
+		case "INVALID_INPUT":
+			return { isPending: false, data: null, success: false, error: action.payload };
 		case "IS_PENDING":
 			return { isPending: true, data: null, success: false, error: null };
 		case "ERROR":
@@ -27,13 +29,38 @@ const axiosReducer = (state, action) => {
 	}
 };
 
-export const useAxios = (options) => {
+export const useAxios = (_options) => {
+	// input must be an object that including 3 properties: method: String, url: String and headers: Object,
+	const checkInput = () => {
+		if (Object.keys(_options).length < 3) {
+			dispatch({
+				type: "INVALID_INPUT",
+				payload: "input options is invalid, make sure it at least includes method, url and headers",
+			});
+		}
+
+		if (
+			!(
+				Object.keys(_options).includes("method") &&
+				Object.keys(_options).includes("url") &&
+				Object.keys(_options).includes("headers")
+			)
+		) {
+			dispatch({
+				type: "INVALID_INPUT",
+				payload: "input options is invalid, make sure it at least includes method, url and headers",
+			});
+		}
+	};
+
+	checkInput();
+
 	const [response, dispatch] = useReducer(axiosReducer, initialState);
-	const [payload, setPayload] = useState(options);
+	const [options, setOptions] = useState(_options);
 	const httpMethod = options.method;
 
 	const updateOptions = (newOptions) => {
-		setPayload(newOptions);
+		setOptions(newOptions);
 	};
 
 	useEffect(() => {
@@ -80,12 +107,20 @@ export const useAxios = (options) => {
 			}
 		};
 
-		processRequest(payload);
+		if (httpMethod === "GET") {
+			console.log("get is running");
+			processRequest(options);
+		}
+
+		if (httpMethod === "POST" && options.data) {
+			console.log("post is running");
+			processRequest(options);
+		}
 
 		return () => {
 			controller.abort();
 		};
-	}, [payload, httpMethod]);
+	}, [options, httpMethod]);
 
 	return { response, updateOptions };
 };
