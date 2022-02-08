@@ -1,7 +1,7 @@
 import { useReducer, useEffect, useState } from "react";
 import axios from "axios";
 
-let initialState = {
+const initialState = {
 	data: null,
 	isPending: false,
 	error: null,
@@ -43,16 +43,6 @@ export const useAxiosGet = (url, headers = {}) => {
 	useEffect(() => {
 		const controller = new AbortController();
 
-		const isInputValid = () => {
-			if (Object.keys(options).length < 2) {
-				return false;
-			}
-			if (!(Object.keys(options).includes("url") && Object.keys(options).includes("headers"))) {
-				return false;
-			}
-			return true;
-		};
-
 		// process crud requests
 		const processRequest = async (axiosPayload) => {
 			dispatch({ type: "IS_PENDING" });
@@ -74,14 +64,7 @@ export const useAxiosGet = (url, headers = {}) => {
 			}
 		};
 
-		if (isInputValid()) {
-			processRequest(options);
-		} else {
-			dispatch({
-				type: "INVALID_INPUT",
-				payload: "input must be an object that including url: String and headers: Object",
-			});
-		}
+		processRequest(options);
 
 		return () => {
 			controller.abort();

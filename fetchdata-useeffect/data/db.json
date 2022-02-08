@@ -10,7 +10,31 @@
       "title": "Ten Night Stay in HK",
       "price": "£1820",
       "loc": "china",
+      "id": 6
+    },
+    {
+      "title": "Ten Night Stay in Paris",
+      "price": "£1820",
+      "loc": "europe",
       "id": 7
+    },
+    {
+      "title": "Ten Night Stay in london",
+      "price": "£1820",
+      "loc": "europe",
+      "id": 8
+    },
+    {
+      "title": "Ten Night Stay in Toronton",
+      "price": "£1820",
+      "loc": "canada",
+      "id": 9
+    },
+    {
+      "title": "Ten Night Stay in Tokyo",
+      "price": "£1820",
+      "loc": "japan",
+      "id": 10
     }
   ]
 }
