@@ -6,7 +6,7 @@ function App() {
 	const [showTrips, setShowTrips] = useState(true);
 	return (
 		<div className='App'>
-			<button onClick={(e) => setShowTrips(!showTrips)}>hide trips</button>
+			<button onClick={(e) => setShowTrips((prevShowTips) => !prevShowTips)}>hide trips</button>
 			{showTrips && <TripList />}
 		</div>
 	);
