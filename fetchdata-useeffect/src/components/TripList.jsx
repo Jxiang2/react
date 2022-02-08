@@ -1,11 +1,15 @@
 import { useState } from "react";
 import { useFetch } from "../hooks/useFetch";
+import ChangePriceComponent from "./ChangePriceComponent";
 import "./TripList.css";
 
 export default function TripList() {
 	const [url, setUrl] = useState("http://127.0.0.1:3000/trips");
-	// destructure data, call it trips
 	const { data: trips, isPending, error } = useFetch(url, { type: "GET" });
+
+	const deleteTrip = (tripId) => {
+		console.log(`delete the trip with id ${tripId}`);
+	};
 
 	return (
 		<div className='trip-list'>
@@ -20,6 +24,8 @@ export default function TripList() {
 						<li key={trip.id}>
 							<h3>{trip.title}</h3>
 							<p>{trip.price}</p>
+							<ChangePriceComponent trip={trip} />
+							<button onClick={() => deleteTrip(trip.id)}>delete</button>
 						</li>
 					))}
 			</ul>
