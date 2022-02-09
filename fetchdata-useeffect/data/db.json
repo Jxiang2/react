@@ -2,15 +2,9 @@
   "trips": [
     {
       "title": "Ten Night Stay in Moscow Countryside",
-      "price": "£1020",
+      "price": "£1099",
       "loc": "europe",
       "id": 4
-    },
-    {
-      "title": "Ten Night Stay in london",
-      "price": "£2800",
-      "loc": "europe",
-      "id": 8
     },
     {
       "title": "Ten Night Stay in Toronton",
@@ -19,14 +13,8 @@
       "id": 9
     },
     {
-      "title": "Ten Night Stay in Tokyo",
-      "price": "£1820",
-      "loc": "japan",
-      "id": 10
-    },
-    {
       "title": "Seven Night Stay in Singapore",
-      "price": "$980",
+      "price": "$1097",
       "loc": "singapore",
       "id": 11
     }
