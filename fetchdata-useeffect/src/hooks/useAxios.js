@@ -58,7 +58,28 @@ export const useAxios = () => {
 		}
 	};
 
-	const axiosUpdate = () => {};
+	const axiosUpdate = async (url, methodName, options = {}) => {
+		try {
+			const axiosResponse = await axios({
+				method: methodName,
+				url: url,
+				headers: options.headers ? { ...options.headers } : {},
+				data: options.data ? { ...options.data } : {},
+			});
+
+			const axiosResponseOk = axiosResponse && axiosResponse.status < 400;
+			if (!axiosResponseOk) {
+				throw new Error(axiosResponse.statusText);
+			}
+
+			const axiosData = await axiosResponse.data;
+			dispatchIfNotCancelled({ type: "UPDATED", payload: axiosData });
+			return;
+		} catch (error) {
+			dispatchIfNotCancelled({ type: "ERROR", payload: error.message });
+			return;
+		}
+	};
 
 	const axiosDelete = async (url, options = {}) => {
 		try {
