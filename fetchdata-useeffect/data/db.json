@@ -1,20 +1,14 @@
 {
   "trips": [
     {
-      "title": "Ten Night Stay in Moscow",
-      "price": "£1520",
+      "title": "Ten Night Stay in Moscow Countryside",
+      "price": "£1020",
       "loc": "europe",
       "id": 4
     },
     {
-      "title": "Ten Night Stay in HK",
-      "price": "£1820",
-      "loc": "china",
-      "id": 6
-    },
-    {
       "title": "Ten Night Stay in london",
-      "price": "£1820",
+      "price": "£2800",
       "loc": "europe",
       "id": 8
     },

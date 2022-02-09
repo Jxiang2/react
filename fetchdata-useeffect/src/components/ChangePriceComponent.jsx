@@ -1,12 +1,25 @@
 import React from "react";
 import { useState } from "react";
+import { useAxios } from "../hooks/useAxios";
 
-export default function ChangePriceComponent({ trip }) {
+export default function ChangePriceComponent({ trip, refRequstAfterChange }) {
 	const [newPrice, setNewPrice] = useState("");
+	const { axiosUpdate } = useAxios();
 
 	const sumbitNewPrice = (e) => {
 		e.preventDefault();
-		console.log(`trip id: ${trip.id} | new price: ${newPrice}`);
+		if (newPrice) {
+			axiosUpdate(`http://127.0.0.1:3000/trips/${trip.id}`, "PATCH", {
+				headers: {
+					Accept: "application/json",
+					"Content-Type": "application/json;charset=UTF-8",
+				},
+				data: {
+					price: newPrice,
+				},
+			});
+		}
+		refRequstAfterChange();
 		setNewPrice("");
 	};
 

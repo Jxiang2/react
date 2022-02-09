@@ -30,7 +30,7 @@ export default function TripList() {
 						<li key={t.id}>
 							<h3>{t.title}</h3>
 							<p>{t.price}</p>
-							<ChangePriceComponent trip={t} />
+							<ChangePriceComponent trip={t} refRequstAfterChange={refRequstAfterChange} />
 							<button onClick={() => deleteTrip(t.id)}>delete</button>
 						</li>
 					))}
