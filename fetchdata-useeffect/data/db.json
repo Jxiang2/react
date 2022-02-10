@@ -8,15 +8,9 @@
     },
     {
       "title": "Ten Night Stay in Toronton",
-      "price": "£1910",
+      "price": "£3099",
       "loc": "canada",
       "id": 5
-    },
-    {
-      "title": "Seven Night Stay in Paris",
-      "price": "$2088",
-      "loc": "europe",
-      "id": 6
     }
   ]
 }

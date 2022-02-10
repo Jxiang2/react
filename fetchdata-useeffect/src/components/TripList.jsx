@@ -1,11 +1,9 @@
-import { useRef } from "react";
 import { useAxiosGet } from "../hooks/useAxiosGet";
 import TripCard from "./TripCard";
 import "./TripList.css";
 
 export default function TripList() {
 	const { response, updateUrl, requstAfterChange } = useAxiosGet("http://127.0.0.1:3000/trips");
-	const refRequstAfterChange = useRef(requstAfterChange).current;
 
 	return (
 		<div className='trip-list'>
@@ -18,7 +16,7 @@ export default function TripList() {
 				{response.data &&
 					response.data.map((t) => (
 						<li key={t.id}>
-							<TripCard trip={t} refRequstAfterChange={refRequstAfterChange} />
+							<TripCard trip={t} requstAfterChange={requstAfterChange} />
 						</li>
 					))}
 			</ul>

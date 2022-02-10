@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useAxios } from "../hooks/useAxios";
 
-export default function TripCard({ trip, refRequstAfterChange }) {
+export default function TripCard({ trip, requstAfterChange }) {
 	const { axiosDelete } = useAxios();
 	const { response: updateRes, axiosUpdate } = useAxios();
 
@@ -32,7 +32,7 @@ export default function TripCard({ trip, refRequstAfterChange }) {
 
 	const deleteTrip = async (tripId) => {
 		await axiosDelete(`http://127.0.0.1:3000/trips/${tripId}`);
-		refRequstAfterChange();
+		requstAfterChange();
 	};
 
 	return (
