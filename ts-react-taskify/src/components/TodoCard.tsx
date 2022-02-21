@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Todo } from '../models/model';
 import { AiFillEdit, AiFillDelete } from 'react-icons/ai';
 import { MdDone } from 'react-icons/md';
@@ -9,13 +9,14 @@ import './TodoCard.css';
 interface Props {
     todo: Todo;
     todos: Todo[];
-    setTodos: Function;
+    setTodos: React.Dispatch<React.SetStateAction<Todo[]>>;
 }
 
 export default function TodoCard({todo, todos, setTodos}: Props) {
 
     const [edit, setEdit] = useState<boolean>(false);
     const [editedTodoText, setEditedTodoText] = useState<string>(todo.todoText);
+    const inputRef = useRef<HTMLInputElement>(null);
 
     const handleDone = (id: number)=>{
         setTodos(todos.map(todo=>
@@ -34,13 +35,21 @@ export default function TodoCard({todo, todos, setTodos}: Props) {
         setEdit(false);
     }
 
+    useEffect(()=>{
+        inputRef.current?.focus();
+    }, [edit])
+
     return (
         <form className='todo__card' onSubmit={e=>handleEdit(e, todo.id)}>
 
-            {edit ? (<input
+            {edit ? (
+            <input
+                     ref={inputRef}
                      className='todos__card--text'
                      onChange={e=>setEditedTodoText(e.target.value)}
-                     value={editedTodoText}/>) : (todo.isDone ? (
+                     value={editedTodoText}
+            />
+            ) : (todo.isDone ? (
                 <s className='todo__card--text'>{todo.todoText}</s>
             ) : (
                 <span className='todo__card--text'>{todo.todoText}</span>

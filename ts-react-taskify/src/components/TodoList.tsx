@@ -7,7 +7,7 @@ import './TodoList.css'
 
 interface Props {
     todos: Todo[];
-    setTodos: Function;
+    setTodos: React.Dispatch<React.SetStateAction<Todo[]>>;
 }
 
 export default function TodoList( { todos, setTodos }: Props) {
