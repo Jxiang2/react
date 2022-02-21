@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Todo } from '../models/model';
+import { Actions, Todo } from '../models/model';
 import { AiFillEdit, AiFillDelete } from 'react-icons/ai';
 import { MdDone } from 'react-icons/md';
 
@@ -9,29 +9,26 @@ import './TodoCard.css';
 interface Props {
     todo: Todo;
     todos: Todo[];
-    setTodos: React.Dispatch<React.SetStateAction<Todo[]>>;
+    dispatch: React.Dispatch<Actions>;
 }
 
-export default function TodoCard({todo, todos, setTodos}: Props) {
+export default function TodoCard({todo, todos, dispatch}: Props) {
 
     const [edit, setEdit] = useState<boolean>(false);
     const [editedTodoText, setEditedTodoText] = useState<string>(todo.todoText);
     const inputRef = useRef<HTMLInputElement>(null);
 
     const handleDone = (id: number)=>{
-        setTodos(todos.map(todo=>
-            todo.id === id ? {...todo, isDone: !todo.isDone} : todo));
+        dispatch({type: "done", payload: id});
     }
 
     const handleDelete = (id: number) => {
-        setTodos(todos.filter(todo => todo.id !== id));
+        dispatch({type: "remove", payload: id});
     }
 
     const handleEdit = (e: React.SyntheticEvent, id: number) => {
         e.preventDefault();
-        setTodos(todos.map((todo) => 
-            todo.id === id ? {...todo, todoText: editedTodoText} : todo
-        ))
+        dispatch({type: "edit", payload: {id: id, text: editedTodoText}})
         setEdit(false);
     }
 
