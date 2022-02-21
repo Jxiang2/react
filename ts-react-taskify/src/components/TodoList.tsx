@@ -1,5 +1,5 @@
 import React from 'react'
-import { Actions, Todo } from '../models/model';
+import { Actions, Todo } from '../models/Todo';
 import TodoCard from './TodoCard';
 
 // styles

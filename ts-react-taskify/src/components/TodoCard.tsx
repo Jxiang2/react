@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Actions, Todo } from '../models/model';
+import { Actions, Todo } from '../models/Todo';
 import { AiFillEdit, AiFillDelete } from 'react-icons/ai';
 import { MdDone } from 'react-icons/md';
 

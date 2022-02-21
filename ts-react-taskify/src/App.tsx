@@ -1,5 +1,5 @@
 import React, { useReducer, useState } from 'react';
-import { TodosReducer } from './models/model';
+import { TodosReducer } from './models/Todo';
 import InputField from './components/InputField';
 import TodoList from './components/TodoList';
 
