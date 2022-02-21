@@ -2,11 +2,11 @@
 
 .App {
 	width: 100vw;
-	height: 100vh;
+	min-height: 100vh;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	background-color: rgb(51, 136, 189);
+	background-color: #2f74c0;
 	font-family: "Neucha", cursive;
 }
 

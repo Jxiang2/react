@@ -5,14 +5,17 @@ import { MdDone } from 'react-icons/md';
 
 // styles
 import './TodoCard.css';
+import { Draggable } from 'react-beautiful-dnd';
 
 interface Props {
+    index: number;
     todo: Todo;
     todos: Todo[];
+    setTodos: React.Dispatch<React.SetStateAction<Todo[]>>;
     dispatch: React.Dispatch<Actions>;
 }
 
-export default function TodoCard({todo, todos, dispatch}: Props) {
+export default function TodoCard({index, todo, todos, dispatch}: Props) {
 
     const [edit, setEdit] = useState<boolean>(false);
     const [editedTodoText, setEditedTodoText] = useState<string>(todo.todoText);
@@ -37,34 +40,45 @@ export default function TodoCard({todo, todos, dispatch}: Props) {
     }, [edit])
 
     return (
-        <form className='todo__card' onSubmit={e=>handleEdit(e, todo.id)}>
+        <Draggable draggableId={todo.id.toString()} index={index}>
+            {(provided) => (
+                <form 
+                 className='todo__card'
+                 onSubmit={e=>handleEdit(e, todo.id)}
+                 {...provided.draggableProps}
+                 {...provided.dragHandleProps}
+                 ref={provided.innerRef}
+                 >
+                    {edit ? (
+                    <input
+                            ref={inputRef}
+                            className='todos__card--text'
+                            onChange={e=>setEditedTodoText(e.target.value)}
+                            value={editedTodoText}
+                    />
+                    ) : (todo.isDone ? (
+                        <s className='todo__card--text'>{todo.todoText}</s>
+                    ) : (
+                        <span className='todo__card--text'>{todo.todoText}</span>
+                    ))}
 
-            {edit ? (
-            <input
-                     ref={inputRef}
-                     className='todos__card--text'
-                     onChange={e=>setEditedTodoText(e.target.value)}
-                     value={editedTodoText}
-            />
-            ) : (todo.isDone ? (
-                <s className='todo__card--text'>{todo.todoText}</s>
-            ) : (
-                <span className='todo__card--text'>{todo.todoText}</span>
-            ))}
-
-            <div>
-                <span className='icon' onClick={()=>
-                    {if (!edit && !todo.isDone) setEdit(!edit)}
-                }>
-                    <AiFillEdit />
-                </span>
-                <span className='icon' onClick={()=>handleDelete(todo.id)}>
-                    <AiFillDelete />
-                </span>
-                <span className='icon' onClick={()=>handleDone(todo.id)}>
-                    <MdDone />
-                </span>
-            </div>
-        </form>
+                    <div>
+                        <span className='icon' onClick={()=>
+                            {if (!edit && !todo.isDone) setEdit(!edit)}
+                        }>
+                            <AiFillEdit />
+                        </span>
+                        <span className='icon' onClick={()=>handleDelete(todo.id)}>
+                            <AiFillDelete />
+                        </span>
+                        <span className='icon' onClick={()=>handleDone(todo.id)}>
+                            <MdDone />
+                        </span>
+                    </div>
+                </form>
+            )}
+            
+        </Draggable>
+        
     )
 }
