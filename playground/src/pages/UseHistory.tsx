@@ -1,14 +1,15 @@
 import { useNavigate } from "react-router-dom";
-import "./UseHistory.css";
-
 export default function UseHistory () {
     const navigate = useNavigate();
 
     return (
-        <div>
+        <div style={ { "display": "grid" } }>
             useNavigate
-            <button onClick={ () => navigate("/") }>try this</button>
+            <button onClick={ () => navigate("/") }>go home</button>
+            <button onClick={ () => navigate("/ref") }>go ref</button>
+            <button onClick={ () => navigate("/reducer") }>go reducer</button>
         </div>
+
 
     );
 }

@@ -1,5 +1,4 @@
-import { Routes, Route, BrowserRouter, Link, Navigate } from 'react-router-dom';
-import { useState } from 'react';
+import { Routes, Route, BrowserRouter, Link } from 'react-router-dom';
 
 import Home from './pages/Home';
 import UseEffect from './pages/UseEffect';
@@ -11,8 +10,6 @@ import './App.css';
 
 function App () {
 
-  const [showUseEffect] = useState(true);
-
   return (
     <div className="App">
       <BrowserRouter>
@@ -21,10 +18,9 @@ function App () {
 
           <div className='links'>
             <Link to="/ref">useRef</Link>
-            <Link to="/reducer">useEffect</Link>
+            <Link to="/reducer">useReducer</Link>
             <Link to="/effect">useEffect</Link>
             <Link to="/navigate">useNavigate</Link>
-            <Link to="/go">ConditionRoute</Link>
             <button>Context Example</button>
           </div>
         </nav>
@@ -35,11 +31,6 @@ function App () {
           <Route path="/navigate" element={ <UseHistory /> } />
           <Route path="/reducer" element={ <UseReducer /> } />
           <Route path="/ref" element={ <UseRef /> } />
-
-          <Route
-            path='/go'
-            element={ showUseEffect ? <Navigate to="/reducer" /> : <Navigate to="/ref" /> }
-          />
         </Routes>
       </BrowserRouter>
     </div>
