@@ -1,19 +1,35 @@
 import { useState, useRef, useEffect } from "react";
 
 export default function UseRef () {
-
     const [name, setName] = useState("");
-    const rerenderCount = useRef(1);
 
+    // usecase 1
+    const inputRef = useRef<HTMLInputElement>(null);
+    const focus = () => inputRef.current?.focus();
+
+    // usecase 2
+    const renderCount = useRef(1);
     useEffect(() => {
-        rerenderCount.current = rerenderCount.current + 1;
-        console.log(rerenderCount);
-    }, []);
+        renderCount.current += 1;
+    });
+
+    // usecase 3, since ref presist but not cause re-render
+    const previousName = useRef(name);
+    useEffect(() => {
+        previousName.current = name;
+    }, [name]);
 
     return (
         <div>
-            <input value={ name } onChange={ e => setName(e.target.value) } />
-            <div>My name is { name }</div>
-            <div>I rendered { rerenderCount.current }</div>
+            <input
+                ref={ inputRef }
+                value={ name }
+                onChange={ e => setName(e.target.value) }
+            />
+            <button onClick={ focus }>focus</button>
+
+            <p>My name is { name }</p>
+            <p>My previous name is { previousName.current }</p>
+            <p>Already rendered { renderCount.current } times</p>
         </div>);
 }
