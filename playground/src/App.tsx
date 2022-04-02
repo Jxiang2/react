@@ -15,7 +15,6 @@ function App () {
       <BrowserRouter>
         <nav>
           <span><Link to="/">ReactTS Playground</Link></span>
-
           <div className='links'>
             <Link to="/ref">useRef</Link>
             <Link to="/reducer">useReducer</Link>
