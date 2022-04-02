@@ -1,3 +1,25 @@
 .App {
   text-align: center;
 }
+
+nav {
+  display: flex;
+  background-color: bisque;
+  padding: 2vh;
+}
+
+nav>span {
+  color: brown;
+  font-weight: bolder;
+  margin-right: 50px;
+}
+
+.links {
+  display: flex;
+  margin-left: auto;
+
+}
+
+.links>div {
+  margin: 0 10px;
+}

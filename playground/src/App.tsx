@@ -4,9 +4,20 @@ function App () {
 
   return (
     <div className="App">
-      <div>
-        ReactTS Playground
-      </div>
+      <nav>
+        <span>ReactTS Playground</span>
+
+        <div className='links'>
+          <div>useRef</div>
+          <div>useReducer</div>
+          <div>useEffect</div>
+          <div>useHistory</div>
+          <button>Context Example</button>
+        </div>
+
+      </nav>
+
+
     </div>
   );
 }
