@@ -7,7 +7,8 @@ export default function UseRef () {
 
     useEffect(() => {
         rerenderCount.current = rerenderCount.current + 1;
-    });
+        console.log(rerenderCount);
+    }, []);
 
     return (
         <div>
