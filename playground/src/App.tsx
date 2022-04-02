@@ -1,9 +1,8 @@
 import { Routes, Route, BrowserRouter, Link } from 'react-router-dom';
 
 import Home from './pages/Home';
-import UseEffect from './pages/UseEffect';
+import UseHttp from './pages/Http';
 import UseHistory from './pages/UseHistory';
-import UseReducer from './pages/UseReducer';
 import UseRef from './pages/UseRef';
 
 import './App.css';
@@ -17,8 +16,7 @@ function App () {
           <span><Link to="/">ReactTS Playground</Link></span>
           <div className='links'>
             <Link to="/ref">useRef</Link>
-            <Link to="/reducer">useReducer</Link>
-            <Link to="/effect">useEffect</Link>
+            <Link to="/http">useHttp</Link>
             <Link to="/navigate">useNavigate</Link>
             <button>Context Example</button>
           </div>
@@ -26,9 +24,8 @@ function App () {
 
         <Routes>
           <Route path="/" element={ <Home /> } />
-          <Route path="/effect" element={ <UseEffect /> } />
+          <Route path="/http" element={ <UseHttp /> } />
           <Route path="/navigate" element={ <UseHistory /> } />
-          <Route path="/reducer" element={ <UseReducer /> } />
           <Route path="/ref" element={ <UseRef /> } />
         </Routes>
       </BrowserRouter>

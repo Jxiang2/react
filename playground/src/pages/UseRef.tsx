@@ -3,17 +3,17 @@ import { useState, useRef, useEffect } from "react";
 export default function UseRef () {
     const [name, setName] = useState("");
 
-    // usecase 1
+    // usecase 1: access DOM elements
     const inputRef = useRef<HTMLInputElement>(null);
     const focus = () => inputRef.current?.focus();
 
-    // usecase 2
+    // usecase 2: ref presist but not cause re-render
     const renderCount = useRef(1);
     useEffect(() => {
         renderCount.current += 1;
     });
 
-    // usecase 3, since ref presist but not cause re-render
+    // usecase 3: ref presist but not cause re-render
     const previousName = useRef(name);
     useEffect(() => {
         previousName.current = name;
