@@ -1,3 +1,6 @@
+import { Routes, Route } from 'react-router-dom';
+
+
 import './App.css';
 
 function App () {
@@ -14,6 +17,10 @@ function App () {
           <div>useHistory</div>
           <button>Context Example</button>
         </div>
+
+        <Routes>
+          <Route path='/' />
+        </Routes>
 
       </nav>
 

@@ -1,6 +1,6 @@
 import "./UseEffect.css";
 
-export default function useEffect () {
+export default function UseEffect () {
     return (
         <div>useEffect</div>
     );

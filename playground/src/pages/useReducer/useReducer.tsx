@@ -1,6 +1,6 @@
 import "./UseReducer.css";
 
-export default function useReducer () {
+export default function UseReducer () {
     return (
         <div>useReducer</div>
     );

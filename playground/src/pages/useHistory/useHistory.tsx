@@ -1,6 +1,6 @@
 import "./UseHistory.css";
 
-export default function useHistory () {
+export default function UseHistory () {
     return (
         <div>useHistory</div>
     );
