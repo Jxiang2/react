@@ -1,4 +1,4 @@
-import "./useHistory.css";
+import "./UseHistory.css";
 
 export default function useHistory () {
     return (

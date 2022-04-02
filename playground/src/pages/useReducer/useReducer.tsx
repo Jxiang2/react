@@ -1,4 +1,4 @@
-import "./useReducer.css";
+import "./UseReducer.css";
 
 export default function useReducer () {
     return (

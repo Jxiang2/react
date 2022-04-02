@@ -1,4 +1,4 @@
-import "./useEffect.css";
+import "./UseEffect.css";
 
 export default function useEffect () {
     return (
