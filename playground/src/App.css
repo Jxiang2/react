@@ -24,3 +24,7 @@ nav>span>a {
 .links>a {
   margin: 0 10px;
 }
+
+.links>button {
+  margin-right: 10px;
+}
