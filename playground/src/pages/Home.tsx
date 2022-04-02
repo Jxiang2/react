@@ -8,13 +8,12 @@ export default function Home () {
     const [num, setNum] = useState(1);
     const [subTheme, setSubTheme] = useState(false);
 
-    // only num changes, getItems re-react
+    // only num changes, getItems re-creact
     const getItems = useCallback((increment: number) => {
         return [num, Math.floor(num + increment - increment / 2), num + increment];
     }, [num]);
 
     const subtheme = {
-        backgroundColor: subTheme ? "#333" : "#FFF",
         color: subTheme ? "#FFF" : "#333"
     };
 
