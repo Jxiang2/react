@@ -4,7 +4,7 @@ export default function UseHistory () {
 
     return (
         <div style={ { "display": "grid" } }>
-            useNavigate
+            useNavigate (useHistory)
             <button onClick={ () => navigate("/") }>go home</button>
             <button onClick={ () => navigate("/ref") }>go ref</button>
             <button onClick={ () => navigate("/reducer") }>go reducer</button>
