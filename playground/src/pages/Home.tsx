@@ -20,8 +20,8 @@ export default function Home () {
 
     return (
         <div style={ { ...subtheme, backgroundColor: context?.backgroundColor } }>
-            <p>Home Page</p>
-            <p>useContext & useCallback demo</p>
+            **Home Page**
+            <p>useCallback & props demo</p>
             <input
                 type="number"
                 value={ num }
