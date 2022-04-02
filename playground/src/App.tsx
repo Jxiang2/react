@@ -1,15 +1,25 @@
+import { useContext } from "react";
 import { BrowserRouter, Link, Route, Routes } from "react-router-dom";
 
 import Home from "./pages/Home";
 import UseHttp from "./pages/Http";
 import UseHistory from "./pages/UseHistory";
 import UseRef from "./pages/UseRef";
-
+import { ThemeContex } from "./contexts/ThemeContext";
 import "./App.css";
 
 
 function App () {
-
+  const context = useContext(ThemeContex);
+  // use context
+  const globlaTheme = context?.backgroundColor;
+  const setTheme = () => {
+    if (globlaTheme === "#947673") {
+      context?.changeTheme("#ada0a0");
+    } else {
+      context?.changeTheme("#947673");
+    }
+  };
 
   return (
     <div className="App">
@@ -20,7 +30,7 @@ function App () {
             <Link to="/ref">useRef</Link>
             <Link to="/navigate">useNavigate</Link>
             <Link to="/http">useHttp</Link>
-            <button>Macrotheme</button>
+            <button onClick={ setTheme }>Macrotheme</button>
           </div>
         </nav>
 

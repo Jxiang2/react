@@ -22,7 +22,7 @@ export default function UseRef () {
     }, [name]);
 
     return (
-        <div style={ { backgroundColor: theme.backgroundColor } }>
+        <div style={ { backgroundColor: theme?.backgroundColor } }>
             <input
                 ref={ inputRef }
                 value={ name }

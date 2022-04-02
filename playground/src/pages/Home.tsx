@@ -4,9 +4,9 @@ import HomeList from "../Components/HomeList";
 
 
 export default function Home () {
+    const context = useContext(ThemeContex);
     const [num, setNum] = useState(1);
-    const [dark, setDark] = useState(false);
-    const theme = useContext(ThemeContex);
+    const [subTheme, setSubTheme] = useState(false);
 
     // only num changes, getItems re-react
     const getItems = useCallback((increment: number) => {
@@ -14,24 +14,22 @@ export default function Home () {
     }, [num]);
 
     const subtheme = {
-        backgroundColor: dark ? "#333" : "#FFF",
-        color: dark ? "#FFF" : "#333"
+        backgroundColor: subTheme ? "#333" : "#FFF",
+        color: subTheme ? "#FFF" : "#333"
     };
 
     return (
-        <div style={ { ...subtheme, backgroundColor: theme.backgroundColor } }>
-            <p>homepage & useCallback demo</p>
+        <div style={ { ...subtheme, backgroundColor: context?.backgroundColor } }>
+            <p>Home Page</p>
+            <p>useContext & useCallback demo</p>
             <input
                 type="number"
                 value={ num }
                 onChange={ e => setNum(Number(e.target.value)) }
             />
 
-            <button onClick={ () => setDark(prevDark => !prevDark) }>
+            <button onClick={ () => setSubTheme(prevDark => !prevDark) }>
                 Subtheme
-            </button>
-            <button>
-                Macrotheme
             </button>
 
             <HomeList getItems={ getItems } />
