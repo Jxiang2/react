@@ -8,10 +8,11 @@ nav {
   padding: 2vh;
 }
 
-nav>span {
+nav>span>a {
   color: brown;
   font-weight: bolder;
   margin-right: 50px;
+  text-decoration: none;
 }
 
 .links {

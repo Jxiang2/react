@@ -14,7 +14,7 @@ function App () {
     <div className="App">
       <BrowserRouter>
         <nav>
-          <span>ReactTS Playground</span>
+          <span><Link to="/">ReactTS Playground</Link></span>
 
           <div className='links'>
             <Link to="/ref">useRef</Link>
