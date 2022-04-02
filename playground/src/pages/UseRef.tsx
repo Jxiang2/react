@@ -1,6 +1,8 @@
-import { useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
+import { ThemeContex } from "../contexts/ThemeContext";
 
 export default function UseRef () {
+    const theme = useContext(ThemeContex);
     const [name, setName] = useState("");
 
     // usecase 1: access DOM elements
@@ -20,7 +22,7 @@ export default function UseRef () {
     }, [name]);
 
     return (
-        <div>
+        <div style={ { backgroundColor: theme.backgroundColor } }>
             <input
                 ref={ inputRef }
                 value={ name }

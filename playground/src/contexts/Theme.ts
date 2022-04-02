@@ -3,5 +3,5 @@ export interface Theme {
 };
 
 export const initTheme: Theme = {
-  "backgroundColor": "white"
+  "backgroundColor": "#947673"
 };
