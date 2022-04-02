@@ -1,13 +1,20 @@
-import "./App.css";
-
+import { useContext } from "react";
 import { BrowserRouter, Link, Route, Routes } from "react-router-dom";
 
 import Home from "./pages/Home";
 import UseHttp from "./pages/Http";
 import UseHistory from "./pages/UseHistory";
 import UseRef from "./pages/UseRef";
+import { ThemeContex } from "./contexts/ThemeContext";
+
+import "./App.css";
+
 
 function App () {
+
+  const theme = useContext(ThemeContex);
+  console.log(theme);
+
 
   return (
     <div className="App">
