@@ -1,11 +1,11 @@
-import { Routes, Route, BrowserRouter, Link } from 'react-router-dom';
+import "./App.css";
 
-import Home from './pages/Home';
-import UseHttp from './pages/Http';
-import UseHistory from './pages/UseHistory';
-import UseRef from './pages/UseRef';
+import { BrowserRouter, Link, Route, Routes } from "react-router-dom";
 
-import './App.css';
+import Home from "./pages/Home";
+import UseHttp from "./pages/Http";
+import UseHistory from "./pages/UseHistory";
+import UseRef from "./pages/UseRef";
 
 function App () {
 
@@ -16,8 +16,8 @@ function App () {
           <span><Link to="/">ReactTS Playground</Link></span>
           <div className='links'>
             <Link to="/ref">useRef</Link>
-            <Link to="/http">useHttp</Link>
             <Link to="/navigate">useNavigate</Link>
+            <Link to="/http">useHttp</Link>
             <button>Context Example</button>
           </div>
         </nav>

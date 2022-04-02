@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
+
 export default function UseHistory () {
     const navigate = useNavigate();
-
     return (
         <div style={ { "display": "grid" } }>
             useNavigate (useHistory)

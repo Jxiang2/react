@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from "react";
+import { useEffect, useRef, useState } from "react";
 
 export default function UseRef () {
     const [name, setName] = useState("");
@@ -22,9 +22,9 @@ export default function UseRef () {
     return (
         <div>
             <input
-                ref={ inputRef }
-                value={ name }
-                onChange={ e => setName(e.target.value) }
+             ref={ inputRef }
+             value={ name }
+             onChange={ e => setName(e.target.value) }
             />
             <button onClick={ focus }>focus</button>
 
