@@ -18,7 +18,7 @@ function App () {
             <Link to="/ref">useRef</Link>
             <Link to="/navigate">useNavigate</Link>
             <Link to="/http">useHttp</Link>
-            <button>Context Example</button>
+            <button>Macrotheme</button>
           </div>
         </nav>
 

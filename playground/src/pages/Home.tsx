@@ -1,5 +1,4 @@
 import { useCallback, useState } from "react";
-
 import HomeList from "../Components/HomeList";
 
 export default function Home () {
@@ -26,8 +25,12 @@ export default function Home () {
             />
 
             <button onClick={ () => setDark(prevDark => !prevDark) }>
-                Toggle Theme
+                Subtheme
             </button>
+            <button>
+                Macrotheme
+            </button>
+
             <HomeList getItems={ getItems } />
         </div>
     );
