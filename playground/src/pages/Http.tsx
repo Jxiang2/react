@@ -1,5 +1,5 @@
 export default function UseEffect () {
     return (
-        <div>useEffect</div>
+        <div>HTTP CRUD Workflow</div>
     );
 }

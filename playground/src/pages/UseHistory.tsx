@@ -9,7 +9,5 @@ export default function UseHistory () {
             <button onClick={ () => navigate("/ref") }>go ref</button>
             <button onClick={ () => navigate("/reducer") }>go reducer</button>
         </div>
-
-
     );
 }
