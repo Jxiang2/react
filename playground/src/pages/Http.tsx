@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import { themeContext } from "../contexts/themeContext";
 import { useAxios } from "../Hooks/useAxios";
 import { useAxiosGet } from "../Hooks/useAxiosGet";
@@ -16,9 +16,7 @@ export default function UseEffect () {
             setUrl("http://3.144.236.185:8000/planets");
     };
 
-    useEffect(() => {
-        if (response) console.log(response);
-    }, [response]);
+    console.log(response);
 
     return (
         <div style={ { backgroundColor: theme?.backgroundColor } }>
