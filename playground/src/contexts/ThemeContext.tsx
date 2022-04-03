@@ -1,5 +1,5 @@
 import { createContext, useReducer } from "react";
-import { Theme, ThemeActions, ThemeContextProviderProps, ThemeContexttype } from "./themeContext.types";
+import { Theme, ThemeActions, ThemeContextProviderProps, ThemeContexttype } from "./ThemeContext.types";
 
 const themeReducer = (state: Theme, action: ThemeActions) => {
   switch (action.type) {
