@@ -1,21 +1,28 @@
-interface Theme {
+interface ITheme {
   backgroundColor: string;
 }
 
-type ThemeContextProviderProps = {
+type ThemeActionsType = { type: "CHANGE_COLOR", payload: string; };
+
+type ThemeContextProviderPropsType = {
   children: React.ReactNode;
 };
 
-type ThemeContexttype = {
+type ThemeContextType = {
   backgroundColor: string;
   changeTheme: (color: string) => void;
 };
 
-type ThemeActions = { type: "CHANGE_COLOR", payload: string; };
+export const themeReducer = (state: ITheme, action: ThemeActionsType) => {
+  switch (action.type) {
+    case "CHANGE_COLOR":
+      return { ...state, backgroundColor: action.payload };
+    default:
+      return state;
+  }
+};
 
 export type {
-  Theme,
-  ThemeContextProviderProps,
-  ThemeContexttype,
-  ThemeActions,
+  ThemeContextProviderPropsType,
+  ThemeContextType,
 };

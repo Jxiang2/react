@@ -5,12 +5,12 @@ import Home from "./pages/Home";
 import UseHttp from "./pages/Http";
 import UseHistory from "./pages/UseHistory";
 import UseRef from "./pages/UseRef";
-import { themeContex } from "./contexts/themeContext";
+import { themeContext } from "./contexts/themeContext";
 import "./App.css";
 
 
 function App () {
-  const context = useContext(themeContex);
+  const context = useContext(themeContext);
   // use context
   const globlaTheme = context?.backgroundColor;
   const setTheme = () => {

@@ -1,8 +1,8 @@
 import { useContext } from "react";
-import { themeContex } from "../contexts/themeContext";
+import { themeContext } from "../contexts/themeContext";
 
 export default function UseEffect () {
-    const theme = useContext(themeContex);
+    const theme = useContext(themeContext);
     return (
         <div style={ { backgroundColor: theme?.backgroundColor } }>HTTP CRUD Workflow</div>
     );

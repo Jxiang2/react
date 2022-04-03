@@ -1,10 +1,10 @@
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import { themeContex } from "../contexts/themeContext";
+import { themeContext } from "../contexts/themeContext";
 
 export default function UseHistory () {
     const navigate = useNavigate();
-    const theme = useContext(themeContex);
+    const theme = useContext(themeContext);
     return (
         <div style={ { display: "grid", backgroundColor: theme?.backgroundColor } }>
             useNavigate (useHistory)
