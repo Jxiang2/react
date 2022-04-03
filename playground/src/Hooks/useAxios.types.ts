@@ -8,11 +8,11 @@ interface IAxiosState {
 type AxiosUpdateMethodName = "PUT" | "PATCH";
 
 type AxiosActionsType =
-  | { type: "IS_PENDING", payload: string; }
-  | { type: "ERROR", payload: string; }
-  | { type: "CREATED", payload: string; }
-  | { type: "UPDATED", payload: string; }
-  | { type: "DELETED", payload: string; };
+  | { type: "IS_PENDING", payload: any; }
+  | { type: "ERROR", payload: any; }
+  | { type: "CREATED", payload: any; }
+  | { type: "UPDATED", payload: any; }
+  | { type: "DELETED", payload: any; };
 
 export const axiosReducer = (state: IAxiosState, action: AxiosActionsType) => {
   switch (action.type) {
@@ -32,6 +32,7 @@ export const axiosReducer = (state: IAxiosState, action: AxiosActionsType) => {
 };
 
 export type {
+  IAxiosState,
   AxiosActionsType,
   AxiosUpdateMethodName
 };

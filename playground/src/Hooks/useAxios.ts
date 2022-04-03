@@ -1,12 +1,14 @@
 import axios from "axios";
 import { useReducer, useState, useEffect } from "react";
-import { axiosReducer, AxiosActionsType, AxiosUpdateMethodName } from "./useAxios.types";
+import { IAxiosState, axiosReducer, AxiosActionsType, AxiosUpdateMethodName } from "./useAxios.types";
+
+let initState: IAxiosState = {
+  isPending: false, data: null, success: false, error: null
+};
 
 export const useAxios = () => {
   const [isCancelled, setIsCancelled] = useState(false);
-  const [response, dispatch] = useReducer(axiosReducer, {
-    isPending: false, data: null, success: false, error: null
-  });
+  const [response, dispatch] = useReducer(axiosReducer, initState);
 
   const dispatchIfNotCancelled = (action: AxiosActionsType) =>
     !isCancelled && dispatch(action);
@@ -22,14 +24,10 @@ export const useAxios = () => {
       if (!(axiosResponse && axiosResponse.status < 400))
         throw new Error(axiosResponse.statusText);
 
-      const axiosData = await axiosResponse.data;
-
-      dispatchIfNotCancelled({ type: "CREATED", payload: axiosData });
-      return;
+      return dispatchIfNotCancelled({ type: "CREATED", payload: axiosResponse.data });
     }
     catch (err: any) {
-      dispatchIfNotCancelled({ type: "ERROR", payload: err.message });
-      return;
+      return dispatchIfNotCancelled({ type: "ERROR", payload: err.message });
     }
   };
 
@@ -44,14 +42,10 @@ export const useAxios = () => {
       if (!(axiosResponse && axiosResponse.status < 400))
         throw new Error(axiosResponse.statusText);
 
-      const axiosData = await axiosResponse.data;
-
-      dispatchIfNotCancelled({ type: "UPDATED", payload: axiosData });
-      return;
+      return dispatchIfNotCancelled({ type: "UPDATED", payload: axiosResponse.data });
     }
     catch (error: any) {
-      dispatchIfNotCancelled({ type: "ERROR", payload: error.message });
-      return;
+      return dispatchIfNotCancelled({ type: "ERROR", payload: error.message });
     }
   };
 
@@ -65,14 +59,11 @@ export const useAxios = () => {
       if (!(axiosResponse && axiosResponse.status < 400))
         throw new Error(axiosResponse.statusText);
 
-      const axiosData = await axiosResponse.data;
+      return dispatchIfNotCancelled({ type: "DELETED", payload: axiosResponse.data });
 
-      dispatchIfNotCancelled({ type: "DELETED", payload: axiosData });
-      return;
     }
     catch (error: any) {
-      dispatchIfNotCancelled({ type: "ERROR", payload: error.message });
-      return;
+      return dispatchIfNotCancelled({ type: "ERROR", payload: error.message });
     }
   };
 
