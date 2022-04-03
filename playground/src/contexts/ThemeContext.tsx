@@ -1,5 +1,5 @@
 import { createContext, useReducer } from "react";
-import { Theme, ThemeActions, ThemeContextProviderProps, ThemeContexttype } from "./ThemeContext.types";
+import { Theme, ThemeActions, ThemeContextProviderProps, ThemeContexttype } from "./themeContext.types";
 
 const themeReducer = (state: Theme, action: ThemeActions) => {
   switch (action.type) {
@@ -11,7 +11,7 @@ const themeReducer = (state: Theme, action: ThemeActions) => {
 };
 
 // the content of context to be consumed
-export const ThemeContex = createContext<ThemeContexttype | null>(null);
+export const themeContex = createContext<ThemeContexttype | null>(null);
 
 export const ThemeContexProvider = ({ children }: ThemeContextProviderProps) => {
   // variables in context
@@ -21,8 +21,8 @@ export const ThemeContexProvider = ({ children }: ThemeContextProviderProps) => 
   const changeTheme = (color: string) => dispatch({ type: "CHANGE_COLOR", payload: color });
 
   return (
-    <ThemeContex.Provider value={ { ...state, changeTheme } } >
+    <themeContex.Provider value={ { ...state, changeTheme } } >
       { children }
-    </ThemeContex.Provider >
+    </themeContex.Provider >
   );
 };

@@ -1,8 +1,8 @@
 import { useContext, useEffect, useRef, useState } from "react";
-import { ThemeContex } from "../contexts/ThemeContext";
+import { themeContex } from "../contexts/themeContext";
 
 export default function UseRef () {
-    const theme = useContext(ThemeContex);
+    const theme = useContext(themeContex);
     const [name, setName] = useState("");
 
     // usecase 1: access DOM elements
