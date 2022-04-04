@@ -1,0 +1,14 @@
+{
+  "products": [
+    {
+      "id": "1",
+      "title": "Mac",
+      "rating": 0
+    },
+    {
+      "id": "2",
+      "title": "IPhone",
+      "rating": 0
+    }
+  ]
+}
