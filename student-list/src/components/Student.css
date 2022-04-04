@@ -1,0 +1,62 @@
+.student-card {
+    display: grid;
+    grid-template-columns: 0.5fr 1fr 0.5fr;
+    align-items: center;
+    border-bottom: 1px solid lightgrey;
+}
+
+.avatar {
+    margin: auto auto;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    border: 1px solid lightgrey;
+}
+
+.avatar img {
+    border-radius:50%;
+    width: 150px;
+    height: 150px;
+}
+
+.info p {
+    margin-left: 15px;
+    text-align: left;
+}
+
+.info form {
+    margin-left: 15px;
+    text-align: left;
+    margin-bottom: 20px;
+    width: 100px;
+}
+
+.info form input {
+    border: none;
+    width: 98%;
+    height: 100%;
+    border-bottom: 1px solid lightgrey;
+    
+}
+
+.info form input:focus {
+    outline: none;
+}
+
+.info h1 {
+    text-align: left;
+}
+
+.grade-list {
+    grid-column: 2;
+    margin-left: 15px;
+    text-align: left;
+}
+
+button {
+    background: none;
+    border: 2px solid #fff;
+    color: black;
+    font-weight: bold;
+    cursor: pointer;
+}
