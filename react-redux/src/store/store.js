@@ -6,6 +6,8 @@ const reducerFn = (state = { counter: 10 }, action) => {
       return { ...state, counter: state.counter + 1 };
     case ("DEC"):
       return { ...state, counter: state.counter - 1 };
+    case ("ADD"):
+      return { ...state, counter: state.counter + 10 };
     default:
       return state;
   }
