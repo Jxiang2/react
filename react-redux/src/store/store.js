@@ -16,10 +16,9 @@ const counterSlice = createSlice({
   }
 });
 
-const store = configureStore({
-  reducer: counterSlice.reducer
-});
+const actions = counterSlice.actions;
+const store = configureStore({ reducer: counterSlice.reducer });
 
-export const actions = counterSlice.actions;
-export default store;
+
+export { actions, store };
 
