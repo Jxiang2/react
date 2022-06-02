@@ -14,21 +14,22 @@ export default class Counter extends Component {
 
   // invoked right after render
   componentDidMount () {
-    console.log("Component did mount----------------")
+    console.log("Component did mount")
   }
 
+  // like memo() to memoizes a component, and updates only when the following logic returns true
   shouldComponentUpdate (nextProps, nextState) {
     if (nextProps.propToIgnore && this.props.propToIgnore !== nextProps.propToIgnore) {
-      console.log("Should component update - no render----------------")
+      console.log("Should component update - no render")
       return false
     }
 
-    console.log("Should component update - render----------------")
+    console.log("Should component update - render")
     return true
   }
 
   render () {
-    console.log("render----------------")
+    console.log("render")
 
     return (
       < div className="App" >
@@ -41,10 +42,10 @@ export default class Counter extends Component {
   }
 
   componentDidUpdate (prevProps, prevState, snapshot) {
-    console.log("Component did update, the prev state is", prevState, "----------------")
+    console.log("Component did update, the prev state is", prevState,)
   }
 
   componentWillUnmount () {
-    console.log("Component will unmount----------------")
+    console.log("Component will unmount")
   }
 }
