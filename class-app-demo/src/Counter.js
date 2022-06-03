@@ -12,13 +12,22 @@ export default class Counter extends Component {
     this.decrement = () => this.setState({ counter: this.state.counter - 1 })
   }
 
+  // handlers
+  handleIncrement = () => {
+    this.increment()
+  }
+
+  handleDecrement = () => {
+    this.decrement()
+  }
+
   // invoked right after render
-  componentDidMount () {
+  componentDidMount = () => {
     console.log("Component did mount")
   }
 
   // like memo() to memoizes a component, and updates only when the following logic returns true
-  shouldComponentUpdate (nextProps, nextState) {
+  shouldComponentUpdate = (nextProps, nextState) => {
     if (nextProps.propToIgnore && this.props.propToIgnore !== nextProps.propToIgnore) {
       console.log("Should component update - no render")
       return false
@@ -28,24 +37,25 @@ export default class Counter extends Component {
     return true
   }
 
-  render () {
+  render = () => {
     console.log("render")
 
     return (
       < div className="App" >
         Counter: {this.state.counter}
-        <button onClick={this.increment}>+</button>
-        <button onClick={this.decrement}>-</button>
+        <button onClick={this.handleIncrement}>+</button>
+        <button onClick={this.handleDecrement}>-</button>
         {this.props.propToIgnore}
       </ div>
     )
   }
 
-  componentDidUpdate (prevProps, prevState, snapshot) {
+  componentDidUpdate = (prevProps, prevState, snapshot) => {
     console.log("Component did update, the prev state is", prevState,)
+    console.log("Component did update, the prev props is", prevProps,)
   }
 
-  componentWillUnmount () {
+  componentWillUnmount = () => {
     console.log("Component will unmount")
   }
 }
