@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useReducer, useState, useEffect } from "react";
-import { IAxiosState, axiosReducer, AxiosActionsType, AxiosUpdateMethodName } from "./useAxios.types";
+import { IAxiosState, axiosReducer, AxiosActionsType, AxiosUpdateMethodName } from "../react-app-env";
 
 let initState: IAxiosState = {
   isPending: false, data: null, success: false, error: null

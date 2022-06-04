@@ -1,5 +1,5 @@
 import { createContext, useReducer } from "react";
-import { themeReducer, ThemeContextProviderPropsType, ThemeContextType } from "./themeContext.types";
+import { themeReducer, ThemeContextProviderPropsType, ThemeContextType } from "../react-app-env";
 
 
 // the content of context to be consumed
