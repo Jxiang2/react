@@ -1,10 +1,11 @@
-import { useAxiosGet } from "../hooks/useAxiosGet";
-import TripCard from "./TripCard";
-import "./TripList.css";
+import { useAxiosGet } from "../hooks/useAxiosGet"
+import TripCard from "./TripCard"
+import "./TripList.css"
 
-export default function TripList() {
-	const { response, updateUrl, requstAfterChange } = useAxiosGet("http://127.0.0.1:3000/trips");
+export default function TripList () {
+	const { response, updateUrl, requstAfterChange } = useAxiosGet("http://127.0.0.1:3001/trips")
 
+	console.log("rendered")
 	return (
 		<div className='trip-list'>
 			<h2>Trip List</h2>
@@ -22,12 +23,12 @@ export default function TripList() {
 			</ul>
 
 			<div className='filters'>
-				<button onClick={() => updateUrl("http://127.0.0.1:3000/trips?loc=europe")}>
+				<button onClick={() => updateUrl("http://127.0.0.1:3001/trips?loc=europe")}>
 					European Trips
 				</button>
 
-				<button onClick={() => updateUrl("http://127.0.0.1:3000/trips")}>All Trips</button>
+				<button onClick={() => updateUrl("http://127.0.0.1:3001/trips")}>All Trips</button>
 			</div>
 		</div>
-	);
+	)
 }

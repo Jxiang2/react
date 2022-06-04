@@ -1,24 +1,24 @@
-import { useState } from "react";
-import { useAxios } from "./hooks/useAxios";
-import TripList from "./components/TripList";
+import { useState } from "react"
+import { useAxios } from "./hooks/useAxios"
+import TripList from "./components/TripList"
 
-function App() {
-	const [showTrips, setShowTrips] = useState(true);
-	const [title, setTitle] = useState("");
-	const [price, setPrice] = useState("");
-	const [location, setLocation] = useState("");
-	const { axiosCreate } = useAxios();
+function App () {
+	const [showTrips, setShowTrips] = useState(true)
+	const [title, setTitle] = useState("")
+	const [price, setPrice] = useState("")
+	const [location, setLocation] = useState("")
+	const { axiosCreate } = useAxios()
 
 	const resetForm = () => {
-		setTitle("");
-		setPrice("");
-		setLocation("");
-	};
+		setTitle("")
+		setPrice("")
+		setLocation("")
+	}
 
 	const addNewtrip = async (e) => {
-		e.preventDefault();
+		e.preventDefault()
 		if (title && price && location) {
-			axiosCreate("http://127.0.0.1:3000/trips", {
+			axiosCreate("http://127.0.0.1:3001/trips", {
 				headers: {
 					Accept: "application/json",
 					"Content-Type": "application/json;charset=UTF-8",
@@ -28,13 +28,13 @@ function App() {
 					price: price,
 					loc: location,
 				},
-			});
-			resetForm();
+			})
+			resetForm()
 		} else {
-			console.log("input can not be empty!");
-			resetForm();
+			console.log("input can not be empty!")
+			resetForm()
 		}
-	};
+	}
 
 	return (
 		<div className='App'>
@@ -66,7 +66,7 @@ function App() {
 				</form>
 			)}
 		</div>
-	);
+	)
 }
 
-export default App;
+export default App
