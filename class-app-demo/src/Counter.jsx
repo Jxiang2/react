@@ -27,22 +27,24 @@ export default class Counter extends Component {
   }
 
   // like memo() to memoizes a component, and updates only when the following logic returns true
+  // shouldComponentUpdate's priority is higher than state change
   shouldComponentUpdate = (nextProps, nextState) => {
-    if (nextProps.propToIgnore === this.props.propToIgnore) {
-      console.log("Should component update - no render")
-      return false
+    if (this.props.propToIgnore === nextProps.propToIgnore) {
+      if (nextState.counter !== this.state.counter) {
+        console.log("Should component update - render")
+        return true
+      }
     }
-
-    console.log("Should component update - render")
-    return true
+    console.log("Should class component update - no render")
+    return false
   }
 
   render = () => {
-    console.log("class child rendered")
+    console.log("class child render")
 
     return (
       < div className="App" >
-        Counter: {this.state.counter}
+        Class Counter: {this.state.counter}
         <button onClick={this.handleIncrement}>+</button>
         <button onClick={this.handleDecrement}>-</button>
         {this.props.propToIgnore}

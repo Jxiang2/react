@@ -15,7 +15,7 @@ function FunctionCounter ({ propToIgnore }) {
 
   return (
     < div className="App" >
-      Counter: {counter}
+      Function Counter: {counter}
       <button onClick={() => { setCounter(prev => counter + 1) }}>+</button>
       <button onClick={() => { setCounter(prev => counter - 1) }}>-</button>
       {propToIgnore}
@@ -23,4 +23,5 @@ function FunctionCounter ({ propToIgnore }) {
   )
 }
 
+// component re-render only if props change
 export default memo(FunctionCounter)
