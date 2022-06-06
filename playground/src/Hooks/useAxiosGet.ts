@@ -37,5 +37,6 @@ export const useAxiosGet = (url: string, headers: any) => {
 
     return () => controller.abort();
   }, [url, headers]);
+
   return { response };
 };
