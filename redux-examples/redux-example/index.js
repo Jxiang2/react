@@ -39,6 +39,8 @@ function restockIceCream (qty = 1) {
 }
 
 // action subReducers
+// subReducers can respond to ALL action types
+// but they can only update their specialized states
 const cakeReducer = (state = initialCakeState, action) => {
   switch (action.type) {
     case CAKE_ORDERED:
@@ -56,6 +58,8 @@ const iceCreamReducer = (state = initialIceCreamState, action) => {
       return { ...state, numOfIceCreams: state.numOfIceCreams - 1 }
     case ICECREAM_RESTOCKED:
       return { ...state, numOfIceCreams: state.numOfIceCreams + action.payload }
+    case CAKE_ORDERED:
+      return { ...state, numOfIceCreams: state.numOfIceCreams - 1 }
     default:
       return state
   }
