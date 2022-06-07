@@ -1,0 +1,38 @@
+*OVERVIEW*
+
+Redux is for JS apps (React, Angular, Vue...)
+Redux is used of 
+  you have large amounts of state that are needed in many places in the app
+  the app state updates frequently over time
+
+
+redux is a container used to store the state shared by all components
+of the app, and it provides global actions to manage the state.
+
+RTK encapsulates redux for efficient development
+
+React <--> React-Redux <--> Redux (RTK)
+
+
+*Core Concepts*
+Store: hold state of the app
+Action: describe what happend {type, payload}
+Reducer: ties store and actions togethor, handles the action and decides how to update state
+
+
+*Core Principles*
+The global state is a single object in a single store
+The only way to change state is to dispatch an action
+The state tree is updated based on actions, managed by reducers (prevState, action) -> newState
+
+
+*WorkFlow*
+app -> excute bussiness logic -> dispatch action -> 
+action handled by reducer -> update redux store (state) -> influence the app
+
+
+**store**
+Hold app state
+Provide getState()
+Provide dispatch(action)
+Provide subscribe(listener)
