@@ -7,9 +7,9 @@ const initialState = {
 const cakeSlice = createSlice({
   name: "cake", // name of the slice in the state, the same with the on is store.js
 
-  initialState: initialState,
+  initialState,
 
-  reducers: { // automatically generate action creator functions and reducers
+  reducers: { // generate both action funcs and subReducers sharing the same name
     ordered: (state) => {
       state.numOfCakes--
     },

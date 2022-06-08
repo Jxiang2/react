@@ -1,5 +1,4 @@
 const { cakeActions } = require("../cake/cakeSlice")
-
 const createSlice = require("@reduxjs/toolkit").createSlice
 
 const initialState = {
@@ -9,9 +8,9 @@ const initialState = {
 const iceCreamSlice = createSlice({
   name: "iceCream", // name of the slice in the state, the same with the on is store.js
 
-  initialState: initialState,
+  initialState,
 
-  reducers: { // automatically generate action creator functions and reducers
+  reducers: { // generate both action funcs and subReducers sharing the same name
     ordered: (state) => {
       state.numOfIceCreams--
     },
@@ -21,9 +20,8 @@ const iceCreamSlice = createSlice({
     }
   },
 
-  // respond to actions in other slices
-  extraReducers: (builder) => {
-    builder.addCase(cakeActions.ordered, (state) => { // (other action name, response function to that action name)
+  extraReducers: (builder) => { // respond to invokes to other slices' action funcs, including those downloaded
+    builder.addCase(cakeActions.ordered, (state) => { // (other action name, callback func) => update this slice
       state.numOfIceCreams--
     })
   }

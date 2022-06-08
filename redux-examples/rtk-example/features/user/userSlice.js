@@ -8,7 +8,7 @@ const initialState = {
   error: ""
 }
 
-// generates pending, fufilled and rejected action types to the async callback function at the 
+// generates pending, fufilled and rejected actions to the async callback function at the 
 // 2nd argument position of createAsyncThunk
 const fetchUsers = createAsyncThunk("user/fetchUsers", () => {
   return axios
@@ -17,9 +17,13 @@ const fetchUsers = createAsyncThunk("user/fetchUsers", () => {
 })
 
 const userSlice = createSlice({
-  name: "user",
+  name: "user", // name of the slice in the state, the same with the on is store.js
+
   initialState,
-  extraReducers: (builder) => {
+
+  reducers: {},
+
+  extraReducers: (builder) => { // respond to invokes to other slices' action funcs, including those downloaded
     builder.addCase(fetchUsers.pending, (state) => {
       state.loading = true
     })
