@@ -4,7 +4,7 @@ const initialState = {
   error: null,
 }
 
-const users = (state = initialState, action) => {
+const usersReducer = (state = initialState, action) => {
   switch (action.type) {
     case "GET_USERS_REQUESTED":
       return { ...state, loading: true }
@@ -17,4 +17,4 @@ const users = (state = initialState, action) => {
   }
 }
 
-export default users
+export default usersReducer

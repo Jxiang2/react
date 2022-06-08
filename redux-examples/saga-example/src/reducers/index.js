@@ -1,10 +1,10 @@
-import petCounter from "./petCounter"
-import users from "./users"
+import petCounterReducer from "./petCounter"
+import usersReducer from "./users"
 import { combineReducers } from "redux"
 
-const reducers = combineReducers({
-  petCounter,
-  users,
+const rootReducer = combineReducers({
+  petCounter: petCounterReducer,
+  users: usersReducer
 })
 
-export default reducers
+export default rootReducer

@@ -1,4 +1,4 @@
-const url = "https://jsonplaceholder.typicode.com/ussers"
+const url = "https://jsonplaceholder.typicode.com/users"
 
 const fetchGetUsers = () => {
   return fetch(url, { method: "GET", })
