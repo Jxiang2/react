@@ -39,3 +39,7 @@ Hold app state
 Provide getState()
 Provide dispatch(action)
 Provide subscribe(listener)
+
+
+**Saga**
+dispatch() --> Saga Middleware --> fetch() -->data--> Reducer --> Store

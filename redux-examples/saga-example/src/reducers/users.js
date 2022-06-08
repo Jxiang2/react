@@ -1,7 +1,7 @@
 const initialState = {
   users: [],
   loading: false,
-  error: null
+  error: null,
 }
 
 const users = (state = initialState, action) => {
@@ -10,7 +10,7 @@ const users = (state = initialState, action) => {
       return { ...state, loading: true }
     case "GET_USERS_SUCCEEDED":
       return { ...state, loading: false, users: action.users }
-    case "GET_USERS_FAIILED":
+    case "GET_USERS_FAILED":
       return { ...state, loading: false, error: action.message }
     default:
       return state
