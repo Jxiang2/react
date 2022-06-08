@@ -8,7 +8,7 @@ const users = (state = initialState, action) => {
   switch (action.type) {
     case "GET_USERS_REQUESTED":
       return { ...state, loading: true }
-    case "GET_USERS_SUCCESS":
+    case "GET_USERS_SUCCEEDED":
       return { ...state, loading: false, users: action.users }
     case "GET_USERS_FAIILED":
       return { ...state, loading: false, error: action.message }
