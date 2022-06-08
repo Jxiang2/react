@@ -8,7 +8,7 @@ import {
   toggleTodo,
   removeTodo,
   addTodo,
-} from "./store";
+} from "./redux/store";
 
 function TodoApp () {
   const dispatch = useDispatch();
@@ -38,6 +38,7 @@ function TodoApp () {
               />
               <span>{ todo.text }</span>
             </div>
+
             <button onClick={ () => dispatch(removeTodo(todo)) }>Delete</button>
           </React.Fragment>
         )) }

@@ -8,11 +8,11 @@ export interface Todo {
 }
 
 // http get all totos
-export const getTodos = async (): Promise<Todo[]> =>
+export const httpGetTodos = async (): Promise<Todo[]> =>
   fetch(`${BASE_URL}`).then((res) => res.json());
 
 // create a todo
-export const createTodo = async (text: string): Promise<Todo> =>
+export const httpCreateTodo = async (text: string): Promise<Todo> =>
   fetch(`${BASE_URL}`, {
     method: "POST",
     headers: {
@@ -24,7 +24,7 @@ export const createTodo = async (text: string): Promise<Todo> =>
   }).then((res) => res.json());
 
 // http update a todo
-export const updateTodo = async (todo: Todo): Promise<Todo> =>
+export const httpUpdateTodo = async (todo: Todo): Promise<Todo> =>
   fetch(`${BASE_URL}/${todo.id}`, {
     method: "PUT",
     headers: {
@@ -34,7 +34,7 @@ export const updateTodo = async (todo: Todo): Promise<Todo> =>
   }).then((res) => res.json());
 
 // http delete a todo
-export const deleteTodo = async (todo: Todo): Promise<Todo> =>
+export const httpDeleteTodo = async (todo: Todo): Promise<Todo> =>
   fetch(`${BASE_URL}/${todo.id}`, {
     method: "DELETE",
   }).then(() => todo);

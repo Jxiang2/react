@@ -1,7 +1,9 @@
 import { createStore, applyMiddleware } from "redux";
 import createSagaMiddleware from "@redux-saga/core";
-import rootSaga from "./sagas/rootSaga";
-import type { Todo } from "./sagas/requests/requests";
+import rootSaga from "../sagas/rootSaga";
+
+// types
+import type { Todo } from "../sagas/requests/requests";
 
 // reducer
 const todoReducer = (state: Todo[] = [], action: { type: string; payload: any; }) => {
@@ -25,10 +27,12 @@ export const toggleTodo = (todo: Todo) => ({
     done: !todo.done,
   },
 });
+
 export const removeTodo = (todo: Todo) => ({
   type: "DELETE_TODO_REQUESTED",
   payload: todo,
 });
+
 export const addTodo = (text: string) => ({
   type: "CREATE_TODO_REQUESTED",
   payload: text,
