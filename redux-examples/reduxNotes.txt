@@ -41,5 +41,6 @@ Provide dispatch(action)
 Provide subscribe(listener)
 
 
-**Saga**
-dispatch() --> Saga Middleware --> fetch() -->data--> Reducer --> Store
+**Saga: A Middleware**
+dispatch(actionCreator()) --> Watcher Saga catches the action --> Handler calls a http function to make request
+ --> retrieve http data --> Reducer --> Store
