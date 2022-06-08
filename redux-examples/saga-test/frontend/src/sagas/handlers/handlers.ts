@@ -5,7 +5,7 @@ import { put } from "redux-saga/effects";
 import type { Todo } from "../requests/requests";
 
 function* getTodosAction () {
-  const todos: Todo[] = yield httpGetTodos();
+  const todos: Array<Todo> = yield httpGetTodos();
   yield put({ type: "TODOS_FETCH_SUCCEEDED", payload: todos });
 }
 

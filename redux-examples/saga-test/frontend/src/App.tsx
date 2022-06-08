@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useCallback } from "react";
+import React, { useEffect, useRef } from "react";
 import { Provider, useSelector, useDispatch } from "react-redux";
 
 import {
@@ -20,10 +20,10 @@ function TodoApp () {
 
   const textRef = useRef<HTMLInputElement>(null);
 
-  const onAdd = useCallback(() => {
+  const onAdd = () => {
     dispatch(addTodo(textRef.current!.value));
     textRef.current!.value = "";
-  }, [dispatch]);
+  };
 
   return (
     <div className="App">
