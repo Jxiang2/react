@@ -1,10 +1,10 @@
-import petCounter from "./petCounter";
-import petFavorite from "./petFavorite";
-import { combineReducers } from "redux";
+import petCounter from "./petCounter"
+import users from "./users"
+import { combineReducers } from "redux"
 
 const reducers = combineReducers({
   petCounter,
-  petFavorite,
-});
+  users,
+})
 
-export default reducers;
+export default reducers
