@@ -38,7 +38,7 @@ const fetchUsersFailure = error => {
 
 /**
  * async action creator function
- * returns a function intead of action object
+ * returns a {function (dispatch): async logics ...} intead of action object
  * and it dispatchs sync actions inside it,
  * so it is a "thunk" of actions
  */
