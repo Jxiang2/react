@@ -7,7 +7,7 @@ export interface Todo {
   done: boolean;
 }
 
-// http get all totos
+// http get all todos
 export const httpGetTodos = async (): Promise<Todo[]> =>
   fetch(`${BASE_URL}`).then((res) => res.json());
 
