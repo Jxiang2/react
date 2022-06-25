@@ -1,12 +1,12 @@
-const { cakeActions } = require("../cake/cakeSlice")
-const createSlice = require("@reduxjs/toolkit").createSlice
+const { cakeActions } = require('../cake/cakeSlice')
+const createSlice = require('@reduxjs/toolkit').createSlice
 
 const initialState = {
-  numOfIceCreams: 20
+  numOfIceCreams: 20,
 }
 
 const iceCreamSlice = createSlice({
-  name: "iceCream", // name of the slice in the state, the same with the on is store.js
+  name: 'iceCream', // name of the slice in the state, the same with the on is store.js
 
   initialState,
 
@@ -17,14 +17,14 @@ const iceCreamSlice = createSlice({
 
     restocked: (state, action) => {
       state.numOfIceCreams += action.payload
-    }
+    },
   },
 
   extraReducers: (builder) => { // respond to invokes to other slices' action funcs, including those downloaded
     builder.addCase(cakeActions.ordered, (state) => { // (other action name, callback func) => update this slice
       state.numOfIceCreams--
     })
-  }
+  },
 })
 
 // fixed export pattern

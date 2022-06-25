@@ -1,5 +1,5 @@
-import Articles from "./components/Articles";
-import User from "./components/User";
+import Articles from './components/Articles'
+import User from './components/User'
 
 function App() {
   return (
@@ -8,12 +8,12 @@ function App() {
         <h1>React Skeltons</h1>
       </header>
 
-      <div className='content'>
+      <div className="content">
         <Articles/>
         <User/>
       </div>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App

@@ -1,4 +1,4 @@
-import { createStore, applyMiddleware } from "redux";
+import { applyMiddleware, createStore } from "redux";
 import { composeWithDevTools } from "redux-devtools-extension"; // browser devtools
 import createSagaMiddleware from "@redux-saga/core";
 import rootSaga from "../sagas/rootSaga";
@@ -20,7 +20,7 @@ const todoReducer = (state: Todo[] = [], action: { type: string; payload: Array<
 export const selectTodos = (state: Array<Todo>) => state;
 
 // action creator functions
-export const fetchTodos = () => ({ type: "TODOS_FETCH_REQUESTED" });
+export const fetchTodos = () => ({type: "TODOS_FETCH_REQUESTED"});
 
 export const toggleTodo = (todo: Todo) => ({
   type: "UPDATE_TODO_REQUESTED",

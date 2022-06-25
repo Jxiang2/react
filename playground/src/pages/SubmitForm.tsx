@@ -27,25 +27,25 @@ const SubmitForm = () => {
   return (
     <div>
       SubmitForm
-      <form onSubmit={ handleSubmit }>
+      <form onSubmit={handleSubmit}>
         <p>recipie title</p>
         <input
           type="text"
-          onChange={ (e) => setTitile(e.target.value) }
-          value={ title }
+          onChange={(e) => setTitile(e.target.value)}
+          value={title}
           required
         />
 
         <p>recipie ingradients</p>
         <input type="text"
-          onChange={ (e) => setNewIngredient(e.target.value) }
-          value={ newIngredient }
-          ref={ ingredientInput }
+               onChange={(e) => setNewIngredient(e.target.value)}
+               value={newIngredient}
+               ref={ingredientInput}
         />
-        <button className='btn' onClick={ handleAdd }>add</button>
+        <button className="btn" onClick={handleAdd}>add</button>
         <p>
           Current Ingredients:
-          { ingredients.map(ing => (<em key={ ing }>{ ing }, </em>)) }
+          {ingredients.map(ing => (<em key={ing}>{ing}, </em>))}
         </p>
 
         <button>Submit</button>

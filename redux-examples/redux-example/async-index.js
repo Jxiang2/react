@@ -7,7 +7,7 @@ const applyMiddleware = redux.applyMiddleware
 const initialState = {
   loading: false,
   users: [],
-  error: ''
+  error: '',
 }
 
 // action names
@@ -18,21 +18,21 @@ const FETCH_USERS_FAILED = 'FETCH_USERS_FAILED'
 // action creator functions
 const fetchUsersRequest = () => {
   return {
-    type: FETCH_USERS_REQUESTED
+    type: FETCH_USERS_REQUESTED,
   }
 }
 
 const fetchUsersSuccess = users => {
   return {
     type: FETCH_USERS_SUCCEEDED,
-    payload: users
+    payload: users,
   }
 }
 
 const fetchUsersFailure = error => {
   return {
     type: FETCH_USERS_FAILED,
-    payload: error
+    payload: error,
   }
 }
 
@@ -67,19 +67,19 @@ const reducer = (state = initialState, action) => {
     case FETCH_USERS_REQUESTED:
       return {
         ...state,
-        loading: true
+        loading: true,
       }
     case FETCH_USERS_SUCCEEDED:
       return {
         loading: false,
         users: action.payload,
-        error: ''
+        error: '',
       }
     case FETCH_USERS_FAILED:
       return {
         loading: false,
         users: [],
-        error: action.payload
+        error: action.payload,
       }
   }
 }
@@ -88,5 +88,7 @@ const reducer = (state = initialState, action) => {
 const store = createStore(reducer, applyMiddleware(thunk))
 
 // bussiness logics
-store.subscribe(() => { console.log(store.getState()) })
+store.subscribe(() => {
+  console.log(store.getState())
+})
 store.dispatch(fetchUsers())

@@ -9,6 +9,6 @@ import "./index.css";
 const root = ReactDOM.createRoot(document.getElementById('root')!);
 root.render(
   <ThemeContexProvider>
-    <App />
+    <App/>
   </ThemeContexProvider>
 );

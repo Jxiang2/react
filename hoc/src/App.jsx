@@ -1,15 +1,15 @@
 import './App.css'
-import SearchedTodos from "./components/TodoList"
-import SearchedUsers from "./components/UserList"
+import SearchedTodos from './components/TodoList'
+import SearchedUsers from './components/UserList'
 
-function App () {
+function App() {
   return (
     <div className="App">
       <h2>Higher Order Components</h2>
 
       <div className="section">
-        <SearchedUsers />
-        <SearchedTodos />
+        <SearchedUsers/>
+        <SearchedTodos/>
       </div>
     </div>
   )

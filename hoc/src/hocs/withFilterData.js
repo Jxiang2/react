@@ -1,13 +1,13 @@
-import React from "react"
+import React from 'react'
 
 const HOC = (WrappedComponent, entity) => {
   return class extends React.PureComponent {
     state = {
       data: [],
-      term: ""
+      term: '',
     }
 
-    componentDidMount () {
+    componentDidMount() {
       const fetchData = async () => {
         const res = await fetch(`https://jsonplaceholder.typicode.com/${entity}`)
         const json = await res.json()
@@ -17,22 +17,18 @@ const HOC = (WrappedComponent, entity) => {
       fetchData()
     }
 
-    render () {
+    render() {
       let { term, data } = this.state
       let filteredData = data
         .slice(0, 10)
         .filter((d) => {
-          if (entity === "users") {
+          if (entity === 'users') {
             const { name } = d
             return name.indexOf(term) >= 0
-          }
-
-          else if (entity === "todos") {
+          } else if (entity === 'todos') {
             const { title } = d
             return title.indexOf(term) >= 0
-          }
-
-          else {
+          } else {
             return []
           }
         })

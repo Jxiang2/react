@@ -1,6 +1,11 @@
 import axios from "axios";
-import { useReducer, useState, useEffect } from "react";
-import { IAxiosState, axiosReducer, AxiosActionsType, AxiosUpdateMethodName } from "../react-app-env";
+import { useEffect, useReducer, useState } from "react";
+import {
+  AxiosActionsType,
+  axiosReducer,
+  AxiosUpdateMethodName,
+  IAxiosState
+} from "../react-app-env";
 
 let initState: IAxiosState = {
   isPending: false, data: null, success: false, error: null
@@ -17,17 +22,16 @@ export const useAxios = () => {
     try {
       const axiosResponse = await axios({
         method: "POST", url: url,
-        headers: options.headers ? { ...options.headers } : {},
-        data: options.data ? { ...options.data } : {},
+        headers: options.headers ? {...options.headers} : {},
+        data: options.data ? {...options.data} : {},
       });
 
       if (!(axiosResponse && axiosResponse.status < 400))
         throw new Error(axiosResponse.statusText);
 
-      return dispatchIfNotCancelled({ type: "CREATED", payload: axiosResponse.data });
-    }
-    catch (err: any) {
-      return dispatchIfNotCancelled({ type: "ERROR", payload: err.message });
+      return dispatchIfNotCancelled({type: "CREATED", payload: axiosResponse.data});
+    } catch (err: any) {
+      return dispatchIfNotCancelled({type: "ERROR", payload: err.message});
     }
   };
 
@@ -35,17 +39,16 @@ export const useAxios = () => {
     try {
       const axiosResponse = await axios({
         method: methodName, url: url,
-        headers: options.headers ? { ...options.headers } : {},
-        data: options.data ? { ...options.data } : {},
+        headers: options.headers ? {...options.headers} : {},
+        data: options.data ? {...options.data} : {},
       });
 
       if (!(axiosResponse && axiosResponse.status < 400))
         throw new Error(axiosResponse.statusText);
 
-      return dispatchIfNotCancelled({ type: "UPDATED", payload: axiosResponse.data });
-    }
-    catch (error: any) {
-      return dispatchIfNotCancelled({ type: "ERROR", payload: error.message });
+      return dispatchIfNotCancelled({type: "UPDATED", payload: axiosResponse.data});
+    } catch (error: any) {
+      return dispatchIfNotCancelled({type: "ERROR", payload: error.message});
     }
   };
 
@@ -53,17 +56,16 @@ export const useAxios = () => {
     try {
       const axiosResponse = await axios({
         method: "DELETE", url: url,
-        headers: { ...options },
+        headers: {...options},
       });
 
       if (!(axiosResponse && axiosResponse.status < 400))
         throw new Error(axiosResponse.statusText);
 
-      return dispatchIfNotCancelled({ type: "DELETED", payload: axiosResponse.data });
+      return dispatchIfNotCancelled({type: "DELETED", payload: axiosResponse.data});
 
-    }
-    catch (error: any) {
-      return dispatchIfNotCancelled({ type: "ERROR", payload: error.message });
+    } catch (error: any) {
+      return dispatchIfNotCancelled({type: "ERROR", payload: error.message});
     }
   };
 
@@ -71,6 +73,7 @@ export const useAxios = () => {
     return () => setIsCancelled(true);
   }, []);
 
-  return { axiosCreate, axiosUpdate, axiosDelete, response };;
+  return {axiosCreate, axiosUpdate, axiosDelete, response};
+  ;
 };
 

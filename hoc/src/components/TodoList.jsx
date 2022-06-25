@@ -1,5 +1,5 @@
 import React from 'react'
-import HOC from "../hocs/withFilterData"
+import HOC from '../hocs/withFilterData'
 
 const TodoList = ({ data }) => {
 
@@ -18,5 +18,5 @@ const TodoList = ({ data }) => {
   )
 }
 
-const SearchedTodos = HOC(TodoList, "todos")
+const SearchedTodos = HOC(TodoList, 'todos')
 export default SearchedTodos

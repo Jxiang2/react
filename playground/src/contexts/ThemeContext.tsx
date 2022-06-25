@@ -1,20 +1,24 @@
 import { createContext, useReducer } from "react";
-import { themeReducer, ThemeContextProviderPropsType, ThemeContextType } from "../react-app-env";
+import {
+  ThemeContextProviderPropsType,
+  ThemeContextType,
+  themeReducer
+} from "../react-app-env";
 
 
 // the content of context to be consumed
 export const themeContext = createContext<ThemeContextType | null>(null);
 
-export const ThemeContexProvider = ({ children }: ThemeContextProviderPropsType) => {
+export const ThemeContexProvider = ({children}: ThemeContextProviderPropsType) => {
   // variables in context
-  const [state, dispatch] = useReducer(themeReducer, { backgroundColor: "#947673" });
+  const [state, dispatch] = useReducer(themeReducer, {backgroundColor: "#947673"});
 
   // variable modifiers in context
-  const changeTheme = (color: string) => dispatch({ type: "CHANGE_COLOR", payload: color });
+  const changeTheme = (color: string) => dispatch({type: "CHANGE_COLOR", payload: color});
 
   return (
-    <themeContext.Provider value={ { ...state, changeTheme } } >
-      { children }
+    <themeContext.Provider value={{...state, changeTheme}}>
+      {children}
     </themeContext.Provider>
   );
 };

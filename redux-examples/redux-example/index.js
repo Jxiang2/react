@@ -1,40 +1,45 @@
-const { createStore, bindActionCreators, combineReducers, applyMiddleware } = require("redux")
-const { createLogger } = require("redux-logger")
+const {
+  createStore,
+  bindActionCreators,
+  combineReducers,
+  applyMiddleware,
+} = require('redux')
+const { createLogger } = require('redux-logger')
 
 // initial substates
-const initialCakeState = { numOfCakes: 10, }
-const initialIceCreamState = { numOfIceCreams: 20, }
+const initialCakeState = { numOfCakes: 10 }
+const initialIceCreamState = { numOfIceCreams: 20 }
 
 // action names
-const CAKE_ORDERED = "CAKE_ORDERED"
-const CAKE_RESTOCKED = "CAKE_RESTOCKED"
-const ICECREAM_ORDERED = "ICECREAM_ORDERED"
-const ICECREAM_RESTOCKED = "ICECREAM_RESTOCKED"
+const CAKE_ORDERED = 'CAKE_ORDERED'
+const CAKE_RESTOCKED = 'CAKE_RESTOCKED'
+const ICECREAM_ORDERED = 'ICECREAM_ORDERED'
+const ICECREAM_RESTOCKED = 'ICECREAM_RESTOCKED'
 
 // action creator functions that return an action object
-function orderCake () {
+function orderCake() {
   return {
     type: CAKE_ORDERED,
   }
 }
 
-function restockCake (qty = 1) {
+function restockCake(qty = 1) {
   return {
     type: CAKE_RESTOCKED,
-    payload: qty
+    payload: qty,
   }
 }
 
-function orderIceCream () {
+function orderIceCream() {
   return {
     type: ICECREAM_ORDERED,
   }
 }
 
-function restockIceCream (qty = 1) {
+function restockIceCream(qty = 1) {
   return {
     type: ICECREAM_RESTOCKED,
-    payload: qty
+    payload: qty,
   }
 }
 
@@ -82,10 +87,11 @@ const logger = createLogger()
 const store = createStore(rootReducer, applyMiddleware(logger))
 
 // store has a single object representing state
-console.log("initial state: ", store.getState())
+console.log('initial state: ', store.getState())
 
 // register listners on dispatch
-const unsub = store.subscribe(() => {})
+const unsub = store.subscribe(() => {
+})
 
 // 2 ways to dispatch an action, which updates the state accroding to it's reducer
 const actions = bindActionCreators({

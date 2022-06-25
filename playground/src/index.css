@@ -1,20 +1,20 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap");
 
 body {
-  font-family: Poppins, sans-serif;
-  margin: 0;
+    font-family: Poppins, sans-serif;
+    margin: 0;
 }
 
 button {
-  background: #fff;
-  border-radius: 4px;
-  color: pink;
-  cursor: pointer;
-  border: 1px solid pink;
-  margin: auto auto;
+    background: #fff;
+    border-radius: 4px;
+    color: pink;
+    cursor: pointer;
+    border: 1px solid pink;
+    margin: auto auto;
 }
 
 button:hover {
-  color: #fff;
-  background-color: lightcoral;
+    color: #fff;
+    background-color: lightcoral;
 }

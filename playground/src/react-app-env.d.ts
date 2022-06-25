@@ -18,7 +18,7 @@ type ThemeContextType = {
 export const themeReducer = (state: ITheme, action: ThemeActionsType) => {
   switch (action.type) {
     case "CHANGE_COLOR":
-      return { ...state, backgroundColor: action.payload };
+      return {...state, backgroundColor: action.payload};
     default:
       return state;
   }
@@ -55,15 +55,15 @@ type AxiosGetActionsType =
 export const axiosReducer = (state: IAxiosState, action: AxiosActionsType) => {
   switch (action.type) {
     case "IS_PENDING":
-      return { isPending: true, data: null, success: false, error: null };
+      return {isPending: true, data: null, success: false, error: null};
     case "ERROR":
-      return { isPending: false, data: null, success: false, error: action.payload };
+      return {isPending: false, data: null, success: false, error: action.payload};
     case "CREATED":
-      return { isPending: false, data: action.payload, success: true, error: null };
+      return {isPending: false, data: action.payload, success: true, error: null};
     case "UPDATED":
-      return { isPending: false, data: action.payload, success: true, error: null };
+      return {isPending: false, data: action.payload, success: true, error: null};
     case "DELETED":
-      return { isPending: false, data: action.payload, success: true, error: null };
+      return {isPending: false, data: action.payload, success: true, error: null};
     default:
       return state;
   }
@@ -72,11 +72,11 @@ export const axiosReducer = (state: IAxiosState, action: AxiosActionsType) => {
 export const axiosGetReducer = (state: IAxiosGetState, action: AxiosGetActionsType) => {
   switch (action.type) {
     case "IS_PENDING":
-      return { isPending: true, data: null, success: false, error: null };
+      return {isPending: true, data: null, success: false, error: null};
     case "ERROR":
-      return { isPending: false, data: null, success: false, error: action.payload };
+      return {isPending: false, data: null, success: false, error: action.payload};
     case "RETRIEVED":
-      return { isPending: false, data: action.payload, success: true, error: null };
+      return {isPending: false, data: action.payload, success: true, error: null};
     default:
       return state;
   }

@@ -1,11 +1,11 @@
-const createSlice = require("@reduxjs/toolkit").createSlice
+const createSlice = require('@reduxjs/toolkit').createSlice
 
 const initialState = {
-  numOfCakes: 10
+  numOfCakes: 10,
 }
 
 const cakeSlice = createSlice({
-  name: "cake", // name of the slice in the state, the same with the on is store.js
+  name: 'cake', // name of the slice in the state, the same with the on is store.js
 
   initialState,
 
@@ -16,8 +16,8 @@ const cakeSlice = createSlice({
 
     restocked: (state, action) => {
       state.numOfCakes += action.payload
-    }
-  }
+    },
+  },
 
 })
 

@@ -1,5 +1,5 @@
 import React from 'react'
-import HOC from "../hocs/withFilterData"
+import HOC from '../hocs/withFilterData'
 
 const UserList = ({ data }) => {
 
@@ -16,5 +16,5 @@ const UserList = ({ data }) => {
   )
 }
 
-const SearchedUsers = HOC(UserList, "users")
+const SearchedUsers = HOC(UserList, 'users')
 export default SearchedUsers

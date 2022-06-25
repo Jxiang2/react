@@ -1,16 +1,16 @@
 import React, { useEffect, useRef } from "react";
-import { Provider, useSelector, useDispatch } from "react-redux";
+import { Provider, useDispatch, useSelector } from "react-redux";
 
 import {
-  store,
-  selectTodos,
-  fetchTodos,
-  toggleTodo,
-  removeTodo,
   addTodo,
+  fetchTodos,
+  removeTodo,
+  selectTodos,
+  store,
+  toggleTodo,
 } from "./redux/store";
 
-function TodoApp () {
+function TodoApp() {
   const dispatch = useDispatch();
   const todos = useSelector(selectTodos);
 
@@ -28,34 +28,34 @@ function TodoApp () {
   return (
     <div className="App">
       <div className="todos">
-        { todos?.map((todo) => (
-          <React.Fragment key={ todo.id }>
+        {todos?.map((todo) => (
+          <React.Fragment key={todo.id}>
             <div>
               <input
                 type="checkbox"
-                checked={ todo.done }
-                onChange={ () => dispatch(toggleTodo(todo)) }
+                checked={todo.done}
+                onChange={() => dispatch(toggleTodo(todo))}
               />
-              <span>{ todo.text }</span>
+              <span>{todo.text}</span>
             </div>
 
-            <button onClick={ () => dispatch(removeTodo(todo)) }>Delete</button>
+            <button onClick={() => dispatch(removeTodo(todo))}>Delete</button>
           </React.Fragment>
-        )) }
+        ))}
       </div>
 
       <div className="add">
-        <input type="text" ref={ textRef } />
-        <button onClick={ onAdd }>Add</button>
+        <input type="text" ref={textRef}/>
+        <button onClick={onAdd}>Add</button>
       </div>
     </div>
   );
 }
 
-function App () {
+function App() {
   return (
-    <Provider store={ store }>
-      <TodoApp />
+    <Provider store={store}>
+      <TodoApp/>
     </Provider>
   );
 }
