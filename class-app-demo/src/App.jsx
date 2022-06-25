@@ -1,15 +1,15 @@
 import React, { Component } from 'react'
-import Counter from "./Counter"
-import FunctionCounter from "./FunctionCounter"
+import Counter from './Counter'
+import FunctionCounter from './FunctionCounter'
 
 export default class App extends Component {
-  constructor (props) {
+  constructor(props) {
     super(props)
 
     this.state = {
       mount: true,
       propToIgnore: 0,
-      num: 0
+      num: 0,
     }
 
     this.adder = () => this.setState({ num: this.state.num + 1 })
@@ -18,23 +18,29 @@ export default class App extends Component {
     this.propToIgnore = () => this.setState({ propToIgnore: 10 })
   }
 
-  render () {
+  render() {
 
-    console.log("parent rendered")
+    console.log('parent rendered')
 
     return (
       <div>
         <button onClick={this.adder}>{this.state.num}</button>
 
-        <button disabled={this.state.mount} onClick={this.mountCounter}>mountCounter</button>
+        <button disabled={this.state.mount} onClick={this.mountCounter}>mountCounter
+        </button>
 
-        <button disabled={!this.state.mount} onClick={this.unmountCounter}>unmountCounter</button>
+        <button disabled={!this.state.mount}
+                onClick={this.unmountCounter}>unmountCounter
+        </button>
 
-        <button style={{ marginBottom: "20px" }} onClick={this.propToIgnore}>Change propToIgnore</button>
+        <button style={{ marginBottom: '20px' }} onClick={this.propToIgnore}>Change
+          propToIgnore
+        </button>
 
-        {this.state.mount ? <Counter propToIgnore={this.state.propToIgnore} /> : null}
+        {this.state.mount ? <Counter propToIgnore={this.state.propToIgnore}/> : null}
 
-        {this.state.mount ? <FunctionCounter propToIgnore={this.state.propToIgnore} /> : null}
+        {this.state.mount ?
+          <FunctionCounter propToIgnore={this.state.propToIgnore}/> : null}
       </div>
     )
 
