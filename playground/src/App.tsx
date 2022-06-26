@@ -6,7 +6,7 @@ import UseHttp from "./pages/Http";
 import SubmitForm from "./pages/SubmitForm";
 import UseHistory from "./pages/UseHistory";
 import UseRef from "./pages/UseRef";
-import { themeContext } from "./contexts/themeContext";
+import { themeContext } from "./contexts/ThemeContext";
 import "./App.css";
 
 

@@ -1,5 +1,5 @@
 import { useCallback, useContext, useState } from "react";
-import { themeContext } from "../contexts/themeContext";
+import { themeContext } from "../contexts/ThemeContext";
 import HomeList from "../Components/HomeList";
 
 
@@ -18,20 +18,20 @@ export default function Home() {
   };
 
   return (
-    <div style={{...subtheme, backgroundColor: context?.backgroundColor}}>
+    <div style={ { ...subtheme, backgroundColor: context?.backgroundColor } }>
       **Home Page**
       <p>useCallback & props demo</p>
       <input
         type="number"
-        value={num}
-        onChange={e => setNum(Number(e.target.value))}
+        value={ num }
+        onChange={ e => setNum(Number(e.target.value)) }
       />
 
-      <button onClick={() => setSubTheme(prevDark => !prevDark)}>
+      <button onClick={ () => setSubTheme(prevDark => !prevDark) }>
         Subtheme
       </button>
 
-      <HomeList getItems={getItems}/>
+      <HomeList getItems={ getItems } />
     </div>
   );
 }
