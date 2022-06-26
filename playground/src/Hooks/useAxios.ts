@@ -37,7 +37,8 @@ export const useAxios = () => {
   const axiosCreate = async (url: string, options: any) => {
     try {
       const axiosResponse = await axios({
-        method: "POST", url: url,
+        method: "POST",
+        url: url,
         headers: options.headers ? { ...options.headers } : {},
         data: options.data ? { ...options.data } : {},
       });
@@ -54,7 +55,8 @@ export const useAxios = () => {
   const axiosUpdate = async (url: string, methodName: AxiosUpdateMethodName, options: any) => {
     try {
       const axiosResponse = await axios({
-        method: methodName, url: url,
+        method: methodName,
+        url: url,
         headers: options.headers ? { ...options.headers } : {},
         data: options.data ? { ...options.data } : {},
       });
@@ -71,7 +73,8 @@ export const useAxios = () => {
   const axiosDelete = async (url: string, options: any) => {
     try {
       const axiosResponse = await axios({
-        method: "DELETE", url: url,
+        method: "DELETE",
+        url: url,
         headers: { ...options },
       });
 
