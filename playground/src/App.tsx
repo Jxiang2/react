@@ -32,16 +32,16 @@ function App() {
             <Link to="/navigate">useNavigate</Link>
             <Link to="/http">useHttp</Link>
             <Link to="/submit">submitForm</Link>
-            <button onClick={setTheme}>Macrotheme</button>
+            <button onClick={ setTheme }>Macrotheme</button>
           </div>
         </nav>
 
         <Routes>
-          <Route path="/" element={<Home/>}/>
-          <Route path="/http" element={<UseHttp/>}/>
-          <Route path="/navigate" element={<UseHistory/>}/>
-          <Route path="/ref" element={<UseRef/>}/>
-          <Route path="/submit" element={<SubmitForm/>}/>
+          <Route path="/" element={ <Home /> } />
+          <Route path="/http" element={ <UseHttp /> } />
+          <Route path="/navigate" element={ <UseHistory /> } />
+          <Route path="/ref" element={ <UseRef /> } />
+          <Route path="/submit" element={ <SubmitForm /> } />
         </Routes>
       </BrowserRouter>
     </div>
