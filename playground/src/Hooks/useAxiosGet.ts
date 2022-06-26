@@ -46,10 +46,14 @@ export const useAxiosGet = (url: string, headers: any) => {
 
   useEffect(() => {
     const controller = new AbortController();
-
+    console.log("ready to run effects");
     processRequest(controller);
 
-    return () => controller.abort();
+    // clean up function runs before effect code when a effect is triggered in a non-initial render
+    return () => {
+      console.log("clean up first");
+      controller.abort();
+    };
   }, [url, headers, processRequest]);
 
   return { response };
