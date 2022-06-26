@@ -49,7 +49,7 @@ export const useAxiosGet = (url: string, headers: any) => {
     console.log("ready to run effects");
     processRequest(controller);
 
-    // clean up function runs before effect code when a effect is triggered in a non-initial render
+    // clean up function runs before effect code when a dependency changes
     return () => {
       console.log("clean up first");
       controller.abort();

@@ -88,7 +88,7 @@ export const useAxios = () => {
     }
   };
 
-  // clean up function runs before effect code when a effect is triggered in a non-initial render
+  // clean up function runs before effect code when a dependency changes
   useEffect(() => {
     return () => setIsCancelled(true);
   }, []);
