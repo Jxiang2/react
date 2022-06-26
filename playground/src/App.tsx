@@ -7,7 +7,7 @@ import SubmitForm from "./pages/SubmitForm";
 import UseHistory from "./pages/UseHistory";
 import UseRef from "./pages/UseRef";
 import { themeContext } from "./contexts/ThemeContext";
-import "./App.css";
+import "./styles/App.css";
 
 
 function App() {
@@ -26,7 +26,10 @@ function App() {
     <div className="App">
       <BrowserRouter>
         <nav>
-          <span><Link to="/">ReactTS Playground</Link></span>
+          <span>
+            <Link to="/">ReactTS Playground</Link>
+            { process.env.REACT_APP_CUSTOM_KEY }
+          </span>
           <div className="links">
             <Link to="/ref">useRef</Link>
             <Link to="/navigate">useNavigate</Link>

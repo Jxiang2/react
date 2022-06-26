@@ -2,7 +2,6 @@ import { useCallback, useContext, useState } from "react";
 import { themeContext } from "../contexts/ThemeContext";
 import HomeList from "../Components/HomeList";
 
-
 export default function Home() {
   const context = useContext(themeContext);
   const [num, setNum] = useState(1);
