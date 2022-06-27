@@ -23,15 +23,17 @@ export default class Counter extends Component {
 
   // invoked right after render
   componentDidMount = () => {
-    console.log('component did mount')
+    console.log('Component did mount')
   }
 
   // like memo() to memoizes a component, and updates only when the following logic returns true
   // shouldComponentUpdate's priority is higher than state change
   shouldComponentUpdate = (nextProps, nextState) => {
     if (this.props.propToIgnore === nextProps.propToIgnore) {
+      console.log("first check completed")
       if (nextState.counter !== this.state.counter) {
-        console.log('Should component update - render')
+        console.log("second check completed")
+        console.log('Should class component update - render')
         return true
       }
     }
@@ -40,7 +42,7 @@ export default class Counter extends Component {
   }
 
   render = () => {
-    console.log('class child render')
+    console.log('Class child render')
 
     return (
       < div className="App">
@@ -53,7 +55,9 @@ export default class Counter extends Component {
   }
 
   componentDidUpdate = (prevProps, prevState, snapshot) => {
-    console.log('Component did update, the prev state is', prevState, 'and the prev props is ', prevProps)
+    console.log(
+      `Component did update with prev state ${prevState} and prev props ${prevProps}`
+    )
   }
 
   componentWillUnmount = () => {

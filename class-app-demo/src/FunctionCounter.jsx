@@ -3,13 +3,13 @@ import React, { memo, useEffect, useState } from 'react'
 function FunctionCounter({ propToIgnore }) {
   const [counter, setCounter] = useState(0)
 
-  console.log('function child rendered')
+  console.log('Function child rendered')
 
   useEffect(() => {
-    console.log('component has mounted or updated')
+    console.log('Function component has mounted or updated')
 
     return () => {
-      console.log(`we will cleanup - the current count is ${counter}`)
+      console.log(`We will cleanup - the current count is ${counter}`)
     }
   }, [counter])
 
