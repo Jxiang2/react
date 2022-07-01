@@ -13,9 +13,9 @@ module.exports = {
     rules: [
       // bable rule
       {
-        test: /\.js$/,
+        test: /\.js$/, // all files ending with .js in the same dir
+        exclude: /node_modules/, // all files ending with .js in the same dir
         include: [path.resolve(__dirname, 'src')],
-        exclude: /node_modules/,
         use: {
           loader: 'babel-loader',
           options: {
