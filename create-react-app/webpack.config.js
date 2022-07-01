@@ -13,7 +13,8 @@ module.exports = {
     rules: [
       // bable rule
       {
-        test: /.js$/,
+        test: /\.js$/,
+        include: [path.resolve(__dirname, 'src')],
         exclude: /node_modules/,
         use: {
           loader: 'babel-loader',
