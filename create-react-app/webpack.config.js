@@ -17,6 +17,7 @@ module.exports = {
         exclude: /node_modules/, // all files ending with .js in the same dir
         include: [path.resolve(__dirname, 'src')],
         use: {
+          // transpile src code into browser compatible js code following presets
           loader: 'babel-loader',
           options: {
             presets: ['@babel/preset-env', '@babel/preset-react',]
