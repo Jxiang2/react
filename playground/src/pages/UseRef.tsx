@@ -1,5 +1,5 @@
 import { useContext, useEffect, useRef, useState } from "react";
-import { themeContext } from "../contexts/themeContext";
+import { themeContext } from "../contexts/ThemeContext";
 
 export default function UseRef() {
   const theme = useContext(themeContext);
@@ -22,17 +22,17 @@ export default function UseRef() {
   }, [name]);
 
   return (
-    <div style={{backgroundColor: theme?.backgroundColor}}>
+    <div style={ { backgroundColor: theme?.backgroundColor } }>
       <input
-        ref={inputRef}
-        value={name}
-        onChange={e => setName(e.target.value)}
+        ref={ inputRef }
+        value={ name }
+        onChange={ e => setName(e.target.value) }
       />
-      <button onClick={focus}>focus</button>
+      <button onClick={ focus }>focus</button>
 
-      <p>My name is {name}</p>
-      <p>My previous name is {previousName.current}</p>
-      <p>Already rendered {renderCount.current} times</p>
+      <p>My name is { name }</p>
+      <p>My previous name is { previousName.current }</p>
+      <p>Already rendered { renderCount.current } times</p>
 
     </div>);
 }

@@ -2,13 +2,29 @@ import axios from "axios";
 import { useEffect, useReducer, useState } from "react";
 import {
   AxiosActionsType,
-  axiosReducer,
   AxiosUpdateMethodName,
   IAxiosState
 } from "../react-app-env";
 
 let initState: IAxiosState = {
   isPending: false, data: null, success: false, error: null
+};
+
+export const axiosReducer = (state: IAxiosState, action: AxiosActionsType) => {
+  switch (action.type) {
+    case "IS_PENDING":
+      return { isPending: true, data: null, success: false, error: null };
+    case "ERROR":
+      return { isPending: false, data: null, success: false, error: action.payload };
+    case "CREATED":
+      return { isPending: false, data: action.payload, success: true, error: null };
+    case "UPDATED":
+      return { isPending: false, data: action.payload, success: true, error: null };
+    case "DELETED":
+      return { isPending: false, data: action.payload, success: true, error: null };
+    default:
+      return state;
+  }
 };
 
 export const useAxios = () => {
@@ -21,59 +37,63 @@ export const useAxios = () => {
   const axiosCreate = async (url: string, options: any) => {
     try {
       const axiosResponse = await axios({
-        method: "POST", url: url,
-        headers: options.headers ? {...options.headers} : {},
-        data: options.data ? {...options.data} : {},
+        method: "POST",
+        url: url,
+        headers: options.headers ? { ...options.headers } : {},
+        data: options.data ? { ...options.data } : {},
       });
 
       if (!(axiosResponse && axiosResponse.status < 400))
         throw new Error(axiosResponse.statusText);
 
-      return dispatchIfNotCancelled({type: "CREATED", payload: axiosResponse.data});
+      return dispatchIfNotCancelled({ type: "CREATED", payload: axiosResponse.data });
     } catch (err: any) {
-      return dispatchIfNotCancelled({type: "ERROR", payload: err.message});
+      return dispatchIfNotCancelled({ type: "ERROR", payload: err.message });
     }
   };
 
   const axiosUpdate = async (url: string, methodName: AxiosUpdateMethodName, options: any) => {
     try {
       const axiosResponse = await axios({
-        method: methodName, url: url,
-        headers: options.headers ? {...options.headers} : {},
-        data: options.data ? {...options.data} : {},
+        method: methodName,
+        url: url,
+        headers: options.headers ? { ...options.headers } : {},
+        data: options.data ? { ...options.data } : {},
       });
 
       if (!(axiosResponse && axiosResponse.status < 400))
         throw new Error(axiosResponse.statusText);
 
-      return dispatchIfNotCancelled({type: "UPDATED", payload: axiosResponse.data});
+      return dispatchIfNotCancelled({ type: "UPDATED", payload: axiosResponse.data });
     } catch (error: any) {
-      return dispatchIfNotCancelled({type: "ERROR", payload: error.message});
+      return dispatchIfNotCancelled({ type: "ERROR", payload: error.message });
     }
   };
 
   const axiosDelete = async (url: string, options: any) => {
     try {
       const axiosResponse = await axios({
-        method: "DELETE", url: url,
-        headers: {...options},
+        method: "DELETE",
+        url: url,
+        headers: { ...options },
       });
 
       if (!(axiosResponse && axiosResponse.status < 400))
         throw new Error(axiosResponse.statusText);
 
-      return dispatchIfNotCancelled({type: "DELETED", payload: axiosResponse.data});
+      return dispatchIfNotCancelled({ type: "DELETED", payload: axiosResponse.data });
 
     } catch (error: any) {
-      return dispatchIfNotCancelled({type: "ERROR", payload: error.message});
+      return dispatchIfNotCancelled({ type: "ERROR", payload: error.message });
     }
   };
 
+  // clean up function runs before effect code when a dependency changes
   useEffect(() => {
     return () => setIsCancelled(true);
   }, []);
 
-  return {axiosCreate, axiosUpdate, axiosDelete, response};
+  return { axiosCreate, axiosUpdate, axiosDelete, response };
   ;
 };
 
