@@ -31,7 +31,7 @@ function App() {
         change color
       </button>
 
-      <MemoedSwatch params={params}/>
+      <MemoedSwatch params={params} />
 
       {/* another independent instance of MemoedSwatch */}
       {/* <MemoedSwatch params={{ color: color === "red" ? "blue" : "red" }} /> */}
