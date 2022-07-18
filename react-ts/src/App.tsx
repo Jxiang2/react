@@ -41,7 +41,7 @@ interface Todo {
 function App() {
   const newTodoRef = useRef<HTMLInputElement | null>(null);
   const [payload, setPayload] = useState<Payload | null>(null);
-  console.log(newTodoRef);
+
 
 
   const [todos, dispatch] = useReducer((state: Todo[], action: ActionType) => {
