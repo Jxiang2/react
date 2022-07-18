@@ -1,6 +1,50 @@
 import React, { FC, PropsWithChildren, useCallback, useEffect, useReducer, useRef, useState } from 'react';
 import './App.css';
 
+
+const useTypedState = (initValue: number) => useState<number>(initValue);
+
+
+type UseTypedStateValue = ReturnType<typeof useTypedState>[0];
+type UseTypedStateSetValue = ReturnType<typeof useTypedState>[1];
+
+type ActionType =
+  | { type: "ADD", text: string; }
+  | { type: "REMOVE", id: number; };
+
+interface Payload {
+  text: string;
+}
+
+interface Todo {
+  id: number;
+  done: boolean;
+  text: string;
+}
+
+
+const Button: FC<
+  React.DetailedHTMLProps<
+    React.ButtonHTMLAttributes<HTMLButtonElement>,
+    HTMLButtonElement
+  >
+  & PropsWithChildren
+  & { title?: string; }
+> = ({ children, title, ...rest }) => (
+  <button {...rest} style={{ backgroundColor: "red" }}>
+    {title ? title : children}
+  </button>
+);
+
+const Incrementer: FC<{
+  value: UseTypedStateValue;
+  setValue: UseTypedStateSetValue;
+}> = ({ value, setValue }) => (
+  <Button onClick={() => setValue(value + 1)}>
+    Add ~ {value}
+  </Button>
+);
+
 const Heading: FC<{ title: string; }> = ({ title }) => (
   <h2>{title}</h2>
 );
@@ -24,24 +68,10 @@ const Box: FC<PropsWithChildren> = ({ children }) => (
   </div>
 );
 
-type ActionType =
-  | { type: "ADD", text: string; }
-  | { type: "REMOVE", id: number; };
-
-interface Payload {
-  text: string;
-}
-
-interface Todo {
-  id: number;
-  done: boolean;
-  text: string;
-}
-
 function App() {
   const newTodoRef = useRef<HTMLInputElement | null>(null);
   const [payload, setPayload] = useState<Payload | null>(null);
-
+  const [value, setValue] = useState(0);
 
 
   const [todos, dispatch] = useReducer((state: Todo[], action: ActionType) => {
@@ -91,6 +121,8 @@ function App() {
         {JSON.stringify(payload)}
       </Box>
 
+      <Incrementer value={value} setValue={setValue} />
+
       <Heading title="Todos" />
       {todos.map(todo => (
         <>
@@ -102,7 +134,7 @@ function App() {
       ))}
 
       <input type="text" ref={newTodoRef} />
-      <button onClick={onAddTodo}>Add</button>
+      <Button onClick={onAddTodo} title="Add" />
     </div>
   );
 }
