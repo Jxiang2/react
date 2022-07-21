@@ -1,27 +1,33 @@
-import React, { FC, PropsWithChildren, useCallback, useEffect, useReducer, useRef, useState } from 'react';
+import {
+  FC,
+  PropsWithChildren,
+  useCallback,
+  useEffect,
+  useRef,
+  useState
+} from 'react';
+import useTodos from "./useTodos";
 import './App.css';
 
-
-const useTypedState = (initValue: number) => useState<number>(initValue);
-
-
-type UseTypedStateValue = ReturnType<typeof useTypedState>[0];
-type UseTypedStateSetValue = ReturnType<typeof useTypedState>[1];
-
-type ActionType =
-  | { type: "ADD", text: string; }
-  | { type: "REMOVE", id: number; };
+type UseTypedState<T> = (initialValue: T) => [T, React.Dispatch<React.SetStateAction<T>>];
+type UseTypedStateValue<T> = ReturnType<UseTypedState<T>>[0];
+type UseTypedStateSetValue<T> = ReturnType<UseTypedState<T>>[1];
 
 interface Payload {
   text: string;
 }
 
-interface Todo {
-  id: number;
-  done: boolean;
-  text: string;
-}
+const Heading: FC<{ title: string; }> = ({ title }) => (
+  <h2>{title}</h2>
+);
 
+const Box: FC<PropsWithChildren> = ({ children }) => (
+  <div
+    style={{ padding: "1rem", color: "green" }}
+  >
+    {children}
+  </div>
+);
 
 const Button: FC<
   React.DetailedHTMLProps<
@@ -30,23 +36,22 @@ const Button: FC<
   >
   & PropsWithChildren
   & { title?: string; }
-> = ({ children, title, ...rest }) => (
-  <button {...rest} style={{ backgroundColor: "red" }}>
-    {title ? title : children}
-  </button>
-);
+> = ({ children, title, ...rest }) => {
+  // console.log(rest);
+
+  return (
+    <button {...rest} style={{ backgroundColor: "red" }}>
+      {title ? title : children}
+    </button>);
+};
 
 const Incrementer: FC<{
-  value: UseTypedStateValue;
-  setValue: UseTypedStateSetValue;
+  value: UseTypedStateValue<number>;
+  setValue: UseTypedStateSetValue<number>;
 }> = ({ value, setValue }) => (
   <Button onClick={() => setValue(value + 1)}>
     Add ~ {value}
   </Button>
-);
-
-const Heading: FC<{ title: string; }> = ({ title }) => (
-  <h2>{title}</h2>
 );
 
 const List: FC<{
@@ -60,30 +65,14 @@ const List: FC<{
   </ul>
 );
 
-const Box: FC<PropsWithChildren> = ({ children }) => (
-  <div
-    style={{ padding: "1rem", color: "green" }}
-  >
-    {children}
-  </div>
-);
-
 function App() {
   const newTodoRef = useRef<HTMLInputElement | null>(null);
   const [payload, setPayload] = useState<Payload | null>(null);
   const [value, setValue] = useState(0);
+  const { todos, addTodo, removeTodo } = useTodos([
+    { id: 0, text: "hi there", done: false }
+  ]);
 
-
-  const [todos, dispatch] = useReducer((state: Todo[], action: ActionType) => {
-    switch (action.type) {
-      case "ADD":
-        return [...state, { id: state.length + 1, text: action.text, done: false }];
-      case "REMOVE":
-        return state.filter(todo => todo.id !== action.id);
-      default:
-        throw new Error();
-    }
-  }, []);
 
   useEffect(() => {
     fetch("/data.json")
@@ -95,14 +84,10 @@ function App() {
 
   const onAddTodo = useCallback(() => {
     if (newTodoRef.current?.value) {
-      dispatch({
-        type: "ADD",
-        text: newTodoRef.current.value
-      });
-
+      addTodo(newTodoRef.current.value);
       newTodoRef.current.value = "";
     }
-  }, []);
+  }, [addTodo]);
 
   return (
     <div>
@@ -127,7 +112,7 @@ function App() {
       {todos.map(todo => (
         <>
           <div key={todo.id}>{todo.text}</div>
-          <button onClick={() => dispatch({ type: "REMOVE", id: todo.id })}>
+          <button onClick={() => removeTodo(todo.id)}>
             Remove
           </button>
         </>
