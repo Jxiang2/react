@@ -1,12 +1,12 @@
 import { useReducer, useCallback } from 'react';
 
-interface Todo {
+export interface Todo {
   id: number;
   done: boolean;
   text: string;
 }
 
-type ActionType =
+export type ActionType =
   | { type: "ADD", text: string; }
   | { type: "REMOVE", id: number; };
 

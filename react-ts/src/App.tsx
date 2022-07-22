@@ -6,9 +6,10 @@ import {
   useRef,
   useState
 } from 'react';
-import useTodos from "./useTodos";
+import useTodos, { Todo } from "./useTodos";
 import './App.css';
 
+// types
 type UseTypedState<T> = (initialValue: T) => [T, React.Dispatch<React.SetStateAction<T>>];
 type UseTypedStateValue<T> = ReturnType<UseTypedState<T>>[0];
 type UseTypedStateSetValue<T> = ReturnType<UseTypedState<T>>[1];
@@ -17,6 +18,7 @@ interface Payload {
   text: string;
 }
 
+// components
 const Heading: FC<{ title: string; }> = ({ title }) => (
   <h2>{title}</h2>
 );
@@ -28,22 +30,6 @@ const Box: FC<PropsWithChildren> = ({ children }) => (
     {children}
   </div>
 );
-
-const Button: FC<
-  React.DetailedHTMLProps<
-    React.ButtonHTMLAttributes<HTMLButtonElement>,
-    HTMLButtonElement
-  >
-  & PropsWithChildren
-  & { title?: string; }
-> = ({ children, title, ...rest }) => {
-  // console.log(rest);
-
-  return (
-    <button {...rest} style={{ backgroundColor: "red" }}>
-      {title ? title : children}
-    </button>);
-};
 
 const Incrementer: FC<{
   value: UseTypedStateValue<number>;
@@ -65,6 +51,42 @@ const List: FC<{
   </ul>
 );
 
+const Button: FC<
+  React.DetailedHTMLProps<
+    React.ButtonHTMLAttributes<HTMLButtonElement>,
+    HTMLButtonElement
+  >
+  & PropsWithChildren
+  & { title?: string; }
+> = ({ children, title, ...rest }) => {
+  console.log(rest); // see what properties of button are passed
+  return (
+    <button {...rest} style={{ backgroundColor: "red" }}>
+      {title ? title : children}
+    </button>);
+};
+
+function UL<T>({
+  items,
+  render,
+  itemClick,
+  styles
+}: {
+  items: T[],
+  render: (item: T) => React.ReactNode,
+  itemClick: (item: T) => void;
+  styles: object;
+}) {
+  return (
+    <ul>
+      {items.map((item, index) => (
+        <li style={styles} onClick={() => itemClick(item)} key={index}>{render(item)}</li>
+      ))}
+    </ul>
+  );
+}
+
+// main component
 function App() {
   const newTodoRef = useRef<HTMLInputElement | null>(null);
   const [payload, setPayload] = useState<Payload | null>(null);
@@ -109,14 +131,19 @@ function App() {
       <Incrementer value={value} setValue={setValue} />
 
       <Heading title="Todos" />
-      {todos.map(todo => (
-        <>
-          <div key={todo.id}>{todo.text}</div>
-          <button onClick={() => removeTodo(todo.id)}>
-            Remove
-          </button>
-        </>
-      ))}
+      <UL<Todo>
+        styles={{ backgroundColor: "green" }}
+        items={todos}
+        itemClick={(item: Todo) => alert(item.id)}
+        render={(todo) => (
+          <>
+            <div key={todo.id}>{todo.text}</div>
+            <button onClick={() => removeTodo(todo.id)}>
+              Remove
+            </button>
+          </>
+        )}
+      />
 
       <input type="text" ref={newTodoRef} />
       <Button onClick={onAddTodo} title="Add" />
