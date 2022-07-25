@@ -7,7 +7,7 @@ A webpack loader is used to process files during bundling. It is specific to web
 In a webpack configuration one specifies a mapping of file extensions to webpack loaders. For example, a common case is to process .ts files using ts-loader. This way, webpack will pass off files with the .ts extension to the TypeScript compiler, and use the output of this compilation in the bundle, instead of the source program.
 
 
-Babel is a compiler; it takes an ESNext program and produces an equivalent ES3+ compatible program.
+Babel is a compiler; it takes an ESNext JS program and produces an equivalent ES3+ compatible program.
 
 
 babel-loader does what ts-loader does for TypeScript; passes off files to the Babel compiler, and returns the result to be used in the bundle in-place of the original source program.
