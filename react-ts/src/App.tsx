@@ -10,7 +10,6 @@ import {
   useAddTodo,
   useRemoveTodo,
   useTodos,
-  TodosProvider
 } from "./context/useTodoContext";
 import type { Todo } from './hooks/useTodosManager';
 import './App.css';
@@ -168,22 +167,14 @@ function App() {
 
 export default function AppWrapper() {
   return (
-    <TodosProvider initialTodos={[
-      {
-        id: 0,
-        text: "Hey there context",
-        done: false
-      }
-    ]}>
-      <div
-        style={{
-          display: "grid",
-          gridTemplateColumns: "50% 50%"
-        }}
-      >
-        <App />
-        <App />
-      </div >
-    </TodosProvider>
+    <div
+      style={{
+        display: "grid",
+        gridTemplateColumns: "50% 50%"
+      }}
+    >
+      <App />
+      <App />
+    </div >
   );
 };

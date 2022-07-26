@@ -10,17 +10,18 @@ import useTodosManager, { Todo } from '../hooks/useTodosManager';
 type UseTodosManagerResult = ReturnType<typeof useTodosManager>;
 
 
-// step 1, create context including initial data to be stored, and data access methods
+// step 1, hard-code context content, which includes initial data, and data access methods
 const todoContext = createContext<UseTodosManagerResult>({
   todos: [],
   addTodo: () => { },
   removeTodo: () => { },
 });
 
-// step 2, create a context provider, set value to todoContext contents
+// step 2, create a context provider, set value to a STATE of context content
 export const TodosProvider: FC<
   PropsWithChildren & { initialTodos: Todo[]; }
 > = ({ initialTodos, children }) => {
+  console.log("re-rendered because context state is somehow changed");
   return (
     <todoContext.Provider value={useTodosManager(initialTodos)}>
       {children}
