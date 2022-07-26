@@ -6,8 +6,15 @@ import {
   useRef,
   useState
 } from 'react';
-import useTodos, { Todo } from "./useTodos";
+import {
+  useAddTodo,
+  useRemoveTodo,
+  useTodos,
+  TodosProvider
+} from "./context/useTodoContext";
+import type { Todo } from './hooks/useTodosManager';
 import './App.css';
+
 
 // types
 type UseTypedState<T> = (initialValue: T) => [T, React.Dispatch<React.SetStateAction<T>>];
@@ -17,6 +24,7 @@ type UseTypedStateSetValue<T> = ReturnType<UseTypedState<T>>[1];
 interface Payload {
   text: string;
 }
+
 
 // components
 const Heading: FC<{ title: string; }> = ({ title }) => (
@@ -34,22 +42,28 @@ const Box: FC<PropsWithChildren> = ({ children }) => (
 const Incrementer: FC<{
   value: UseTypedStateValue<number>;
   setValue: UseTypedStateSetValue<number>;
-}> = ({ value, setValue }) => (
-  <Button onClick={() => setValue(value + 1)}>
-    Add ~ {value}
-  </Button>
-);
+}> = ({
+  value,
+  setValue
+}) => (
+    <Button onClick={() => setValue(value + 1)}>
+      Add ~ {value}
+    </Button>
+  );
 
 const List: FC<{
   items: string[];
   onClick?: (item: string) => void;
-}> = ({ items, onClick }) => (
-  <ul>
-    {items.map((item, index) => (
-      <li key={index} onClick={() => onClick?.(item)}>{item}</li>
-    ))}
-  </ul>
-);
+}> = ({
+  items,
+  onClick
+}) => (
+    <ul>
+      {items.map((item, index) => (
+        <li key={index} onClick={() => onClick?.(item)}>{item}</li>
+      ))}
+    </ul>
+  );
 
 const Button: FC<
   React.DetailedHTMLProps<
@@ -86,15 +100,16 @@ function UL<T>({
   );
 }
 
+
 // main component
 function App() {
   const newTodoRef = useRef<HTMLInputElement | null>(null);
   const [payload, setPayload] = useState<Payload | null>(null);
   const [value, setValue] = useState(0);
-  const { todos, addTodo, removeTodo } = useTodos([
-    { id: 0, text: "hi there", done: false }
-  ]);
 
+  const todos = useTodos();
+  const addTodo = useAddTodo();
+  const removeTodo = useRemoveTodo();
 
   useEffect(() => {
     fetch("/data.json")
@@ -151,4 +166,24 @@ function App() {
   );
 }
 
-export default App;
+export default function AppWrapper() {
+  return (
+    <TodosProvider initialTodos={[
+      {
+        id: 0,
+        text: "Hey there context",
+        done: false
+      }
+    ]}>
+      <div
+        style={{
+          display: "grid",
+          gridTemplateColumns: "50% 50%"
+        }}
+      >
+        <App />
+        <App />
+      </div >
+    </TodosProvider>
+  );
+};

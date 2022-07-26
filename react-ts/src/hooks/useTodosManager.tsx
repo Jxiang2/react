@@ -1,5 +1,10 @@
-import { useReducer, useCallback } from 'react';
+import {
+  useReducer,
+  useCallback,
+} from 'react';
 
+
+// types
 export interface Todo {
   id: number;
   done: boolean;
@@ -10,7 +15,9 @@ export type ActionType =
   | { type: "ADD", text: string; }
   | { type: "REMOVE", id: number; };
 
-export default function useTodos(initialTodos: Todo[]): {
+
+// reducer manager
+export default function useTodosManger(initialTodos: Todo[]): {
   todos: Todo[],
   addTodo: (text: string) => void,
   removeTodo: (id: number) => void;
@@ -36,6 +43,7 @@ export default function useTodos(initialTodos: Todo[]): {
 
   return { todos, addTodo, removeTodo };
 }
+
 
 
 
