@@ -42,7 +42,6 @@ const fetchUsersFailure = error => {
  * and it dispatchs sync actions inside it,
  * so it is a "thunk" of actions
  */
-//
 const fetchUsers = () => {
   return function (dispatch) {
     dispatch(fetchUsersRequest())
