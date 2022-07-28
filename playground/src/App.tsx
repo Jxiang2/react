@@ -13,9 +13,9 @@ import "./styles/App.css";
 function App() {
   const context = useContext(themeContext);
   // use context
-  const globlaTheme = context?.backgroundColor;
+  const global = context?.backgroundColor;
   const setTheme = () => {
-    if (globlaTheme === "#947673") {
+    if (global === "#947673") {
       context?.changeTheme("#ada0a0");
     } else {
       context?.changeTheme("#947673");
@@ -28,23 +28,23 @@ function App() {
         <nav>
           <span>
             <Link to="/">ReactTS Playground</Link>
-            { process.env.REACT_APP_CUSTOM_KEY }
+            {process.env.REACT_APP_CUSTOM_KEY}
           </span>
           <div className="links">
             <Link to="/ref">useRef</Link>
             <Link to="/navigate">useNavigate</Link>
             <Link to="/http">useHttp</Link>
             <Link to="/submit">submitForm</Link>
-            <button onClick={ setTheme }>Macrotheme</button>
+            <button onClick={setTheme}>Macrotheme</button>
           </div>
         </nav>
 
         <Routes>
-          <Route path="/" element={ <Home /> } />
-          <Route path="/http" element={ <UseHttp /> } />
-          <Route path="/navigate" element={ <UseHistory /> } />
-          <Route path="/ref" element={ <UseRef /> } />
-          <Route path="/submit" element={ <SubmitForm /> } />
+          <Route path="/" element={<Home/>}/>
+          <Route path="/http" element={<UseHttp/>}/>
+          <Route path="/navigate" element={<UseHistory/>}/>
+          <Route path="/ref" element={<UseRef/>}/>
+          <Route path="/submit" element={<SubmitForm/>}/>
         </Routes>
       </BrowserRouter>
     </div>
