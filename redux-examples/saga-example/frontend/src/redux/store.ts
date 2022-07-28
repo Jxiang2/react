@@ -20,7 +20,7 @@ const todoReducer = (state: Todo[] = [], action: { type: string; payload: Array<
 export const selectTodos = (state: Array<Todo>) => state;
 
 // action creator functions
-export const fetchTodos = () => ({type: "TODOS_FETCH_REQUESTED"});
+export const fetchTodos = () => ({ type: "TODOS_FETCH_REQUESTED" });
 
 export const toggleTodo = (todo: Todo) => ({
   type: "UPDATE_TODO_REQUESTED",

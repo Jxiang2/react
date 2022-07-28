@@ -45,7 +45,7 @@ function TodoApp() {
       </div>
 
       <div className="add">
-        <input type="text" ref={textRef}/>
+        <input type="text" ref={textRef} />
         <button onClick={onAdd}>Add</button>
       </div>
     </div>
@@ -55,7 +55,7 @@ function TodoApp() {
 function App() {
   return (
     <Provider store={store}>
-      <TodoApp/>
+      <TodoApp />
     </Provider>
   );
 }
