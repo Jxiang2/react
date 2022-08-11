@@ -3,7 +3,7 @@ import HOC from '../hocs/withFilterData'
 
 const TodoList = ({ data }) => {
 
-  let todosToRender = data.map((todo, index) => (
+  let todosToRender = data.map((todo) => (
     <div key={todo.id}>
       <p>
         <strong>{todo.title}</strong>
