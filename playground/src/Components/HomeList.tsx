@@ -12,7 +12,7 @@ export default function HomeList({ getItems }: Props) {
   }, [getItems]);
   return (
     <>
-      { items.map(item => <div key={ item }>{ item }</div>) }
+      {items.map(item => <div key={item}>{item}</div>)}
       <p>first render and click setDark</p>
       <p>Home & HomeList re-render with new getItems generated</p>
       <p>useEffect in HomeList is called, getItems() called and setItems() called</p>

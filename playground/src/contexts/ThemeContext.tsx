@@ -26,8 +26,8 @@ export const ThemeContexProvider = ({ children }: ThemeContextProviderPropsType)
   const changeTheme = (color: string) => dispatch({ type: "CHANGE_COLOR", payload: color });
 
   return (
-    <themeContext.Provider value={ { ...state, changeTheme } }>
-      { children }
+    <themeContext.Provider value={{ ...state, changeTheme }}>
+      {children}
     </themeContext.Provider>
   );
 };

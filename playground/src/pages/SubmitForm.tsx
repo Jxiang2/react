@@ -38,9 +38,9 @@ const SubmitForm = () => {
 
         <p>recipie ingradients</p>
         <input type="text"
-               onChange={(e) => setNewIngredient(e.target.value)}
-               value={newIngredient}
-               ref={ingredientInput}
+          onChange={(e) => setNewIngredient(e.target.value)}
+          value={newIngredient}
+          ref={ingredientInput}
         />
         <button className="btn" onClick={handleAdd}>add</button>
         <p>

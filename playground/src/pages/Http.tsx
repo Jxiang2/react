@@ -19,10 +19,10 @@ export default function UseEffect() {
   console.log(response);
 
   return (
-    <div style={ { backgroundColor: theme?.backgroundColor } }>
+    <div style={{ backgroundColor: theme?.backgroundColor }}>
       HTTP CRUD Workflow
       <p>This Page is for demostrating the useAxios and useAxiosGet hook</p>
-      <button onClick={ changeUrl }>change url</button>
+      <button onClick={changeUrl}>change url</button>
     </div>
   );
 }

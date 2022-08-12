@@ -40,11 +40,11 @@ function App() {
         </nav>
 
         <Routes>
-          <Route path="/" element={<Home/>}/>
-          <Route path="/http" element={<UseHttp/>}/>
-          <Route path="/navigate" element={<UseHistory/>}/>
-          <Route path="/ref" element={<UseRef/>}/>
-          <Route path="/submit" element={<SubmitForm/>}/>
+          <Route path="/" element={<Home />} />
+          <Route path="/http" element={<UseHttp />} />
+          <Route path="/navigate" element={<UseHistory />} />
+          <Route path="/ref" element={<UseRef />} />
+          <Route path="/submit" element={<SubmitForm />} />
         </Routes>
       </BrowserRouter>
     </div>
