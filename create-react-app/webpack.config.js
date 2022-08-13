@@ -29,7 +29,17 @@ module.exports = {
 
   plugins: [
     new HTMLWebPackPlugin({
-      template: './src/index.html' // inject bundle.js into index.html in src dir
+      template: './src/public/index.html' // inject bundle.js into index.html in src dir
     }),
   ],
+
+  devServer: {
+    static: {
+      directory: path.join(__dirname, 'public'),
+    },
+    hot: true, // Hot module replacement
+    open: true, // Open browser
+    compress: true, // Enable gzip compression for everything served
+    port: 3000,
+  },
 }
