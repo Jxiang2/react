@@ -6,12 +6,15 @@ import {
   useRef,
   useState
 } from 'react';
+
 import {
   useAddTodo,
   useRemoveTodo,
   useTodos,
 } from "./context/useTodoContext";
+
 import type { Todo } from './hooks/useTodosManager';
+
 import './App.css';
 
 
@@ -66,8 +69,8 @@ const List: FC<{
 
 const Button: FC<
   React.DetailedHTMLProps<
-    React.ButtonHTMLAttributes<HTMLButtonElement>,
-    HTMLButtonElement
+    React.ButtonHTMLAttributes<HTMLButtonElement>, // react button
+    HTMLButtonElement // html button
   >
   & PropsWithChildren
   & { title?: string; }
@@ -152,9 +155,9 @@ function App() {
         render={(todo) => (
           <>
             <div key={todo.id}>{todo.text}</div>
-            <button onClick={() => removeTodo(todo.id)}>
+            <Button onClick={() => removeTodo(todo.id)}>
               Remove
-            </button>
+            </Button>
           </>
         )}
       />
