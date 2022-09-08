@@ -1,6 +1,7 @@
 import {
   useReducer,
   useCallback,
+  useState,
 } from 'react';
 
 
@@ -17,11 +18,15 @@ export type ActionType =
 
 
 // reducer manager
-export default function useTodosManger(initialTodos: Todo[]): {
-  todos: Todo[],
-  addTodo: (text: string) => void,
+export default function useTodosManger(initialTodos: Todo[], initialField: string): {
+  todos: Todo[];
+  field: string;
+  handleSetField: (text: string) => void;
+  addTodo: (text: string) => void;
   removeTodo: (id: number) => void;
 } {
+  const [field, setField] = useState(initialField);
+
   const [todos, dispatch] = useReducer((state: Todo[], action: ActionType) => {
     switch (action.type) {
       case "ADD":
@@ -41,7 +46,9 @@ export default function useTodosManger(initialTodos: Todo[]): {
     dispatch({ type: "REMOVE", id, });
   }, []);
 
-  return { todos, addTodo, removeTodo };
+  const handleSetField = useCallback((text: string) => setField(text), []);
+
+  return { todos, addTodo, removeTodo, field, handleSetField };
 }
 
 
