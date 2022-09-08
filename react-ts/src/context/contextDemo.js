@@ -1,20 +1,38 @@
 import React from 'react'
 
-export const UserContext = React.createContext()
+// original approach
+export const UserContext1 = React.createContext()
 
 export default function App() {
   return (
-    <UserContext.Provider value="Reed">
+    <UserContext1.Provider value="Reed">
       <User />
-    </UserContext.Provider>
+    </UserContext1.Provider>
   )
 }
 
 function User() {
   return (
-    <UserContext.Consumer>
+    <UserContext1.Consumer>
       {value => <h1>{value}</h1>}
       {/* prints: Reed */}
-    </UserContext.Consumer>
+    </UserContext1.Consumer>
   )
+}
+
+// with hook
+export const UserContext2 = React.createContext()
+
+export default function App() {
+  return (
+    <UserContext2.Provider value="Reed">
+      <User />
+    </UserContext2.Provider>
+  )
+}
+
+function User() {
+  const value = React.useContext(UserContext2)
+
+  return <h1>{value}</h1>
 }
