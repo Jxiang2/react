@@ -9,14 +9,9 @@ import {
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <TodosProvider
-    initialTodos={[
-      {
-        id: 0,
-        text: "Hey there context",
-        done: false
-      }
-    ]}
-    initialField="hello">
+    initialTodos={[{ id: 1, text: "Hey there context", done: false }]}
+    initialField={"hello"}
+  >
     <App />
   </TodosProvider>
-);;
+);

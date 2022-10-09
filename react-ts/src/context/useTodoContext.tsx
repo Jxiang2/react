@@ -9,13 +9,7 @@ import useTodosManager, { Todo } from '../hooks/useTodosManager';
 type UseTodosManagerResult = ReturnType<typeof useTodosManager>;
 
 // step 1, hard-code context content, which includes initial data, and data access methods
-const todoContext = createContext<UseTodosManagerResult>({
-  todos: [],
-  field: '',
-  handleSetField: () => { },
-  addTodo: () => { },
-  removeTodo: () => { },
-});
+const todoContext = createContext<UseTodosManagerResult>({} as UseTodosManagerResult);
 
 // step 2, create a context provider, set value to a STATE of context content
 export const TodosProvider: FC<

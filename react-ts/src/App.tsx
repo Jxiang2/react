@@ -90,13 +90,19 @@ function UL<T>({
 }: {
   items: T[],
   render: (item: T) => React.ReactNode,
-  itemClick: (item: T) => void;
+  itemClick?: (item: T) => void;
   styles: object;
 }) {
   return (
     <ul>
       {items.map((item, index) => (
-        <li style={styles} onClick={() => itemClick(item)} key={index}>{render(item)}</li>
+        <li
+          style={styles}
+          onClick={() => itemClick && itemClick(item)}
+          key={index}
+        >
+          {render(item)}
+        </li>
       ))}
     </ul>
   );
@@ -151,10 +157,10 @@ function App() {
       <UL<Todo>
         styles={{ backgroundColor: "green" }}
         items={todos}
-        itemClick={(item: Todo) => alert(item.id)}
+        // itemClick={(item: Todo) => alert(item.id)}
         render={(todo) => (
           <>
-            <div key={todo.id}>{todo.text}</div>
+            <div key={todo.id}>{`${todo.id} : ${todo.text}`}</div>
             <Button onClick={() => removeTodo(todo.id)}>
               Remove
             </Button>
