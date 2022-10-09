@@ -43,9 +43,7 @@ const HOC = (WrappedComponent, entity) => {
             onChange={(e) => this.setState({ ...this.setState, term: e.target.value })}
           />
 
-          <WrappedComponent data={filteredData}>
-
-          </WrappedComponent>
+          <WrappedComponent data={filteredData} />
         </div>
       )
     }
