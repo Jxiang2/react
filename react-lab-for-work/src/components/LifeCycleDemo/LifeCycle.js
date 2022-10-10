@@ -8,10 +8,12 @@ export default class LifeCycle extends Component {
   }
 
   add = () => {
+    console.log(this)
     this.setState(prevState => ({ count: prevState.count + 1 }))
   }
 
   subStract = () => {
+    console.log(this)
     this.state.count > 1 && this.setState(prevState => ({ count: prevState.count - 1 }))
   }
 
