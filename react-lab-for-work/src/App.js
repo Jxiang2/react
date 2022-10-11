@@ -5,6 +5,7 @@ import LifeCycle from './components/LifeCycleDemo'
 import UsePreviousDemo from './components/UsePrevDemo'
 import Parent from './components/FastForward'
 import MemoDemo from './components/MemoDemo'
+import TimerWrapper from './components/EffectDemo'
 
 function App() {
   return (
@@ -32,6 +33,7 @@ function App() {
 
       <MemoDemo />
 
+      <TimerWrapper />
     </div>
   )
 }
