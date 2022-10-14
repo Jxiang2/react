@@ -1,3 +1,3 @@
-import MyDataTable from './MyDataTable'
+import MyDataTable from "./MyDataTable";
 
-export default MyDataTable
+export default MyDataTable;

@@ -1,14 +1,14 @@
 .search-bar {
-    height: 15px;
+  height: 15px;
 }
 
 .search-bar input {
-    border: none;
-    width: 98%;
-    height: 100%;
-    border-bottom: 1px solid lightgrey;
+  border: none;
+  width: 98%;
+  height: 100%;
+  border-bottom: 1px solid lightgrey;
 }
 
 .search-bar input:focus {
-    outline: none;
+  outline: none;
 }

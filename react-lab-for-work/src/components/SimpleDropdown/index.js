@@ -1,3 +1,3 @@
-import SimpleDropdown from './SimpleDropdown'
+import SimpleDropdown from "./SimpleDropdown";
 
-export default SimpleDropdown
+export default SimpleDropdown;

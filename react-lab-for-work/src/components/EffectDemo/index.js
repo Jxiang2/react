@@ -1,3 +1,3 @@
-import TimerWrapper from './TimerWrapper'
+import TimerWrapper from "./TimerWrapper";
 
-export default TimerWrapper
+export default TimerWrapper;

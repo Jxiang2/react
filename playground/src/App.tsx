@@ -9,7 +9,6 @@ import UseRef from "./pages/UseRef";
 import { themeContext } from "./contexts/ThemeContext";
 import "./styles/App.css";
 
-
 function App() {
   const context = useContext(themeContext);
   // use context

@@ -1,42 +1,49 @@
-import { useState } from 'react'
-import { useLogin } from '../../hooks/useLogin'
+import { useState } from "react";
+import { useLogin } from "../../hooks/useLogin";
 
-import styles from './Login.module.css'
+import styles from "./Login.module.css";
 
 export default function Login() {
-
-  const [email, setEmail] = useState('')
-  const [password, SetPassword] = useState('')
-  const { login, error, isPending } = useLogin()
+  const [email, setEmail] = useState("");
+  const [password, SetPassword] = useState("");
+  const { login, error, isPending } = useLogin();
 
   const handleSubmit = (e) => {
-    e.preventDefault()
-    login(email, password)
-  }
+    e.preventDefault();
+    login(email, password);
+  };
 
   return (
     // class = styles.login-form
-    <form onSubmit={handleSubmit} className={styles['login-form']}>
+    <form onSubmit={handleSubmit} className={styles["login-form"]}>
       <h2>Login</h2>
 
       <label>
         <span>email:</span>
-        <input type="email"
-               onChange={(e) => setEmail(e.target.value)}
-               value={email}/>
+        <input
+          type="email"
+          onChange={(e) => setEmail(e.target.value)}
+          value={email}
+        />
       </label>
 
       <label>
         <span>password:</span>
-        <input type="password"
-               onChange={(e) => SetPassword(e.target.value)}
-               value={password}/>
+        <input
+          type="password"
+          onChange={(e) => SetPassword(e.target.value)}
+          value={password}
+        />
       </label>
 
       {!isPending && <button className="btn">Log In</button>}
-      {isPending && <button disabled className="btn">Loding...</button>}
+      {isPending && (
+        <button disabled className="btn">
+          Loding...
+        </button>
+      )}
 
       {error && <p>{error}</p>}
     </form>
-  )
+  );
 }

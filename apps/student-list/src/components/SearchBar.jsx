@@ -1,10 +1,9 @@
-import React from 'react'
+import React from "react";
 
-// styles 
-import './SearchBar.css'
+// styles
+import "./SearchBar.css";
 
 export default function SearchBar({ setAttribute, defaultContent }) {
-
   return (
     <div className="search-bar">
       <input
@@ -14,5 +13,5 @@ export default function SearchBar({ setAttribute, defaultContent }) {
         onChange={(e) => setAttribute(e.target.value)}
       />
     </div>
-  )
+  );
 }

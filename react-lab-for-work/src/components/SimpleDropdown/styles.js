@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled from "styled-components";
 
 export const Menu = styled.span`
   border-radius: 5px;
@@ -10,14 +10,15 @@ export const Menu = styled.span`
   margin-top: 7px;
   display: flex;
   flex-direction: column;
-`
+`;
 
 export const Item = styled.option`
-border-radius: 5px;
-padding: 3px;
-width: 100%;
-margin-top: 4px;
-&:hover {
+  border-radius: 5px;
+  padding: 3px;
+  width: 100%;
+  margin-top: 4px;
+  &:hover {
     cursor: pointer;
-    background: yello}
-`
+    background: yello;
+  }
+`;

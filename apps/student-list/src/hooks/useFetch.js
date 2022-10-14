@@ -1,45 +1,44 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState } from "react";
 
 export const useFetch = (url) => {
-  const [data, setData] = useState(null)
-  const [isPending, setIsPending] = useState(false)
-  const [error, setError] = useState(null)
+  const [data, setData] = useState(null);
+  const [isPending, setIsPending] = useState(false);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
-    const controller = new AbortController()
+    const controller = new AbortController();
 
     const fetchData = async () => {
-      setIsPending(true)
+      setIsPending(true);
 
       try {
-        const res = await fetch(url, { signal: controller.signal })
+        const res = await fetch(url, { signal: controller.signal });
         if (!res.ok) {
           // throw a 404 error that will be caught later
-          throw new Error(res.statusText)
+          throw new Error(res.statusText);
         }
-        const json = await res.json()
-        setData(json)
-        setIsPending(false)
-        setError(null)
+        const json = await res.json();
+        setData(json);
+        setIsPending(false);
+        setError(null);
       } catch (err) {
-        if (err.name === 'AnortError') {
-          console.log('the fetch is aborted')
+        if (err.name === "AnortError") {
+          console.log("the fetch is aborted");
         } else {
-          setIsPending(false)
-          setError('Could not fetch the data')
-          console.log(err.message)
+          setIsPending(false);
+          setError("Could not fetch the data");
+          console.log(err.message);
         }
       }
-    }
+    };
 
-    fetchData()
+    fetchData();
 
     // clean up function
     return () => {
-      controller.abort()
-    }
+      controller.abort();
+    };
+  }, [url]);
 
-  }, [url])
-
-  return { data: data, isPending: isPending, error }
-}
+  return { data: data, isPending: isPending, error };
+};

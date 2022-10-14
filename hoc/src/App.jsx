@@ -1,6 +1,6 @@
-import './App.css'
-import SearchedTodos from './components/TodoList'
-import SearchedUsers from './components/UserList'
+import "./App.css";
+import SearchedTodos from "./components/TodoList";
+import SearchedUsers from "./components/UserList";
 
 function App() {
   return (
@@ -8,11 +8,11 @@ function App() {
       <h2>Higher Order Components</h2>
 
       <div className="section">
-        <SearchedUsers/>
-        <SearchedTodos/>
+        <SearchedUsers />
+        <SearchedTodos />
       </div>
     </div>
-  )
+  );
 }
 
-export default App
+export default App;

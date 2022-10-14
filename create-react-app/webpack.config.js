@@ -1,12 +1,12 @@
-const path = require('path')
-const HTMLWebPackPlugin = require('html-webpack-plugin')
+const path = require("path");
+const HTMLWebPackPlugin = require("html-webpack-plugin");
 
 module.exports = {
-  entry: './src/index.js',
+  entry: "./src/index.js",
 
   output: {
-    path: path.resolve(__dirname, 'dist'),
-    filename: 'bundle.js',
+    path: path.resolve(__dirname, "dist"),
+    filename: "bundle.js",
   },
 
   module: {
@@ -15,12 +15,12 @@ module.exports = {
       {
         test: /\.js$/, // all files ending with .js in the same dir
         exclude: /node_modules/, // all files ending with .js in the same dir
-        include: [path.resolve(__dirname, 'src')],
+        include: [path.resolve(__dirname, "src")],
         use: {
           // transpile src code into browser compatible js code following presets
-          loader: 'babel-loader',
+          loader: "babel-loader",
           options: {
-            presets: ['@babel/preset-env', '@babel/preset-react',]
+            presets: ["@babel/preset-env", "@babel/preset-react"],
           },
         },
       },
@@ -29,17 +29,17 @@ module.exports = {
 
   plugins: [
     new HTMLWebPackPlugin({
-      template: './src/public/index.html' // inject bundle.js into index.html in src dir
+      template: "./src/public/index.html", // inject bundle.js into index.html in src dir
     }),
   ],
 
   devServer: {
     static: {
-      directory: path.join(__dirname, 'public'),
+      directory: path.join(__dirname, "public"),
     },
     hot: true, // Hot module replacement
     open: true, // Open browser
     compress: true, // Enable gzip compression for everything served
     port: 3000,
   },
-}
+};

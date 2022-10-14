@@ -4,22 +4,19 @@ import {
   useCallback,
   useEffect,
   useRef,
-  useState
-} from 'react';
+  useState,
+} from "react";
 
-import {
-  useAddTodo,
-  useRemoveTodo,
-  useTodos,
-} from "./context/useTodoContext";
+import { useAddTodo, useRemoveTodo, useTodos } from "./context/useTodoContext";
 
-import type { Todo } from './hooks/useTodosManager';
+import type { Todo } from "./hooks/useTodosManager";
 
-import './App.css';
-
+import "./App.css";
 
 // types
-type UseTypedState<T> = (initialValue: T) => [T, React.Dispatch<React.SetStateAction<T>>];
+type UseTypedState<T> = (
+  initialValue: T,
+) => [T, React.Dispatch<React.SetStateAction<T>>];
 type UseTypedStateValue<T> = ReturnType<UseTypedState<T>>[0];
 type UseTypedStateSetValue<T> = ReturnType<UseTypedState<T>>[1];
 
@@ -27,69 +24,56 @@ interface Payload {
   text: string;
 }
 
-
 // components
-const Heading: FC<{ title: string; }> = ({ title }) => (
-  <h2>{title}</h2>
-);
+const Heading: FC<{ title: string }> = ({ title }) => <h2>{title}</h2>;
 
 const Box: FC<PropsWithChildren> = ({ children }) => (
-  <div
-    style={{ padding: "1rem", color: "green" }}
-  >
-    {children}
-  </div>
+  <div style={{ padding: "1rem", color: "green" }}>{children}</div>
 );
 
 const Incrementer: FC<{
   value: UseTypedStateValue<number>;
   setValue: UseTypedStateSetValue<number>;
-}> = ({
-  value,
-  setValue
-}) => (
-    <Button onClick={() => setValue(value + 1)}>
-      Add ~ {value}
-    </Button>
-  );
+}> = ({ value, setValue }) => (
+  <Button onClick={() => setValue(value + 1)}>Add ~ {value}</Button>
+);
 
 const List: FC<{
   items: string[];
   onClick?: (item: string) => void;
-}> = ({
-  items,
-  onClick
-}) => (
-    <ul>
-      {items.map((item, index) => (
-        <li key={index} onClick={() => onClick?.(item)}>{item}</li>
-      ))}
-    </ul>
-  );
+}> = ({ items, onClick }) => (
+  <ul>
+    {items.map((item, index) => (
+      <li key={index} onClick={() => onClick?.(item)}>
+        {item}
+      </li>
+    ))}
+  </ul>
+);
 
 const Button: FC<
   React.DetailedHTMLProps<
     React.ButtonHTMLAttributes<HTMLButtonElement>, // react button
     HTMLButtonElement // html button
-  >
-  & PropsWithChildren
-  & { title?: string; }
+  > &
+    PropsWithChildren & { title?: string }
 > = ({ children, title, ...rest }) => {
   console.log(rest); // see what properties of button are passed
   return (
     <button {...rest} style={{ backgroundColor: "red" }}>
       {title ? title : children}
-    </button>);
+    </button>
+  );
 };
 
 function UL<T>({
   items,
   render,
   itemClick,
-  styles
+  styles,
 }: {
-  items: T[],
-  render: (item: T) => React.ReactNode,
+  items: T[];
+  render: (item: T) => React.ReactNode;
   itemClick?: (item: T) => void;
   styles: object;
 }) {
@@ -108,7 +92,6 @@ function UL<T>({
   );
 }
 
-
 // main component
 function App() {
   const newTodoRef = useRef<HTMLInputElement | null>(null);
@@ -121,8 +104,8 @@ function App() {
 
   useEffect(() => {
     fetch("/data.json")
-      .then(res => res.json())
-      .then(data => setPayload(data));
+      .then((res) => res.json())
+      .then((data) => setPayload(data));
   }, []);
 
   const onListClick = useCallback((item: string) => alert(item), []);
@@ -138,18 +121,11 @@ function App() {
     <div>
       <Heading title="Intro" />
 
-      <Box>
-        Hello There
-      </Box>
+      <Box>Hello There</Box>
 
-      <List
-        items={["one", "two", "three"]}
-        onClick={onListClick}
-      />
+      <List items={["one", "two", "three"]} onClick={onListClick} />
 
-      <Box>
-        {JSON.stringify(payload)}
-      </Box>
+      <Box>{JSON.stringify(payload)}</Box>
 
       <Incrementer value={value} setValue={setValue} />
 
@@ -161,9 +137,7 @@ function App() {
         render={(todo) => (
           <>
             <div key={todo.id}>{`${todo.id} : ${todo.text}`}</div>
-            <Button onClick={() => removeTodo(todo.id)}>
-              Remove
-            </Button>
+            <Button onClick={() => removeTodo(todo.id)}>Remove</Button>
           </>
         )}
       />
@@ -179,11 +153,11 @@ export default function AppWrapper() {
     <div
       style={{
         display: "grid",
-        gridTemplateColumns: "50% 50%"
+        gridTemplateColumns: "50% 50%",
       }}
     >
       <App />
       <App />
-    </div >
+    </div>
   );
-};
+}

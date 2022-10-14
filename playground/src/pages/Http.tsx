@@ -12,8 +12,7 @@ export default function UseEffect() {
   const changeUrl = () => {
     if (url === "http://3.144.236.185:8000/planets")
       setUrl("http://3.144.236.185:8000/launches");
-    else
-      setUrl("http://3.144.236.185:8000/planets");
+    else setUrl("http://3.144.236.185:8000/planets");
   };
 
   console.log(response);

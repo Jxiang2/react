@@ -1,8 +1,8 @@
 import { useRef, useState } from "react";
 
 const SubmitForm = () => {
-  const [title, setTitile] = useState<string>('');
-  const [newIngredient, setNewIngredient] = useState<string>('');
+  const [title, setTitile] = useState<string>("");
+  const [newIngredient, setNewIngredient] = useState<string>("");
   const [ingredients, SetIngredients] = useState<string[]>([]);
   const ingredientInput = useRef<HTMLInputElement>(null);
 
@@ -10,9 +10,9 @@ const SubmitForm = () => {
     e.preventDefault(); // prevent refresh
     const ing = newIngredient.trim();
     if (ing && !ingredients.includes(ing)) {
-      SetIngredients(PrevIngredients => [...PrevIngredients, ing]);
+      SetIngredients((PrevIngredients) => [...PrevIngredients, ing]);
     }
-    setNewIngredient('');
+    setNewIngredient("");
     ingredientInput.current?.focus();
   };
 
@@ -37,15 +37,20 @@ const SubmitForm = () => {
         />
 
         <p>recipie ingradients</p>
-        <input type="text"
+        <input
+          type="text"
           onChange={(e) => setNewIngredient(e.target.value)}
           value={newIngredient}
           ref={ingredientInput}
         />
-        <button className="btn" onClick={handleAdd}>add</button>
+        <button className="btn" onClick={handleAdd}>
+          add
+        </button>
         <p>
           Current Ingredients:
-          {ingredients.map(ing => (<em key={ing}>{ing}, </em>))}
+          {ingredients.map((ing) => (
+            <em key={ing}>{ing}, </em>
+          ))}
         </p>
 
         <button>Submit</button>
@@ -55,4 +60,3 @@ const SubmitForm = () => {
 };
 
 export default SubmitForm;
-

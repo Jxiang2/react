@@ -1,8 +1,8 @@
 .widget {
-    display: flex;
-    justify-content: center;
+  display: flex;
+  justify-content: center;
 }
 
 .greyStar {
-    color: grey;
+  color: grey;
 }

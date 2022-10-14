@@ -8,12 +8,19 @@ export default function Home() {
   const [subTheme, setSubTheme] = useState(false);
 
   // only num changes, getItems re-creact
-  const getItems = useCallback((increment: number) => {
-    return [num, Math.floor(num + increment - increment / 2), num + increment];
-  }, [num]);
+  const getItems = useCallback(
+    (increment: number) => {
+      return [
+        num,
+        Math.floor(num + increment - increment / 2),
+        num + increment,
+      ];
+    },
+    [num],
+  );
 
   const subtheme = {
-    color: subTheme ? "#FFF" : "#333"
+    color: subTheme ? "#FFF" : "#333",
   };
 
   return (
@@ -23,13 +30,11 @@ export default function Home() {
       <input
         type="number"
         value={num}
-        onChange={e => setNum(Number(e.target.value))}
+        onChange={(e) => setNum(Number(e.target.value))}
       />
-
-      <button onClick={() => setSubTheme(prevDark => !prevDark)}>
+      <button onClick={() => setSubTheme((prevDark) => !prevDark)}>
         Subtheme
       </button>
-
       <HomeList getItems={getItems} />
     </div>
   );

@@ -4,7 +4,7 @@ import {
   httpCreateTodo,
   httpDeleteTodo,
   httpGetTodos,
-  httpUpdateTodo
+  httpUpdateTodo,
 } from "../requests/requests";
 import { put } from "redux-saga/effects";
 
@@ -13,17 +13,32 @@ function* getTodosAction() {
   yield put({ type: "TODOS_FETCH_SUCCEEDED", payload: todos });
 }
 
-function* createTodoAction({ payload, }: { type: "CREATE_TODO_REQUESTED"; payload: string; }) {
+function* createTodoAction({
+  payload,
+}: {
+  type: "CREATE_TODO_REQUESTED";
+  payload: string;
+}) {
   yield httpCreateTodo(payload);
   yield put({ type: "TODOS_FETCH_REQUESTED" });
 }
 
-function* updateTodoAction({ payload, }: { type: "UPDATE_TODO_REQUESTED"; payload: Todo; }) {
+function* updateTodoAction({
+  payload,
+}: {
+  type: "UPDATE_TODO_REQUESTED";
+  payload: Todo;
+}) {
   yield httpUpdateTodo(payload);
   yield put({ type: "TODOS_FETCH_REQUESTED" });
 }
 
-function* deleteTodoAction({ payload, }: { type: "DELETE_TODO_REQUESTED"; payload: Todo; }) {
+function* deleteTodoAction({
+  payload,
+}: {
+  type: "DELETE_TODO_REQUESTED";
+  payload: Todo;
+}) {
   yield httpDeleteTodo(payload);
   yield put({ type: "TODOS_FETCH_REQUESTED" });
 }

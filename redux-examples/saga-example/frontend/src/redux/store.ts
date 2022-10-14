@@ -7,7 +7,10 @@ import rootSaga from "../sagas/rootSaga";
 import type { Todo } from "../sagas/requests/requests";
 
 // reducer
-const todoReducer = (state: Todo[] = [], action: { type: string; payload: Array<Todo>; }) => {
+const todoReducer = (
+  state: Todo[] = [],
+  action: { type: string; payload: Array<Todo> },
+) => {
   switch (action.type) {
     case "TODOS_FETCH_SUCCEEDED":
       return action.payload;
@@ -42,7 +45,8 @@ export const addTodo = (text: string) => ({
 
 // setup store and saga middleware
 const sagaMiddleware = createSagaMiddleware();
-export const store = createStore(todoReducer, composeWithDevTools(applyMiddleware(sagaMiddleware)));
+export const store = createStore(
+  todoReducer,
+  composeWithDevTools(applyMiddleware(sagaMiddleware)),
+);
 sagaMiddleware.run(rootSaga);
-
-

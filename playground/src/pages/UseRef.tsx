@@ -26,13 +26,13 @@ export default function UseRef() {
       <input
         ref={inputRef}
         value={name}
-        onChange={e => setName(e.target.value)}
+        onChange={(e) => setName(e.target.value)}
       />
       <button onClick={focus}>focus</button>
 
       <p>My name is {name}</p>
       <p>My previous name is {previousName.current}</p>
       <p>Already rendered {renderCount.current} times</p>
-
-    </div>);
+    </div>
+  );
 }

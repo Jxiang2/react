@@ -1,3 +1,3 @@
-import Parent from './Parent'
+import Parent from "./Parent";
 
-export default Parent
+export default Parent;

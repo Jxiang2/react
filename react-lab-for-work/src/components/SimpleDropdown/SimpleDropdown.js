@@ -1,33 +1,36 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react'
-import { Menu, Item } from './styles'
-import PropTypes from 'prop-types'
-import { noop } from 'lodash'
+import React, { useCallback, useEffect, useRef, useState } from "react";
+import { Menu, Item } from "./styles";
+import PropTypes from "prop-types";
+import { noop } from "lodash";
 
 function SimpleDropdown({ text, buttonStyle, data, handleSelectItem }) {
-  const btnRef = useRef()
-  const [isOpen, setIsOpen] = useState(false)
+  const btnRef = useRef();
+  const [isOpen, setIsOpen] = useState(false);
 
   const handleClickDropdown = useCallback(() => {
-    setIsOpen(!isOpen)
-  }, [isOpen])
+    setIsOpen(!isOpen);
+  }, [isOpen]);
 
-  const handleCloseDropdown = useCallback(e => {
+  const handleCloseDropdown = useCallback((e) => {
     if (e.path[0] !== btnRef.current) {
-      setIsOpen(false)
+      setIsOpen(false);
     }
-  }, [])
+  }, []);
 
-  const handleClickItem = useCallback(e => {
-    handleSelectItem(e.target.value)
-  }, [handleSelectItem,])
+  const handleClickItem = useCallback(
+    (e) => {
+      handleSelectItem(e.target.value);
+    },
+    [handleSelectItem],
+  );
 
   useEffect(() => {
-    document.body.addEventListener('click', handleCloseDropdown)
+    document.body.addEventListener("click", handleCloseDropdown);
 
     return () => {
-      document.body.removeEventListener('click', handleCloseDropdown)
-    }
-  }, [handleCloseDropdown])
+      document.body.removeEventListener("click", handleCloseDropdown);
+    };
+  }, [handleCloseDropdown]);
 
   return (
     <div style={{ marginTop: "50px" }}>
@@ -36,7 +39,7 @@ function SimpleDropdown({ text, buttonStyle, data, handleSelectItem }) {
       </button>
       {isOpen && (
         <Menu>
-          {data.map(point => (
+          {data.map((point) => (
             <Item
               key={point.value}
               value={point.value}
@@ -48,21 +51,21 @@ function SimpleDropdown({ text, buttonStyle, data, handleSelectItem }) {
         </Menu>
       )}
     </div>
-  )
+  );
 }
 
-export default SimpleDropdown
+export default SimpleDropdown;
 
 SimpleDropdown.defaultProps = {
   buttonStyle: {},
   data: [],
-  text: '',
+  text: "",
   handleSelectItem: noop,
-}
+};
 
 SimpleDropdown.propTypes = {
   buttonStyle: PropTypes.object,
   data: PropTypes.array,
   handleSelectItem: PropTypes.func,
   text: PropTypes.string,
-}
+};

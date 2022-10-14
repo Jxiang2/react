@@ -4,7 +4,7 @@ interface ITheme {
   backgroundColor: string;
 }
 
-type ThemeActionsType = { type: "CHANGE_COLOR", payload: string; };
+type ThemeActionsType = { type: "CHANGE_COLOR"; payload: string };
 
 type ThemeContextProviderPropsType = {
   children: React.ReactNode;
@@ -20,28 +20,28 @@ interface IAxiosState {
   data: any;
   success: boolean;
   error: string | null;
-};
+}
 
 interface IAxiosGetState {
   isPending: boolean;
   data: any;
   success: boolean;
   error: string | null;
-};
+}
 
 type AxiosUpdateMethodName = "PUT" | "PATCH";
 
 type AxiosActionsType =
-  | { type: "IS_PENDING", payload: any; }
-  | { type: "ERROR", payload: any; }
-  | { type: "CREATED", payload: any; }
-  | { type: "UPDATED", payload: any; }
-  | { type: "DELETED", payload: any; };
+  | { type: "IS_PENDING"; payload: any }
+  | { type: "ERROR"; payload: any }
+  | { type: "CREATED"; payload: any }
+  | { type: "UPDATED"; payload: any }
+  | { type: "DELETED"; payload: any };
 
 type AxiosGetActionsType =
-  | { type: "IS_PENDING", payload: any; }
-  | { type: "ERROR", payload: any; }
-  | { type: "RETRIEVED", payload: any; };
+  | { type: "IS_PENDING"; payload: any }
+  | { type: "ERROR"; payload: any }
+  | { type: "RETRIEVED"; payload: any };
 
 export type {
   ITheme,
