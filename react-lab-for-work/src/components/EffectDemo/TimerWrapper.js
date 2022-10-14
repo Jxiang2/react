@@ -5,6 +5,7 @@ function Timer() {
   const [count, setCount] = useState(0);
   const [tooltipShown, setTooltipShown] = useState(false);
   const tooltipPopperRef = useRef(null);
+  const [triggerEffect, setTriggerEffect] = useState(false);
 
   // timer
   useEffect(() => {
@@ -21,11 +22,13 @@ function Timer() {
     }, 1000);
 
     return () => {
-      // when content of useEffect re-run, fire the cleanup function below
+      // when content of useEffect RE-RUN (not first run)
+      // or the component holding the useEffect unmounts,
+      // fire the cleanup function below
       console.log("Clean up old timer");
       clearInterval(timer);
     };
-  }, []);
+  }, [triggerEffect]);
 
   // tooltip
   useEffect(() => {
@@ -45,7 +48,10 @@ function Timer() {
   }, []);
 
   return (
-    <div style={{ marginTop: "50px" }}>
+    <div>
+      <button onClick={() => setTriggerEffect((prevState) => !prevState)}>
+        redo effect
+      </button>
       <div>Timer: {count}</div>
       <div ref={tooltipPopperRef}>Tooltip popper</div>
       {tooltipShown && <div> Tooltip timer: {count}</div>}
@@ -59,7 +65,7 @@ export default function TimerWrapper() {
   const updateIndex = useCallback(() => setIdx(idx + 1), [idx]);
 
   return (
-    <div>
+    <div style={{ marginTop: "50px" }}>
       <Timer key={idx} />
       <div>
         <button onClick={updateIndex}>Update index</button>
