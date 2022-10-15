@@ -1,5 +1,17 @@
 import React, { useEffect, useState, useCallback, useRef } from "react";
 
+/**
+ * The useEffect hook has 3 parts, setup code, cleanup code and dep array,
+ *
+ * Setup code runs when your component mounts (cleanup is not called).
+ *
+ * After every re-render of your component where the dependencies have changed:
+ *   First, your cleanup code runs with the old props and state.
+ *   Then, your setup code runs with the new props and state.
+ *
+ * Your cleanup code runs one final time after your component is removed from the page (unmounts).
+ */
+
 let timerId = 0;
 function Timer() {
   const [count, setCount] = useState(0);
@@ -22,9 +34,6 @@ function Timer() {
     }, 1000);
 
     return () => {
-      // when content of useEffect RE-RUN (not first run)
-      // or the component holding the useEffect unmounts,
-      // fire the cleanup function below
       console.log("Clean up old timer");
       clearInterval(timer);
     };
