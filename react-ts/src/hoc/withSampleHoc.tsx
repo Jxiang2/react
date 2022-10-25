@@ -11,7 +11,10 @@ type PropsFromInputComponent = React.ComponentProps<typeof Heading>;
 const withSampleHoC = <P extends PropsFromInputComponent>(
   InputComponent: React.ComponentType<P>,
   propsAreEqual?: PropsAreEqual<P> | false,
-): React.FC<P> => {
+): {
+  (props: P): React.ReactElement;
+  displayName: string;
+} => {
   function WithSampleHoc(props: P) {
     const { title } = props;
     return (
@@ -21,6 +24,10 @@ const withSampleHoC = <P extends PropsFromInputComponent>(
       </>
     );
   }
+
+  WithSampleHoc.displayName = `withSampleHoc(${
+    InputComponent.displayName ?? InputComponent.name
+  })`;
 
   let OutputComponent =
     propsAreEqual === false
