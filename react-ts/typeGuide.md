@@ -44,4 +44,10 @@ const handleChange = (ev: React.MouseEvent<HTMLDivElement>) => { ... }
 <div onMouseMove={handleChange} ... />
 ```
 
+**`ComponentProps<typeof XXX>`** Note: XXX is a react component
+
+```
+type MyComponentProps = React.ComponentProps<typeof MyComponent>;
+```
+
 <br/>

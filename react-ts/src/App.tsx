@@ -26,7 +26,7 @@ interface Payload {
 }
 
 // components
-const Heading: FC<{ title: string }> = ({ title }) => <h2>{title}</h2>;
+export const Heading: FC<{ title: string }> = ({ title }) => <h2>{title}</h2>;
 
 const Box: FC<PropsWithChildren & { name: string }> = ({ children, name }) => (
   <div style={{ padding: "1rem", color: name }}>{children} </div>
@@ -116,7 +116,7 @@ const App = () => {
   }, [addTodo]);
 
   // using hoc with props
-  const EnhancedHeading = withSampleHoC(Heading);
+  const EnhancedHeading = withSampleHoC(Heading, false);
 
   return (
     <div>
@@ -152,9 +152,6 @@ const App = () => {
   );
 };
 
-// using hoc withou props
-const EnhancedApp = withSampleHoC(App);
-
 export default function AppWrapper() {
   return (
     <div
@@ -163,9 +160,8 @@ export default function AppWrapper() {
         gridTemplateColumns: "50% 50%",
       }}
     >
-      {/* using hoc withou props */}
-      <EnhancedApp />
-      <EnhancedApp />
+      <App />
+      <App />
     </div>
   );
 }
