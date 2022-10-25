@@ -118,6 +118,9 @@ const App = () => {
   // using hoc with props
   const EnhancedHeading = withSampleHoC(Heading, false);
 
+  console.log(EnhancedHeading.displayName); // debug
+  console.log(EnhancedHeading.name); // debug
+
   return (
     <div>
       {/* using hoc withou props */}
