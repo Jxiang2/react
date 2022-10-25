@@ -10,7 +10,7 @@
 
 **`ReactElement | JSX.Element`**: Type representing a concept of React Element - representation of a native DOM component like `<div/>`, or a user-defined composite component(e.g. `<MyComponent />`)
 
-**Relationship**: **`ReactElement | JSX.Element`** is included in **`ReactNode`**
+**Relationship**: `ReactElement | JSX.Element` is included in `ReactNode`
 
 **Relationship**: `ComponentType<P>` vs `ReactElement | JSX.Element`
 
