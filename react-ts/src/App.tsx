@@ -1,4 +1,4 @@
-import {
+import React, {
   FC,
   PropsWithChildren,
   useCallback,
@@ -12,6 +12,7 @@ import { useAddTodo, useRemoveTodo, useTodos } from "./context/useTodoContext";
 import type { Todo } from "./hooks/useTodosManager";
 
 import "./App.css";
+import withSampleHoC from "./hoc/withSampleHoc";
 
 // types
 type UseTypedState<T> = (
@@ -27,8 +28,8 @@ interface Payload {
 // components
 const Heading: FC<{ title: string }> = ({ title }) => <h2>{title}</h2>;
 
-const Box: FC<PropsWithChildren> = ({ children }) => (
-  <div style={{ padding: "1rem", color: "green" }}>{children}</div>
+const Box: FC<PropsWithChildren & { name: string }> = ({ children, name }) => (
+  <div style={{ padding: "1rem", color: name }}>{children} </div>
 );
 
 const Incrementer: FC<{
@@ -52,10 +53,7 @@ const List: FC<{
 );
 
 const Button: FC<
-  React.DetailedHTMLProps<
-    React.ButtonHTMLAttributes<HTMLButtonElement>, // react button
-    HTMLButtonElement // html button
-  > &
+  React.ButtonHTMLAttributes<HTMLButtonElement> &
     PropsWithChildren & { title?: string }
 > = ({ children, title, ...rest }) => {
   console.log(rest); // see what properties of button are passed
@@ -93,7 +91,7 @@ function UL<T>({
 }
 
 // main component
-function App() {
+const App = () => {
   const newTodoRef = useRef<HTMLInputElement | null>(null);
   const [payload, setPayload] = useState<Payload | null>(null);
   const [value, setValue] = useState(0);
@@ -117,19 +115,24 @@ function App() {
     }
   }, [addTodo]);
 
+  // using hoc with props
+  const EnhancedHeading = withSampleHoC(Heading);
+
   return (
     <div>
-      <Heading title="Intro" />
+      {/* using hoc withou props */}
+      <EnhancedHeading title="Intro" />
 
-      <Box>Hello There</Box>
+      {(<Box name="green">Hello There</Box>) as React.ReactElement}
 
       <List items={["one", "two", "three"]} onClick={onListClick} />
 
-      <Box>{JSON.stringify(payload)}</Box>
+      <Box name="green">{JSON.stringify(payload)}</Box>
 
       <Incrementer value={value} setValue={setValue} />
 
       <Heading title="Todos" />
+
       <UL<Todo>
         styles={{ backgroundColor: "green" }}
         items={todos}
@@ -143,10 +146,14 @@ function App() {
       />
 
       <input type="text" ref={newTodoRef} />
+
       <Button onClick={onAddTodo} title="Add" />
     </div>
   );
-}
+};
+
+// using hoc withou props
+const EnhancedApp = withSampleHoC(App);
 
 export default function AppWrapper() {
   return (
@@ -156,8 +163,9 @@ export default function AppWrapper() {
         gridTemplateColumns: "50% 50%",
       }}
     >
-      <App />
-      <App />
+      {/* using hoc withou props */}
+      <EnhancedApp />
+      <EnhancedApp />
     </div>
   );
 }
