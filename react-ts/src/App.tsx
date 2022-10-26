@@ -125,11 +125,6 @@ const App = ({ defaultProp }: AppProps): React.ReactElement => {
   console.log(EnhancedHeading.displayName); // debug
   console.log(EnhancedHeading.name); // debug
 
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>): string => {
-    const val = event.target.value;
-    return val;
-  };
-
   return (
     <div>
       <Box>{defaultProp}</Box>

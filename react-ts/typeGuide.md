@@ -37,7 +37,7 @@ const Input: React.FC<Props & React.InputHTMLAttributes<HTMLInputElement>> = pro
 <Input onClick={...} onChange={...} alt={...} ... />
 ```
 
-**`XXXEvent<HTMLXXXElement>`**: Type representing more specific event. Some common event examples: ChangeEvent, FormEvent, FocusEvent, KeyboardEvent, MouseEvent, DragEvent, PointerEvent, WheelEvent, TouchEvent. For example:
+**`XXXEvent<HTMLXXXElement>`**: Type representing more specific event. Some common event examples: ChangeEvent, FormEvent, FocusEvent, KeyboardEvent, MouseEvent, DragEvent, PointerEvent, WheelEvent, TouchEvent. Thet are all subtypes of SyntheticEvent. For example:
 
 ```
 const handleChange = (ev: React.MouseEvent<HTMLDivElement>) => { ... }
