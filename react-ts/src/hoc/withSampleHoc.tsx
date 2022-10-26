@@ -1,9 +1,9 @@
 import React from "react";
 import { Heading } from "../App";
 
-type PropsAreEqual<P> = (
-  prevProps: Readonly<P>,
-  nextProps: Readonly<P>,
+type PropsAreEqual<Props> = (
+  prevProps: Readonly<Props>,
+  nextProps: Readonly<Props>,
 ) => boolean;
 
 type PropsFromInputComponent = React.ComponentProps<typeof Heading>;

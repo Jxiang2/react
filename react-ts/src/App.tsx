@@ -32,7 +32,7 @@ const Box: FC<PropsWithChildren & { name: string }> = ({ children, name }) => (
   <div style={{ padding: "1rem", color: name }}>{children} </div>
 );
 
-const Incrementer: FC<{
+const Incrementor: FC<{
   value: UseTypedStateValue<number>;
   setValue: UseTypedStateSetValue<number>;
 }> = ({ value, setValue }) => (
@@ -123,7 +123,7 @@ const App = () => {
 
   return (
     <div>
-      {/* using hoc withou props */}
+      {/* using hoc without props */}
       <EnhancedHeading title="Intro" />
 
       {(<Box name="green">Hello There</Box>) as React.ReactElement}
@@ -132,7 +132,7 @@ const App = () => {
 
       <Box name="green">{JSON.stringify(payload)}</Box>
 
-      <Incrementer value={value} setValue={setValue} />
+      <Incrementor value={value} setValue={setValue} />
 
       <Heading title="Todos" />
 
