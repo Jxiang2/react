@@ -28,7 +28,7 @@ interface Payload {
 // components
 export const Heading: FC<{ title: string }> = ({ title }) => <h2>{title}</h2>;
 
-const Box: FC<PropsWithChildren & { name: string }> = ({ children, name }) => (
+const Box: FC<PropsWithChildren & { name?: string }> = ({ children, name }) => (
   <div style={{ padding: "1rem", color: name }}>{children} </div>
 );
 
@@ -73,7 +73,7 @@ function UL<T>({
   items: T[];
   render: (item: T) => React.ReactNode;
   itemClick?: (item: T) => void;
-  styles: object;
+  styles: React.CSSProperties;
 }) {
   return (
     <ul>
@@ -90,8 +90,12 @@ function UL<T>({
   );
 }
 
+type AppProps = {
+  defaultProp: string;
+};
+
 // main component
-const App = () => {
+const App = ({ defaultProp }: AppProps): React.ReactElement => {
   const newTodoRef = useRef<HTMLInputElement | null>(null);
   const [payload, setPayload] = useState<Payload | null>(null);
   const [value, setValue] = useState(0);
@@ -121,8 +125,15 @@ const App = () => {
   console.log(EnhancedHeading.displayName); // debug
   console.log(EnhancedHeading.name); // debug
 
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>): string => {
+    const val = event.target.value;
+    return val;
+  };
+
   return (
     <div>
+      <Box>{defaultProp}</Box>
+
       {/* using hoc without props */}
       <EnhancedHeading title="Intro" />
 
@@ -153,6 +164,10 @@ const App = () => {
       <Button onClick={onAddTodo} title="Add" />
     </div>
   );
+};
+
+App.defaultProps = {
+  defaultProp: "testDefaultPropsMessage",
 };
 
 export default function AppWrapper() {
