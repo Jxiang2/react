@@ -10,6 +10,8 @@
 
 **`ReactElement | JSX.Element`**: Type representing a concept of React Element - representation of a native DOM component like `<div/>`, or a user-defined composite component(e.g. `<MyComponent />`)
 
+(
+
 **Relationship**: `ReactElement | JSX.Element` is included in `ReactNode`
 
 **Relationship**: `ComponentType<P>` vs `ReactElement | JSX.Element`
@@ -22,6 +24,8 @@
   {(<Box name="xjy>Hello There</Box>) as React.ReactElement}
 </>
 ```
+
+)
 
 **`CSSProperties`**: Type representing style object in JSX - for css-in-js styles, for example:
 
@@ -44,6 +48,15 @@ const handleChange = (ev: React.MouseEvent<HTMLDivElement>) => { ... }
 <div onMouseMove={handleChange} ... />
 ```
 
+(
+
+**React Event table**:
+
+<img width="630" alt="Screen Shot 2022-10-26 at 8 23 13 PM" src="https://user-images.githubusercontent.com/46456200/198162808-a84807d9-d091-4ba9-8263-55e45d56d72c.png">
+
+
+)
+
 **`ComponentProps<typeof XXX>`** Note: XXX is a react component
 
 ```
@@ -51,3 +64,5 @@ type MyComponentProps = React.ComponentProps<typeof MyComponent>;
 ```
 
 <br/>
+
+### 2. React & Redux:
