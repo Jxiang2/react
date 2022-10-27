@@ -28,7 +28,7 @@ interface Payload {
 // components
 export const Heading: FC<{ title: string }> = ({ title }) => <h2>{title}</h2>;
 
-const Box: FC<PropsWithChildren & { name?: string }> = ({ children, name }) => (
+const Box: FC<PropsWithChildren<{ name?: string }>> = ({ children, name }) => (
   <div style={{ padding: "1rem", color: name }}>{children} </div>
 );
 
