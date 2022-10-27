@@ -43,24 +43,23 @@ const fetchUsersFailure = (error) => {
  * so it is a "thunk" of actions
  */
 
-const fetchUsers = () => (dispatch, getState) => {
+const apiCall = (url) => async (dispatch, getState) => {
   dispatch(fetchUsersRequest());
   console.log("retrieved from getState(): ", getState()); // test getState()
 
-  axios
-    .get(URL)
-    .then((response) => {
-      // response.data is the users
-      const users = response.data.map((user) => user.id);
-      dispatch(fetchUsersSuccess(users));
-      console.log("retrieved from getState(): ", getState()); // test getState()
-    })
-    .catch((error) => {
-      // error.message is the error message
-      dispatch(fetchUsersFailure(error.message));
-      console.log("retrieved from getState(): ", getState()); // test getState()
-    });
+  const result = await axios.get(url);
+
+  if (result.status === 200) {
+    const users = result.data.map((user) => user.id);
+    dispatch(fetchUsersSuccess(users));
+    console.log("retrieved from getState(): ", getState()); // test getState()
+  } else {
+    dispatch(fetchUsersFailure(result.status));
+    console.log("retrieved from getState(): ", getState()); // test getState()
+  }
 };
+
+const fetchUsers = apiCall(URL);
 
 // reducer
 const reducer = (state = initialState, action) => {
@@ -89,11 +88,17 @@ const reducer = (state = initialState, action) => {
 // setup store
 const store = createStore(reducer, applyMiddleware(thunk));
 
+const createThunkAction = (action) => {
+  return () => action;
+};
+
 const actions = bindActionCreators(
   {
-    fetchUsers,
+    fetchUsers: createThunkAction(fetchUsers),
   },
   store.dispatch,
 );
 
+// two ways to invokde fetchUsers()
 actions.fetchUsers();
+store.dispatch(fetchUsers);
