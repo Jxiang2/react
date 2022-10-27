@@ -10,12 +10,16 @@ const initialState = {
   error: "",
 };
 
-// action names
+/**
+ * action names
+ */
 const FETCH_USERS_REQUESTED = "FETCH_USERS_REQUESTED";
 const FETCH_USERS_SUCCEEDED = "FETCH_USERS_SUCCEEDED";
 const FETCH_USERS_FAILED = "FETCH_USERS_FAILED";
 
-// action creator functions
+/**
+ * action creator functions
+ */
 const fetchUsersRequest = () => {
   return {
     type: FETCH_USERS_REQUESTED,
@@ -37,12 +41,11 @@ const fetchUsersFailure = (error) => {
 };
 
 /**
- * async action creator function
+ * thunk creator function
  * returns a {function (dispatch): async logics ...} intead of action object
  * and it dispatchs sync actions inside it,
  * so it is a "thunk" of actions
  */
-
 const apiCall = (url) => async (dispatch, getState) => {
   dispatch(fetchUsersRequest());
   console.log("retrieved from getState(): ", getState()); // test getState()
@@ -59,9 +62,9 @@ const apiCall = (url) => async (dispatch, getState) => {
   }
 };
 
-const fetchUsers = apiCall(URL);
-
-// reducer
+/**
+ * reducer
+ */
 const reducer = (state = initialState, action) => {
   console.log(action.type);
   switch (action.type) {
@@ -85,20 +88,23 @@ const reducer = (state = initialState, action) => {
   }
 };
 
-// setup store
+/**
+ * setup store
+ */
 const store = createStore(reducer, applyMiddleware(thunk));
 
-const createThunkAction = (action) => {
-  return () => action;
-};
-
+const createThunkAction = (options) => () => apiCall(options);
 const actions = bindActionCreators(
   {
-    fetchUsers: createThunkAction(fetchUsers),
+    fetchUsers: createThunkAction(URL),
   },
   store.dispatch,
 );
 
-// two ways to invokde fetchUsers()
+/**
+ * 2 ways to invoke thunk functions
+ */
 actions.fetchUsers();
+
+const fetchUsers = apiCall(URL);
 store.dispatch(fetchUsers);
