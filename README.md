@@ -1,61 +1,69 @@
-# Getting Started with Create React App
+# React & Typescript Notes
 
-This project was bootstrapped
-with [Create React App](https://github.com/facebook/create-react-app).
+### 1. Types provided by React (all accessible by `import React from 'react'`):
 
-## Available Scripts
+**`React.FC<Props> | React.FunctionComponent<Props>`**
 
-In the project directory, you can run:
+**`React.Component<Props, State>`**
 
-### `npm start`
+**`React.ComponentType<Props>`**: Type representing union of (`React.FC<Props> | React.Component<Props>`) - used in HOC
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+**`ReactNode`**: Type representing any possible type of React node (basically ReactElement (including Fragments and Portals) + primitive JS types)
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+**`ReactElement | JSX.Element`**: Type representing a concept of React Element - representation of a native DOM component like `<div/>`, or a user-defined composite component(e.g. `<MyComponent />`)
 
-### `npm test`
+(
 
-Launches the test runner in the interactive watch mode.\
-See the section
-about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for
-more information.
+**Relationship**: `ReactElement | JSX.Element` is included in `ReactNode`
 
-### `npm run build`
+**Relationship**: `ComponentType<P>` vs `ReactElement | JSX.Element`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best
-performance.
+1. `Box` is a react component, it's type is `ComponentType<PropsWithChidlren & {name: string}>`
+2. `<Box name="xjy>Hello There</Box>` is a JSX element, it's type is `ReactElement | JSX.Element`
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+```
+</>
+  {(<Box name="xjy>Hello There</Box>) as React.ReactElement}
+</>
+```
 
-See the section
-about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more
-information.
+)
 
-### `npm run eject`
+**`CSSProperties`**: Type representing style object in JSX - for css-in-js styles, for example:
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+```
+const styles: React.CSSProperties = { flexDirection: 'row',}
+const element = <div style={styles}
+```
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at
-any time. This command will remove the single build dependency from your project.
+**`XXXHTMLAttributes<HTMLXXXELEMENT>`**: Type representing HTML attributes of specified HTML Element - for extending HTML Elements, for example:
 
-Instead, it will copy all the configuration files and the transitive dependencies (
-webpack, Babel, ESLint, etc) right into your project so you have full control over them.
-All of the commands except `eject` will still work, but they will point to the copied
-scripts so you can tweak them. At this point you’re on your own.
+```
+const Input: React.FC<Props & React.InputHTMLAttributes<HTMLInputElement>> = props => { ... }
+<Input onClick={...} onChange={...} alt={...} ... />
+```
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and
-middle deployments, and you shouldn’t feel obligated to use this feature. However we
-understand that this tool wouldn’t be useful if you couldn’t customize it when you are
-ready for it.
+**`XXXEvent<HTMLXXXElement>`**: Type representing more specific event. Some common event examples: ChangeEvent, FormEvent, FocusEvent, KeyboardEvent, MouseEvent, DragEvent, PointerEvent, WheelEvent, TouchEvent. Thet are all subtypes of SyntheticEvent. For example:
 
-## Learn More
+```
+const handleChange = (ev: React.MouseEvent<HTMLDivElement>) => { ... }
+<div onMouseMove={handleChange} ... />
+```
 
-You can learn more in
-the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started)
-.
+(
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+**React Event table**:
+
+<img width="630" alt="Screen Shot 2022-10-26 at 8 23 13 PM" src="https://user-images.githubusercontent.com/46456200/198162808-a84807d9-d091-4ba9-8263-55e45d56d72c.png">
+
+)
+
+**`ComponentProps<typeof XXX>`** Note: XXX is a react component
+
+```
+type MyComponentProps = React.ComponentProps<typeof MyComponent>;
+```
+
+<br/>
+
+### 2. React & Redux:
