@@ -96,23 +96,31 @@ console.log("initial state: ", store.getState());
 const unsub = store.subscribe(() => {});
 
 // 2 ways to dispatch an action, which updates the state accroding to it's reducer
+const restoreCakeqty = 4;
+const restoreIceCreamQty = 4;
+
+const restorckCakeAction = (qty) => () => restockCake(qty);
+const restockIceCreamAction = (qty) => () => restockIceCream(qty);
+
 const actions = bindActionCreators(
   {
     orderCake,
     orderIceCream,
+    restockCake: restorckCakeAction(restoreCakeqty),
+    restockIceCream: restockIceCreamAction(restoreIceCreamQty),
   },
   store.dispatch,
 );
 
 actions.orderCake();
 actions.orderCake();
-actions.orderCake();
-store.dispatch(restockCake(3));
+store.dispatch(orderCake());
+actions.restockCake();
 
 actions.orderIceCream();
 actions.orderIceCream();
 actions.orderIceCream();
-store.dispatch(restockIceCream(3));
+actions.restockIceCream();
 
 // unregister listners on dispatch
 unsub();

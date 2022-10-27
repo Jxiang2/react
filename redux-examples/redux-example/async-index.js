@@ -1,8 +1,8 @@
-const redux = require("redux");
-const thunk = require("redux-thunk").default;
 const axios = require("axios");
-const createStore = redux.createStore;
-const applyMiddleware = redux.applyMiddleware;
+const thunk = require("redux-thunk").default;
+const { createStore, bindActionCreators, applyMiddleware } = require("redux");
+
+const URL = "https://jsonplaceholder.typicode.com/users";
 
 const initialState = {
   loading: false,
@@ -42,21 +42,24 @@ const fetchUsersFailure = (error) => {
  * and it dispatchs sync actions inside it,
  * so it is a "thunk" of actions
  */
-const fetchUsers = () => {
-  return function (dispatch) {
-    dispatch(fetchUsersRequest());
-    axios
-      .get("https://jsonplaceholder.typicode.com/users")
-      .then((response) => {
-        // response.data is the users
-        const users = response.data.map((user) => user.id);
-        dispatch(fetchUsersSuccess(users));
-      })
-      .catch((error) => {
-        // error.message is the error message
-        dispatch(fetchUsersFailure(error.message));
-      });
-  };
+
+const fetchUsers = () => (dispatch, getState) => {
+  dispatch(fetchUsersRequest());
+  console.log("retrieved from getState(): ", getState()); // test getState()
+
+  axios
+    .get(URL)
+    .then((response) => {
+      // response.data is the users
+      const users = response.data.map((user) => user.id);
+      dispatch(fetchUsersSuccess(users));
+      console.log("retrieved from getState(): ", getState()); // test getState()
+    })
+    .catch((error) => {
+      // error.message is the error message
+      dispatch(fetchUsersFailure(error.message));
+      console.log("retrieved from getState(): ", getState()); // test getState()
+    });
 };
 
 // reducer
@@ -86,8 +89,11 @@ const reducer = (state = initialState, action) => {
 // setup store
 const store = createStore(reducer, applyMiddleware(thunk));
 
-// bussiness logics
-store.subscribe(() => {
-  console.log(store.getState());
-});
-store.dispatch(fetchUsers());
+const actions = bindActionCreators(
+  {
+    fetchUsers,
+  },
+  store.dispatch,
+);
+
+actions.fetchUsers();
