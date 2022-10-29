@@ -1,4 +1,4 @@
-# React & Typescript Notes
+# React & Redux & Typescript Notes
 
 ### 1. Types provided by React (all accessible by `import React from 'react'`):
 
