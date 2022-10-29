@@ -67,3 +67,28 @@ type MyComponentProps = React.ComponentProps<typeof MyComponent>;
 <br/>
 
 ### 2. React & Redux:
+
+**Redux**
+
+1. redux is a container used to store the state shared by all components
+   of the app, and it provides global actions to manage the state.
+2. React <--> React-Redux <--> Redux (RTK)
+3. Redux is used of when
+   - you have large amounts of state that are needed in many places in the app
+   - the app state updates frequently over time
+
+**Core concepts**
+
+1. **Store**: hold state of the app
+2. **Action**: describe what happend {type, payload}
+3. **Reducer**: ties store and actions togethor, handles the action and decides how to update state
+
+**Core principles**
+
+1. The global state is a single object in a single store
+2. The only way to change state is to dispatch an action
+3. The state tree is updated based on actions, managed by reducers (prevState, action) -> newState
+
+**React-redux workflow:**
+app -> excute bussiness logic -> dispatch action ->
+action handled by reducer -> update redux store (state) -> influence the app
