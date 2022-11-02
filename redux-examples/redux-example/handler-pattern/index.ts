@@ -1,10 +1,10 @@
 import axios from "axios";
-import { Action, Dispatch } from "redux";
+import {  AnyAction, Dispatch, Store } from "redux";
 import store from "./reducer";
-import { State, User } from "./types";
+import { State } from "./types";
+import { ThunkAction, ThunkDispatch } from "redux-thunk"
 
 // ------------------- sync -------------------
-
 store.dispatch({
   type: "SET_VISIBILITY_FILTER",
   filter: "PRIVATE",
@@ -28,8 +28,7 @@ const FETCH_USERS_SUCCEEDED = "FETCH_USERS_SUCCEEDED";
 const FETCH_USERS_FAILED = "FETCH_USERS_FAILED";
 const URL = "https://jsonplaceholder.typicode.com/users";
 
-const apiCall =
-  (url: string) => async (dispatch: Dispatch, getState: () => State) => {
+const apiCall = (url: string) => async (dispatch: Dispatch, getState: () => State) => {
     dispatch({ type: FETCH_USERS_REQUESTED });
 
     const result = await axios.get(url);
@@ -42,11 +41,15 @@ const apiCall =
         type: FETCH_USERS_FAILED,
         error: result.status.toString(),
       });
-      console.log(store.getState());
+      console.log(store.getState())
     }
   };
 
 const fetchUsers = apiCall(URL);
 
-store.dispatch(fetchUsers as any);
-// ------------------- async ------------------
+const dispatchThunk = (
+  thunk: ThunkAction<void, State, unknown, AnyAction>
+) => (store.dispatch as ThunkDispatch<State, unknown, AnyAction>)(thunk);
+
+dispatchThunk(fetchUsers);
+// --------------------------------------------
