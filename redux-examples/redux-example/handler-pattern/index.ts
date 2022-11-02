@@ -1,5 +1,5 @@
 import axios from "axios";
-import { AnyAction, Dispatch } from "redux";
+import { Action, AnyAction, Dispatch } from "redux"; // NOTE: AnyAction !== any, instead, it's {type: T, [x: string]: any}
 import store from "./reducer";
 import { State } from "./types";
 import { ThunkAction, ThunkDispatch } from "redux-thunk";
@@ -48,8 +48,8 @@ const apiCall =
 
 const fetchUsers = apiCall(URL);
 
-const dispatchThunk = (thunk: ThunkAction<void, State, unknown, AnyAction>) =>
-  (store.dispatch as ThunkDispatch<State, unknown, AnyAction>)(thunk);
+const dispatchThunk = (thunk: ThunkAction<void, State, unknown, Action>) =>
+  (store.dispatch as ThunkDispatch<State, unknown, Action>)(thunk);
 
 dispatchThunk(fetchUsers);
 // --------------------------------------------
