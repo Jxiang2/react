@@ -1,30 +1,15 @@
 import { combineReducers, createStore, applyMiddleware } from "redux";
-import { updateItemInArray, updateObject } from "./helpers";
+import { updateItemInArray, updateObject, createReducer } from "./helpers";
 import thunk from "redux-thunk";
 
 import {
-  Slice,
-  State,
   Action,
-  Handlers,
   Todo,
   DEFAULT_TODO,
   DEFAULT_VISIBILITY_FILTER,
   UserSlice,
   User,
 } from "./types";
-
-// ----------- reducer creator function -----------
-const createReducer =
-  <T extends Slice>(initialState: State[T], handlers: Handlers<T>) =>
-  (state = initialState, action: Action) => {
-    if (handlers.hasOwnProperty(action.type)) {
-      return handlers[action.type](state, action);
-    } else {
-      return state;
-    }
-  };
-// ------------------------------------------------
 
 // ----------- visibilityFilter slice  ------------
 const setVisibilityFilter = (visibilityState: string, action: Action) => {
