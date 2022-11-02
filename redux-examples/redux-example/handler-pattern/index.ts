@@ -1,4 +1,9 @@
+import axios from "axios";
+import { Action, Dispatch } from "redux";
 import store from "./reducer";
+import { State, User } from "./types";
+
+// ------------------- sync -------------------
 
 store.dispatch({
   type: "SET_VISIBILITY_FILTER",
@@ -15,22 +20,33 @@ store.dispatch({
   type: "TOGGLE_TODO",
   id: "1",
 });
+// --------------------------------------------
 
-// const fetchUserCall =
-//   (url: string) => async (dispatch: Dispatch, getState: () => State) => {
-//     dispatch(fetchUsersRequest());
-//     console.log("retrieved from getState(): ", getState()); // test getState()
+// ------------------- async ------------------
+const FETCH_USERS_REQUESTED = "FETCH_USERS_REQUESTED";
+const FETCH_USERS_SUCCEEDED = "FETCH_USERS_SUCCEEDED";
+const FETCH_USERS_FAILED = "FETCH_USERS_FAILED";
+const URL = "https://jsonplaceholder.typicode.com/users";
 
-//     const result = await axios.get(url);
+const apiCall =
+  (url: string) => async (dispatch: Dispatch, getState: () => State) => {
+    dispatch({ type: FETCH_USERS_REQUESTED });
 
-//     if (result.status === 200) {
-//       const users = result.data.map((user: User) => user.id);
-//       dispatch(fetchUsersSuccess(users));
-//       console.log("retrieved from getState(): ", getState()); // test getState()
-//     } else {
-//       dispatch(fetchUsersFailure(result.status));
-//       console.log("retrieved from getState(): ", getState()); // test getState()
-//     }
-//   };
+    const result = await axios.get(url);
 
-console.log(store.getState());
+    if (result.status === 200) {
+      dispatch({ type: FETCH_USERS_SUCCEEDED, payload: result.data });
+      console.log(store.getState());
+    } else {
+      dispatch({
+        type: FETCH_USERS_FAILED,
+        error: result.status.toString(),
+      });
+      console.log(store.getState());
+    }
+  };
+
+const fetchUsers = apiCall(URL);
+
+store.dispatch(fetchUsers as any);
+// ------------------- async ------------------

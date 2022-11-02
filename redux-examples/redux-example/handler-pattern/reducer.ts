@@ -13,8 +13,8 @@ import {
   UserSlice,
   User,
 } from "./types";
-import axios from "axios";
 
+// ----------- reducer creator function -----------
 const createReducer =
   <T extends Slice>(initialState: State[T], handlers: Handlers<T>) =>
   (state = initialState, action: Action) => {
@@ -24,10 +24,12 @@ const createReducer =
       return state;
     }
   };
+// ------------------------------------------------
 
-// Case reducer
-const setVisibilityFilter = (visibilityState: string, action: Action) =>
-  action.filter ?? visibilityState;
+// ----------- visibilityFilter slice  ------------
+const setVisibilityFilter = (visibilityState: string, action: Action) => {
+  return action.filter ?? visibilityState;
+};
 
 // Slice reducer
 const visibilityReducer = createReducer<"visibilityFilter">(
@@ -36,21 +38,18 @@ const visibilityReducer = createReducer<"visibilityFilter">(
     SET_VISIBILITY_FILTER: setVisibilityFilter,
   },
 );
+// ------------------------------------------------
 
-// Case reducer
+// ------------------ todos slice  ----------------
 const addTodo = (todosState: Todo[], action: Action) => {
   const newTodo: Todo = {
     id: action.id ?? DEFAULT_TODO.id,
     text: action.text ?? DEFAULT_TODO.text,
     completed: false,
   };
-
-  const newTodos = todosState.concat(newTodo);
-
-  return newTodos;
+  return todosState.concat(newTodo);
 };
 
-// Case reducer
 const toggleTodo = (todosState: Todo[], action: Action) => {
   const newTodos = updateItemInArray(
     todosState,
@@ -59,11 +58,9 @@ const toggleTodo = (todosState: Todo[], action: Action) => {
       return updateObject<Todo>(todo, { completed: !todo.completed });
     },
   );
-
   return newTodos;
 };
 
-// Case reducer
 const editTodo = (todosState: Todo[], action: Action) => {
   const newTodos = updateItemInArray(
     todosState,
@@ -72,33 +69,32 @@ const editTodo = (todosState: Todo[], action: Action) => {
       return updateObject(todo, { text: action.text });
     },
   );
-
   return newTodos;
 };
 
-// Slice reducer
 const todosReducer = createReducer<"todos">([], {
   ADD_TODO: addTodo,
   TOGGLE_TODO: toggleTodo,
   EDIT_TODO: editTodo,
 });
+// ------------------------------------------------
 
-// Case reducer
+// ------------------ users slice  ----------------
 const fetchUsersRequest = (usersState: UserSlice, action: Action) => {
   return updateObject(usersState, { loading: true });
 };
 
-// Case reducer
 const fetchUsersSuccess = (usersState: UserSlice, action: Action) => {
-  return updateObject(usersState, { users: action.payload, loading: true });
+  return updateObject(usersState, {
+    users: action.payload?.map((user: User) => user.id),
+    loading: true,
+  });
 };
 
-// Case reducer
 const fetchUsersFailure = (usersState: UserSlice, action: Action) => {
   return updateObject(usersState, { error: action.error });
 };
 
-// Slice reducer
 const usersReducer = createReducer<"users">(
   {
     loading: false,
@@ -111,6 +107,7 @@ const usersReducer = createReducer<"users">(
     FETCH_USERS_FAILED: fetchUsersFailure,
   },
 );
+// ------------------------------------------------
 
 // "Root reducer"
 const appReducer = combineReducers({

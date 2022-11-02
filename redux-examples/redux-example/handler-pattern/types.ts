@@ -24,7 +24,7 @@ export interface User {
 
 export interface UserSlice {
   loading: boolean;
-  users: User[];
+  users: User["id"][];
   error: string;
 }
 
