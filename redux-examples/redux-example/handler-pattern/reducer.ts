@@ -3,7 +3,7 @@ import { updateItemInArray, updateObject, createReducer } from "./helpers";
 import thunk from "redux-thunk";
 
 import {
-  Action,
+  SyncAction,
   Todo,
   DEFAULT_TODO,
   DEFAULT_VISIBILITY_FILTER,
@@ -12,7 +12,7 @@ import {
 } from "./types";
 
 // ----------- visibilityFilter slice  ------------
-const setVisibilityFilter = (visibilityState: string, action: Action) => {
+const setVisibilityFilter = (visibilityState: string, action: SyncAction) => {
   return action.filter ?? visibilityState;
 };
 
@@ -26,7 +26,7 @@ const visibilityReducer = createReducer<"visibilityFilter">(
 // ------------------------------------------------
 
 // ------------------ todos slice  ----------------
-const addTodo = (todosState: Todo[], action: Action) => {
+const addTodo = (todosState: Todo[], action: SyncAction) => {
   const newTodo: Todo = {
     id: action.id ?? DEFAULT_TODO.id,
     text: action.text ?? DEFAULT_TODO.text,
@@ -35,7 +35,7 @@ const addTodo = (todosState: Todo[], action: Action) => {
   return todosState.concat(newTodo);
 };
 
-const toggleTodo = (todosState: Todo[], action: Action) => {
+const toggleTodo = (todosState: Todo[], action: SyncAction) => {
   const newTodos = updateItemInArray(
     todosState,
     action.id ?? DEFAULT_TODO.id,
@@ -46,7 +46,7 @@ const toggleTodo = (todosState: Todo[], action: Action) => {
   return newTodos;
 };
 
-const editTodo = (todosState: Todo[], action: Action) => {
+const editTodo = (todosState: Todo[], action: SyncAction) => {
   const newTodos = updateItemInArray(
     todosState,
     action.id ?? DEFAULT_TODO.id,
@@ -65,18 +65,18 @@ const todosReducer = createReducer<"todos">([], {
 // ------------------------------------------------
 
 // ------------------ users slice  ----------------
-const fetchUsersRequest = (usersState: UserSlice, action: Action) => {
+const fetchUsersRequest = (usersState: UserSlice, action: SyncAction) => {
   return updateObject(usersState, { loading: true });
 };
 
-const fetchUsersSuccess = (usersState: UserSlice, action: Action) => {
+const fetchUsersSuccess = (usersState: UserSlice, action: SyncAction) => {
   return updateObject(usersState, {
     users: action.payload?.map((user: User) => user.id),
     loading: true,
   });
 };
 
-const fetchUsersFailure = (usersState: UserSlice, action: Action) => {
+const fetchUsersFailure = (usersState: UserSlice, action: SyncAction) => {
   return updateObject(usersState, { error: action.error });
 };
 

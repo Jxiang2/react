@@ -1,8 +1,10 @@
-import { Action, Handlers, Slice, State } from "./types";
+import { SyncAction, Handlers, Slice, State } from "./types";
+import { ThunkAction, ThunkDispatch } from "redux-thunk";
+import { AnyAction } from "redux";
 
 export const createReducer =
   <T extends Slice>(initialState: State[T], handlers: Handlers<T>) =>
-  (state = initialState, action: Action) => {
+  (state = initialState, action: SyncAction) => {
     if (handlers.hasOwnProperty(action.type)) {
       return handlers[action.type](state, action);
     } else {

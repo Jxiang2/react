@@ -50,7 +50,7 @@ export interface State {
 
 export type Slice = keyof State;
 
-export interface Action {
+export interface SyncAction {
   type: string;
   filter?: string;
   id?: string;
@@ -60,5 +60,5 @@ export interface Action {
 }
 
 export interface Handlers<T extends Slice> {
-  [x: string]: (state: State[T], action: Action) => State[T];
+  [x: string]: (state: State[T], action: SyncAction) => State[T];
 }

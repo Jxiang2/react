@@ -92,3 +92,5 @@ type MyComponentProps = React.ComponentProps<typeof MyComponent>;
 **React-redux workflow:**
 app -> excute bussiness logic -> dispatch action ->
 action handled by reducer -> update redux store (state) -> influence the app
+
+**Terminologies**

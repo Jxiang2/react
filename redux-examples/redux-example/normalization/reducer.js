@@ -1,4 +1,5 @@
 const { combineReducers } = require("redux");
+import { createReducer, generateId } from "./helper";
 
 // ---------- actions.js -----------------
 function addComment(postId, commentText) {
@@ -21,12 +22,12 @@ function addComment(state, action) {
   const { payload } = action;
   const { postId, commentId } = payload;
 
-  // Look up the correct post
+  // Look up the correct post,
+  // this is why we use map for byId instead of array
   const post = state[postId];
 
   return {
     ...state,
-    // Update our Post object with a new "comments" array
     [postId]: {
       ...post,
       comments: post.comments.concat(commentId),
@@ -34,22 +35,24 @@ function addComment(state, action) {
   };
 }
 
-function postsById(state = {}, action) {
-  switch (action.type) {
-    case "ADD_COMMENT":
-      return addComment(state, action);
-    default:
-      return state;
-  }
-}
+const postsByIdReducer = createReducer(
+  {}, // posts.byId
+  {
+    ADD_COMMENT: addComment,
+  },
+);
 
-function allPosts(state = [], action) {
-  // omitted - no work to be done for this example
-}
+const allPostsReducer = createReducer(
+  [], // posts.allIds
+  {
+    // ...
+  },
+);
 
+// posts
 const postsReducer = combineReducers({
-  byId: postsById,
-  allIds: allPosts,
+  byId: postsByIdReducer,
+  allIds: allPostsReducer,
 });
 // ---------------------------------------
 
@@ -68,14 +71,12 @@ function addCommentEntry(state, action) {
   };
 }
 
-function commentsById(state = {}, action) {
-  switch (action.type) {
-    case "ADD_COMMENT":
-      return addCommentEntry(state, action);
-    default:
-      return state;
-  }
-}
+const commentsByIdReducer = createReducer(
+  {}, // comments.byId
+  {
+    ADD_COMMENT: addCommentEntry,
+  },
+);
 
 function addCommentId(state, action) {
   const { payload } = action;
@@ -84,21 +85,21 @@ function addCommentId(state, action) {
   return state.concat(commentId);
 }
 
-function allComments(state = [], action) {
-  switch (action.type) {
-    case "ADD_COMMENT":
-      return addCommentId(state, action);
-    default:
-      return state;
-  }
-}
+const allCommentsReducer = createReducer(
+  [], // comments.allIds
+  {
+    ADD_COMMENT: addCommentId,
+  },
+);
 
+// comments
 const commentsReducer = combineReducers({
-  byId: commentsById,
-  allIds: allComments,
+  byId: commentsByIdReducer,
+  allIds: allCommentsReducer,
 });
 // ---------------------------------------
 
+// state
 module.exports = combineReducers({
   postsReducer,
   commentsReducer,
