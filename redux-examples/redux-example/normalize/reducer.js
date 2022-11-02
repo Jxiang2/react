@@ -99,7 +99,7 @@ const commentsReducer = combineReducers({
 });
 // ---------------------------------------
 
-export default combineReducers({
+module.exports = combineReducers({
   postsReducer,
   commentsReducer,
 });
