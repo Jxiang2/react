@@ -96,6 +96,8 @@ action handled by reducer -> update redux store (state) -> influence the app
 **Types & Terminologies**
 
 ```javascript
+import { ThunkAction } from "redux-thunk";
+
 interface State {
    [x: string]: any;
 }
