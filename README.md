@@ -93,4 +93,60 @@ type MyComponentProps = React.ComponentProps<typeof MyComponent>;
 app -> excute bussiness logic -> dispatch action ->
 action handled by reducer -> update redux store (state) -> influence the app
 
-**Terminologies**
+**Types & Terminologies**
+
+```javascript
+interface State {
+   [x: string]: any;
+}
+
+interface SyncAction<T = string> {
+   type: T;
+   payload: object;
+}
+
+type AsyncAction = ThunkAction<
+   void,
+   State,
+   unknown,
+   SyncAction
+>;
+
+type Reducer<
+   S extends State,
+   A extends SyncAction
+> = (
+state: S | undefined,
+action: A,
+) => S;
+
+// handler pattern
+export interface Handlers<S extends keyof State> {
+   [x: string]: (state: State[S];
+   action: SyncAction) => State[S];
+}
+
+type Dispatch = (a: SyncAction) => SyncAction;
+
+type AsyncDispatch = ThunkDispatch<
+   State,
+   unknown,
+   SyncAction
+>;
+
+interface Store {
+   dispatch: Dispatch;
+   getState: () => State;
+   subscribe: (listener: () => void) => () => void;
+   replaceReducer: (reducer: Reducer) => void;
+}
+
+interface MiddleWareApi {
+   dispatch: Dispatch;
+   getState: () => State;
+}
+
+// A middleware is a higher-order function that takes a dispatch function to return a new dispatch function. It often turns async actions into actions.
+type Middleware = (api: MiddleWareApi)=>
+((next: Dispatch) => Dispatch);
+```
