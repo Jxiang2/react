@@ -92,19 +92,5 @@ const reducer = (state = initialState, action) => {
  * setup store
  */
 const store = createStore(reducer, applyMiddleware(thunk));
-
-const createThunkAction = (options) => () => apiCall(options);
-const actions = bindActionCreators(
-  {
-    fetchUsers: createThunkAction(URL),
-  },
-  store.dispatch,
-);
-
-/**
- * 2 ways to invoke thunk functions
- */
-actions.fetchUsers();
-
 const fetchUsers = apiCall(URL);
 store.dispatch(fetchUsers);
