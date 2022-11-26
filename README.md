@@ -65,7 +65,6 @@ type MyComponentProps = React.ComponentProps<typeof MyComponent>;
 ```
 
 <br/>
-
 ### 2. React & Redux:
 
 **Redux**
@@ -138,3 +137,39 @@ interface MiddleWareApi {
 // A middleware is a higher-order function that takes a dispatch function to return a new dispatch function. It often turns async actions into actions.
 type Middleware = (api: MiddleWareApi) => (next: Dispatch) => Dispatch;
 ```
+
+<br/>
+### 2. React Lifecycle Methods
+
+**Lifecycle**
+
+1. **In React, components go through a lifecycle of events:**
+
+- Mounting (adding nodes to the DOM)
+- Updating (altering existing nodes in the DOM)
+- Unmounting (removing nodes from the DOM)
+
+2. **Mounting**: The mounting phase refers to the phase during which a component is created and inserted to the DOM.
+
+- `constructor()`: The constructor method is called before the component is mounted to the DOM. In most cases, you would initialize state and bind event handlers methods within the constructor method.
+
+```javascript
+  const MyComponent extends React.Component {
+    constructor(props) {
+    super(props)
+      this.state = {
+        points: 0
+      }
+    this.handlePoints = this.handlePoints.bind(this)
+  }
+}
+```
+
+- `render()`: After render is called, the component is mounted to the DOM
+- `componentDidMount()`: This function is invoked immediately after the component is mounted to the DOM.
+
+  - You would use the componentDidMount lifecycle method to grab a DOM node from the component tree immediately after it’s mounted.
+  - If you also want to make network requests as soon as the component is mounted to the DOM, this is a perfect place to do so
+  - You could also set up subscriptions such as timers. Just make sure to cancel the subscription when the component unmounts.
+
+3. **Updating**
