@@ -65,6 +65,7 @@ type MyComponentProps = React.ComponentProps<typeof MyComponent>;
 ```
 
 <br/>
+
 ### 2. React & Redux:
 
 **Redux**
@@ -139,7 +140,8 @@ type Middleware = (api: MiddleWareApi) => (next: Dispatch) => Dispatch;
 ```
 
 <br/>
-### 2. React Lifecycle Methods
+
+### 3. React Lifecycle Methods
 
 **Lifecycle**
 
