@@ -174,4 +174,13 @@ type Middleware = (api: MiddleWareApi) => (next: Dispatch) => Dispatch;
   - If you also want to make network requests as soon as the component is mounted to the DOM, this is a perfect place to do so
   - You could also set up subscriptions such as timers. Just make sure to cancel the subscription when the component unmounts.
 
-3. **Updating**
+3. **Updating**: Whenever a change is made to the state or props of a React component, the component is rerendered. In simple terms, the component is updated. This is the updating phase of the React component lifecycle.
+
+- `shouldComponentUpdate()`:
+- `render()`:
+- `getSnapshotBeforeUpdate()`:
+- `componentDidUpdate()`:
+
+4. **Unmounting**:
+
+- `componentWillUnmount()`
