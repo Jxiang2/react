@@ -1,5 +1,5 @@
 import React from "react";
-import MyDataTable from "./components/MyDataTable";
+import MyDataTable from "./components/DataTable";
 import SimpleDropdown from "./components/SimpleDropdown";
 import LifeCycle from "./components/LifeCycleDemo";
 import UsePreviousDemo from "./components/UsePrevDemo";
@@ -25,15 +25,15 @@ function App() {
         />
       </div>
 
-      <LifeCycle />
+      {/* <LifeCycle /> */}
 
-      <UsePreviousDemo />
+      {/* <UsePreviousDemo /> */}
 
-      <Parent />
+      {/* <Parent /> */}
 
-      <MemoDemo />
+      {/* <MemoDemo /> */}
 
-      <TimerWrapper />
+      {/* <TimerWrapper /> */}
     </div>
   );
 }
