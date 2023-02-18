@@ -1,6 +1,13 @@
 import React from "react";
 import { Heading } from "../App";
 
+type Options = {
+  title?: string;
+  fname?: string;
+  lname?: string;
+  age?: number;
+};
+
 type PropsAreEqual<Props> = (
   prevProps: Readonly<Props>,
   nextProps: Readonly<Props>,
@@ -10,24 +17,28 @@ type PropsFromInputComponent = React.ComponentProps<typeof Heading>;
 
 const withSampleHoC = <P extends PropsFromInputComponent>(
   InputComponent: React.ComponentType<P>,
-  propsAreEqual?: PropsAreEqual<P> | false,
+  options: Options,
+  propsAreEqual?: PropsAreEqual<P>,
 ): React.ComponentType<P> => {
+  let toShow: string | undefined = undefined;
+  if (options.fname && options.lname && options.age && options.title)
+    toShow = `${options.title}-${options.fname}${options.lname}-${options.age}`;
+
   function WithSampleHoc(props: P) {
     const { title } = props;
     return (
-      <>
-        <div>HoC {`${title}`}</div>
+      <div>
+        <div>{toShow ? toShow : title}</div>
         <InputComponent {...props} />
-      </>
+      </div>
     );
   }
 
   WithSampleHoc.displayName = `withSampleHoc(${InputComponent.name})`;
 
-  let OutputComponent =
-    propsAreEqual === false
-      ? WithSampleHoc
-      : React.memo(WithSampleHoc, propsAreEqual);
+  let OutputComponent = propsAreEqual
+    ? React.memo(WithSampleHoc, propsAreEqual)
+    : WithSampleHoc;
 
   return OutputComponent as typeof WithSampleHoc;
 };

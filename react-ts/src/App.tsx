@@ -120,7 +120,7 @@ const App = ({ defaultProp }: AppProps): React.ReactElement => {
   }, [addTodo]);
 
   // using hoc with props
-  const EnhancedHeading = withSampleHoC(Heading, false);
+  const EnhancedHeading = withSampleHoC(Heading, {});
 
   console.log(EnhancedHeading.displayName); // debug
   console.log(EnhancedHeading.name); // debug
