@@ -36,13 +36,13 @@ const apiCall =
 
     if (result.status === 200) {
       dispatch({ type: FETCH_USERS_SUCCEEDED, payload: result.data });
-      console.log(store.getState());
+      console.log(getState());
     } else {
       dispatch({
         type: FETCH_USERS_FAILED,
         error: result.status.toString(),
       });
-      console.log(store.getState());
+      console.log(getState());
     }
   };
 

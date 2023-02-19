@@ -34,14 +34,6 @@ export interface Todo {
   completed: boolean;
 }
 
-export const DEFAULT_TODO: Todo = {
-  id: "123456",
-  text: "todo",
-  completed: false,
-};
-
-export const DEFAULT_VISIBILITY_FILTER = "GLOBAL";
-
 export interface State {
   visibilityFilter: string;
   todos: Todo[];

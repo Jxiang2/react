@@ -2,16 +2,12 @@ import { combineReducers, createStore, applyMiddleware } from "redux";
 import { updateItemInArray, updateObject, createReducer } from "./helpers";
 import thunk from "redux-thunk";
 
-import {
-  SyncAction,
-  Todo,
-  DEFAULT_TODO,
-  DEFAULT_VISIBILITY_FILTER,
-  UserSlice,
-  User,
-} from "./types";
+import { SyncAction, Todo, UserSlice, User } from "./types";
 
 // ----------- visibilityFilter slice  ------------
+
+const DEFAULT_VISIBILITY_FILTER = "GLOBAL";
+
 const setVisibilityFilter = (visibilityState: string, action: SyncAction) => {
   return action.filter ?? visibilityState;
 };
@@ -26,6 +22,12 @@ const visibilityReducer = createReducer<"visibilityFilter">(
 // ------------------------------------------------
 
 // ------------------ todos slice  ----------------
+const DEFAULT_TODO: Todo = {
+  id: "123456",
+  text: "todo",
+  completed: false,
+};
+
 const addTodo = (todosState: Todo[], action: SyncAction) => {
   const newTodo: Todo = {
     id: action.id ?? DEFAULT_TODO.id,
@@ -57,6 +59,7 @@ const editTodo = (todosState: Todo[], action: SyncAction) => {
   return newTodos;
 };
 
+// Slice reducer
 const todosReducer = createReducer<"todos">([], {
   ADD_TODO: addTodo,
   TOGGLE_TODO: toggleTodo,
@@ -80,6 +83,7 @@ const fetchUsersFailure = (usersState: UserSlice, action: SyncAction) => {
   return updateObject(usersState, { error: action.error });
 };
 
+// Slice reducer
 const usersReducer = createReducer<"users">(
   {
     loading: false,

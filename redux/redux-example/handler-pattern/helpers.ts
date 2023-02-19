@@ -14,7 +14,10 @@ export function updateObject<T extends {}>(
   oldObject: T,
   newValues: Partial<T>,
 ) {
-  return Object.assign({}, oldObject, newValues);
+  return {
+    ...oldObject,
+    ...newValues,
+  };
 }
 
 export function updateItemInArray<T extends { id: string }>(
@@ -33,3 +36,17 @@ export function updateItemInArray<T extends { id: string }>(
 
   return updatedItems;
 }
+
+// test;
+// const input = {
+//   id: "123456",
+//   text: "todo",
+//   completed: { id: 1, flag: false },
+// };
+
+// const output = updateObject(input, {
+//   completed: { ...input.completed, flag: !input.completed.flag },
+// });
+
+// console.log(input);
+// console.log(output);
