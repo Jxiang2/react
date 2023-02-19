@@ -1,10 +1,11 @@
-const { combineReducers } = require("redux");
-import { createReducer, generateId } from "./helper";
+const { combineReducers, createStore, applyMiddleware } = require("redux");
+const { createLogger } = require("redux-logger");
+const { createReducer, generateId } = require("./helper");
 
 // ---------- actions.js -----------------
-function addComment(postId, commentText) {
+function addCommentAction(postId, commentText) {
   // Generate a unique ID for this comment
-  const commentId = generateId("comment");
+  const commentId = generateId(postId);
 
   return {
     type: "ADD_COMMENT",
@@ -30,7 +31,7 @@ function addComment(state, action) {
     ...state,
     [postId]: {
       ...post,
-      comments: post.comments.concat(commentId),
+      comments: (post?.comments || []).concat(commentId),
     },
   };
 }
@@ -42,7 +43,7 @@ const postsByIdReducer = createReducer(
   },
 );
 
-const allPostsReducer = createReducer(
+const allPostIdsReducer = createReducer(
   [], // posts.allIds
   {
     // ...
@@ -52,7 +53,7 @@ const allPostsReducer = createReducer(
 // posts
 const postsReducer = combineReducers({
   byId: postsByIdReducer,
-  allIds: allPostsReducer,
+  allIds: allPostIdsReducer,
 });
 // ---------------------------------------
 
@@ -85,7 +86,7 @@ function addCommentId(state, action) {
   return state.concat(commentId);
 }
 
-const allCommentsReducer = createReducer(
+const allCommentIdsReducer = createReducer(
   [], // comments.allIds
   {
     ADD_COMMENT: addCommentId,
@@ -95,12 +96,20 @@ const allCommentsReducer = createReducer(
 // comments
 const commentsReducer = combineReducers({
   byId: commentsByIdReducer,
-  allIds: allCommentsReducer,
+  allIds: allCommentIdsReducer,
 });
 // ---------------------------------------
 
-// state
-module.exports = combineReducers({
+// store
+const reducer = combineReducers({
   postsReducer,
   commentsReducer,
 });
+
+const logger = createLogger();
+const store = createStore(reducer, applyMiddleware(logger));
+
+store.dispatch(addCommentAction("1", "hello"));
+
+const a = store.getState().commentsReducer.byId;
+console.log(a);

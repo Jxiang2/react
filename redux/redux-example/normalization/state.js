@@ -18,23 +18,23 @@ module.exports = {
     byId: {
       comment1: {
         id: "comment1",
-        comment: ".....",
+        text: ".....",
       },
       comment2: {
         id: "comment2",
-        comment: ".....",
+        text: ".....",
       },
       comment3: {
         id: "comment3",
-        comment: ".....",
+        text: ".....",
       },
       comment4: {
         id: "comment4",
-        comment: ".....",
+        text: ".....",
       },
       comment5: {
         id: "comment5",
-        comment: ".....",
+        text: ".....",
       },
     },
     allIds: ["comment1", "comment2", "comment3", "comment4", "comment5"],

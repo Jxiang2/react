@@ -1,4 +1,4 @@
-export const createReducer =
+const createReducer =
   (initialState, handlers) =>
   (state = initialState, action) => {
     if (handlers.hasOwnProperty(action.type)) {
@@ -8,4 +8,7 @@ export const createReducer =
     }
   };
 
-export const generateId = (text) => text + Math.random() * 10;
+let commentId = 1;
+const generateId = (postId) => `post${postId}-comment${commentId++}`;
+
+module.exports = { createReducer, generateId };
