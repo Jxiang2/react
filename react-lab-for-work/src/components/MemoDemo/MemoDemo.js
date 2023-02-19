@@ -26,7 +26,7 @@ export default function MemoDemo() {
   // create the {color}, only changes when color changes
   const params = useMemo(() => ({ color }), [color]);
 
-  console.log(`App rendered ${appRenderIndex}`);
+  // console.log(`App rendered ${appRenderIndex}`);
 
   return (
     <div style={{ zoom: 2, marginTop: "50px" }}>

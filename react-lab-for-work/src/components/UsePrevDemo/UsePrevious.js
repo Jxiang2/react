@@ -14,9 +14,8 @@ function usePrevious(value) {
 export default function UsePreviousDemo() {
   const [count, setCount] = useState(0);
 
-  // 👇 look here
   const prevCount = usePrevious(count);
-  console.log("rendered: ", prevCount); //test
+  // console.log("rendered: ", prevCount);
   return (
     <div style={{ marginTop: "50px" }}>
       <h1>
