@@ -1,8 +1,11 @@
-import { SyncAction, Handlers, Slice, State } from "./types";
+import { Action, Store } from "redux";
+import { ThunkDispatch, ThunkAction } from "redux-thunk";
+import { Handlers, Slice, State } from "./types";
 
+// Redux
 export const createReducer =
   <T extends Slice>(initialState: State[T], handlers: Handlers<T>) =>
-  (state = initialState, action: SyncAction) => {
+  (state = initialState, action: Action) => {
     if (handlers.hasOwnProperty(action.type)) {
       return handlers[action.type](state, action);
     } else {
@@ -10,6 +13,12 @@ export const createReducer =
     }
   };
 
+export const useDispatchThunk =
+  (store: Store) => (thunk: ThunkAction<void, State, unknown, Action>) =>
+    (store.dispatch as ThunkDispatch<State, unknown, Action>)(thunk);
+// ------------------------------------------------
+
+// Immutable update
 export function updateObject<T extends {}>(
   oldObject: T,
   newValues: Partial<T>,
@@ -36,17 +45,4 @@ export function updateItemInArray<T extends { id: string }>(
 
   return updatedItems;
 }
-
-// test;
-// const input = {
-//   id: "123456",
-//   text: "todo",
-//   completed: { id: 1, flag: false },
-// };
-
-// const output = updateObject(input, {
-//   completed: { ...input.completed, flag: !input.completed.flag },
-// });
-
-// console.log(input);
-// console.log(output);
+// ------------------------------------------------

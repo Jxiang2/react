@@ -8,7 +8,11 @@ const createReducer =
     }
   };
 
-let commentId = 1;
-const generateId = (postId) => `post${postId}-comment${commentId++}`;
+const generateommentId = (postId) => {
+  return `${postId}.${(Math.random() * 10).toFixed(0)}`;
+};
 
-module.exports = { createReducer, generateId };
+module.exports = {
+  createReducer,
+  generateommentId,
+};

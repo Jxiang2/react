@@ -2,13 +2,25 @@ import { combineReducers, createStore, applyMiddleware } from "redux";
 import { updateItemInArray, updateObject, createReducer } from "./helpers";
 import thunk from "redux-thunk";
 
-import { SyncAction, Todo, UserSlice, User } from "./types";
+import {
+  Todo,
+  UserSlice,
+  User,
+  visibilityAction,
+  TodoAction,
+  UserAction,
+  TodoSlice,
+  VisibilitySlice,
+} from "./types";
 
 // ----------- visibilityFilter slice  ------------
 
 const DEFAULT_VISIBILITY_FILTER = "GLOBAL";
 
-const setVisibilityFilter = (visibilityState: string, action: SyncAction) => {
+const setVisibilityFilter = (
+  visibilityState: VisibilitySlice,
+  action: visibilityAction,
+) => {
   return action.filter ?? visibilityState;
 };
 
@@ -28,7 +40,7 @@ const DEFAULT_TODO: Todo = {
   completed: false,
 };
 
-const addTodo = (todosState: Todo[], action: SyncAction) => {
+const addTodo = (todosState: TodoSlice, action: TodoAction) => {
   const newTodo: Todo = {
     id: action.id ?? DEFAULT_TODO.id,
     text: action.text ?? DEFAULT_TODO.text,
@@ -37,7 +49,7 @@ const addTodo = (todosState: Todo[], action: SyncAction) => {
   return todosState.concat(newTodo);
 };
 
-const toggleTodo = (todosState: Todo[], action: SyncAction) => {
+const toggleTodo = (todosState: TodoSlice, action: TodoAction) => {
   const newTodos = updateItemInArray(
     todosState,
     action.id ?? DEFAULT_TODO.id,
@@ -48,7 +60,7 @@ const toggleTodo = (todosState: Todo[], action: SyncAction) => {
   return newTodos;
 };
 
-const editTodo = (todosState: Todo[], action: SyncAction) => {
+const editTodo = (todosState: TodoSlice, action: TodoAction) => {
   const newTodos = updateItemInArray(
     todosState,
     action.id ?? DEFAULT_TODO.id,
@@ -68,19 +80,19 @@ const todosReducer = createReducer<"todos">([], {
 // ------------------------------------------------
 
 // ------------------ users slice  ----------------
-const fetchUsersRequest = (usersState: UserSlice, action: SyncAction) => {
+const fetchUsersRequest = (usersState: UserSlice, action: UserAction) => {
   return updateObject(usersState, { loading: true });
 };
 
-const fetchUsersSuccess = (usersState: UserSlice, action: SyncAction) => {
+const fetchUsersFailure = (usersState: UserSlice, action: UserAction) => {
+  return updateObject(usersState, { error: action.error });
+};
+
+const fetchUsersSuccess = (usersState: UserSlice, action: UserAction) => {
   return updateObject(usersState, {
     users: action.payload?.map((user: User) => user.id),
     loading: true,
   });
-};
-
-const fetchUsersFailure = (usersState: UserSlice, action: SyncAction) => {
-  return updateObject(usersState, { error: action.error });
 };
 
 // Slice reducer
@@ -98,13 +110,11 @@ const usersReducer = createReducer<"users">(
 );
 // ------------------------------------------------
 
-// "Root reducer"
-const appReducer = combineReducers({
-  visibilityFilter: visibilityReducer,
-  todos: todosReducer,
-  users: usersReducer,
-});
-
-const store = createStore(appReducer, applyMiddleware(thunk));
-
-export default store;
+export default createStore(
+  combineReducers({
+    visibilityFilter: visibilityReducer,
+    todos: todosReducer,
+    users: usersReducer,
+  }),
+  applyMiddleware(thunk),
+);

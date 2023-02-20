@@ -1,8 +1,8 @@
 import axios from "axios";
-import { Action, AnyAction, Dispatch } from "redux"; // NOTE: AnyAction !== any, instead, it's {type: T, [x: string]: any}
+import { Dispatch } from "redux";
 import store from "./reducer";
 import { State } from "./types";
-import { ThunkAction, ThunkDispatch } from "redux-thunk";
+import { useDispatchThunk } from "./helpers";
 
 // ------------------- sync -------------------
 store.dispatch({
@@ -28,7 +28,9 @@ const FETCH_USERS_SUCCEEDED = "FETCH_USERS_SUCCEEDED";
 const FETCH_USERS_FAILED = "FETCH_USERS_FAILED";
 const URL = "https://jsonplaceholder.typicode.com/users";
 
-const apiCall =
+const dispatchThunk = useDispatchThunk(store);
+
+const createFetchUserAction =
   (url: string) => async (dispatch: Dispatch, getState: () => State) => {
     dispatch({ type: FETCH_USERS_REQUESTED });
 
@@ -46,10 +48,7 @@ const apiCall =
     }
   };
 
-const fetchUsers = apiCall(URL);
-
-const dispatchThunk = (thunk: ThunkAction<void, State, unknown, Action>) =>
-  (store.dispatch as ThunkDispatch<State, unknown, Action>)(thunk);
-
+// "(dispatch: Dispatch, getState: () => State) => Promise<void>" signature is a "thunk"
+const fetchUsers = createFetchUserAction(URL);
 dispatchThunk(fetchUsers);
 // --------------------------------------------

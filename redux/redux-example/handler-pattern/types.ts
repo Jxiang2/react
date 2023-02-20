@@ -1,3 +1,5 @@
+import { Action } from "redux";
+
 export interface User {
   id: number;
   name: string;
@@ -22,16 +24,21 @@ export interface User {
   };
 }
 
-export interface UserSlice {
-  loading: boolean;
-  users: User["id"][];
-  error: string;
-}
+// State types
+export type VisibilitySlice = string;
 
 export interface Todo {
   id: string;
   text: string;
   completed: boolean;
+}
+
+export type TodoSlice = Array<Todo>;
+
+export interface UserSlice {
+  loading: boolean;
+  users: User["id"][];
+  error: string;
 }
 
 export interface State {
@@ -41,16 +48,25 @@ export interface State {
 }
 
 export type Slice = keyof State;
+// --------------------------
 
-export interface SyncAction {
-  type: string;
+// Action types
+export interface visibilityAction extends Action {
   filter?: string;
+}
+
+export interface TodoAction extends Action {
   id?: string;
   text?: string;
+}
+
+export interface UserAction extends Action {
+  type: string;
   payload?: User[];
   error?: string;
 }
 
 export interface Handlers<T extends Slice> {
-  [x: string]: (state: State[T], action: SyncAction) => State[T];
+  [x: string]: (state: State[T], action: Action) => State[T];
 }
+// --------------------------
