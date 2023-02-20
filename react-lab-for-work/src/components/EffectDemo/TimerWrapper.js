@@ -25,7 +25,7 @@ function Timer() {
 
     // timmerContent will be subscribed and run every 1000 ms
     function timmerContent() {
-      // console.log("Timer id: ", timerId);
+      console.log("Timer id: ", timerId);
       setCount((count) => count + 1);
     }
 
@@ -34,7 +34,7 @@ function Timer() {
     }, 1000);
 
     return () => {
-      // console.log("Clean up old timer");
+      console.log("Clean up old timer");
       clearInterval(timer);
     };
   }, [triggerEffect]);

@@ -11,22 +11,25 @@ function SimpleDropdown({ text, buttonStyle, data, handleSelectItem }) {
     setIsOpen(!isOpen);
   }, [isOpen]);
 
-  const handleCloseDropdown = useCallback((e) => {
-    if (e.path[0] !== btnRef.current) {
-      setIsOpen(false);
-    }
-  }, []);
+  const handleCloseDropdown = useCallback(
+    (e) => {
+      if (isOpen === true && e.path[0] !== btnRef.current) {
+        setIsOpen(false);
+      }
+    },
+    [isOpen],
+  );
 
   const handleClickItem = useCallback(
     (e) => {
       handleSelectItem(e.target.value);
+      setIsOpen(false);
     },
     [handleSelectItem],
   );
 
   useEffect(() => {
     document.body.addEventListener("click", handleCloseDropdown);
-
     return () => {
       document.body.removeEventListener("click", handleCloseDropdown);
     };
