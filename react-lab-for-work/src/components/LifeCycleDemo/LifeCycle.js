@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-
+import axios from "axios";
 export default class LifeCycle extends Component {
   state = {
     count: 1,
@@ -20,12 +20,14 @@ export default class LifeCycle extends Component {
 
   getStarWarCharacter = (id) => {
     this.setState({ disableButtons: true });
-    fetch(`https://swapi.dev/api/people/${id}`)
-      .then((res) => res.json())
-      .then((data) => {
+    axios
+      .get(`https://swapi.dev/api/people/${id}`)
+      .then((res) => {
+        const { data } = res;
         this.setState({ character: data });
         this.setState({ disableButtons: false });
-      });
+      })
+      .catch((err) => console.log(err));
   };
 
   componentDidMount() {
