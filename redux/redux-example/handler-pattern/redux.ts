@@ -1,7 +1,6 @@
 import { combineReducers, createStore, applyMiddleware } from "redux";
 import { updateItemInArray, updateObject, createReducer } from "./helpers";
 import thunk from "redux-thunk";
-
 import {
   Todo,
   UserSlice,
@@ -14,7 +13,6 @@ import {
 } from "./types";
 
 // ----------- visibilityFilter slice  ------------
-
 const DEFAULT_VISIBILITY_FILTER = "GLOBAL";
 
 const setVisibilityFilter = (

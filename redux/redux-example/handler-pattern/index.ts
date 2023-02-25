@@ -1,6 +1,6 @@
 import axios from "axios";
 import { Dispatch } from "redux";
-import store from "./reducer";
+import store from "./redux";
 import { State } from "./types";
 import { useDispatchThunk } from "./helpers";
 
