@@ -1,8 +1,9 @@
 import axios from "axios";
-import { Dispatch } from "redux";
+import { Action, Dispatch } from "redux";
 import store from "./redux";
-import { State } from "./types";
+import { State, UserAction } from "./types";
 import { useDispatchThunk } from "./helpers";
+import { ThunkAction } from "redux-thunk";
 
 // ------------------- sync -------------------
 store.dispatch({
@@ -30,8 +31,10 @@ const URL = "https://jsonplaceholder.typicode.com/users";
 
 const dispatchThunk = useDispatchThunk(store);
 
-const createFetchUserAction =
-  (url: string) => async (dispatch: Dispatch, getState: () => State) => {
+const createFetchUserAction = (
+  url: string,
+): ThunkAction<void, State, unknown, UserAction> =>
+  async function (dispatch: Dispatch, getState: () => State) {
     dispatch({ type: FETCH_USERS_REQUESTED });
 
     const result = await axios.get(url);
