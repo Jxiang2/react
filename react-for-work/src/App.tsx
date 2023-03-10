@@ -29,6 +29,7 @@ function App() {
         <Suspense fallback={<h1>Loading...</h1>}>
           <Routes>
             <Route path="/datatable" element={<MyDataTable />} />
+            <Route path="/" element={<MyDataTable />} />
             <Route
               path="/simpledropdown"
               element={
