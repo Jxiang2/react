@@ -1,5 +1,10 @@
 import React, { useState, useEffect, useRef } from "react";
 
+/**
+ * A trick to render previous value passed to usePrevious
+ * @param {any} value
+ * @returns
+ */
 function usePrevious(value) {
   const ref = useRef();
 
@@ -19,7 +24,6 @@ export default function UsePreviousDemo() {
   return (
     <div style={{ marginTop: "50px" }}>
       <h1>
-        {" "}
         Now: {count}, before: {prevCount}{" "}
       </h1>
       <button onClick={() => setCount(count + 1)}>increment</button>
