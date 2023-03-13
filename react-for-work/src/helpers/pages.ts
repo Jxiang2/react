@@ -3,12 +3,6 @@ import { lazy } from "react";
 export const MyDataTable = lazy(
   () => import("components/MyDataTable" /* webpackChunkName: "MyDataTable" */),
 );
-export const SimpleDropdown = lazy(
-  () =>
-    import(
-      "components/SimpleDropdown" /* webpackChunkName: "SimpleDropdown" */
-    ),
-);
 export const LifeCycle = lazy(
   () =>
     import("components/LifeCycleDemo" /* webpackChunkName: "LifeCycleDemo" */),
