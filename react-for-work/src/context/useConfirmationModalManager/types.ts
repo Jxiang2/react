@@ -6,7 +6,7 @@ export type ConfirmationModalPayload = {
   content: string;
   handleConfirm: ModalCallback;
 };
-export type ConfirmationModalHandlers = {
+type ConfirmationModalHandlers = {
   handlers: {
     openModal: (payload: ConfirmationModalPayload) => void;
     closeModal: () => void;

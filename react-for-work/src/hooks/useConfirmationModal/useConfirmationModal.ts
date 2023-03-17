@@ -6,7 +6,9 @@ import {
 
 export default function useConfirmationModal() {
   const {
-    confirmationModal: { handlers },
+    utilities: {
+      confirmationModal: { handlers },
+    },
   } = useAppContext();
 
   const getConfirmation = ({

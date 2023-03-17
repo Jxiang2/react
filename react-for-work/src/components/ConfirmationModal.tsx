@@ -3,7 +3,9 @@ import { useAppContext } from "../context/context";
 
 export function ConfirmationModal() {
   const {
-    confirmationModal: { title, content, handleConfirm, handlers, isOpen },
+    utilities: {
+      confirmationModal: { title, content, handleConfirm, handlers, isOpen },
+    },
   } = useAppContext();
 
   function handleCancel() {

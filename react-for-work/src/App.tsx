@@ -16,7 +16,9 @@ function App() {
   return (
     <AppContext.Provider
       value={{
-        confirmationModal: useConfirmationModalManager(),
+        utilities: {
+          confirmationModal: useConfirmationModalManager(),
+        },
       }}
     >
       <BrowserRouter>

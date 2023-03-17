@@ -6,7 +6,10 @@ import {
 import { AppContextStates } from "./types";
 
 export const AppContext = createContext<AppContextStates>({
-  [CONFIRMATION_MODAL_KEY]: CONFIRMATION_MODAL_INITIAL_STATE,
+  utilities: {
+    [CONFIRMATION_MODAL_KEY]: CONFIRMATION_MODAL_INITIAL_STATE,
+    // Other app-level utilities keys ...
+  },
   // Other app-level keys ...
 });
 

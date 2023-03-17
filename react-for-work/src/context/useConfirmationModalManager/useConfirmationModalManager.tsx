@@ -9,7 +9,7 @@ import {
 
 const confirmationModalReducer = (
   state: ConfirmationModalState,
-  action: Action<"confirmationModal">,
+  action: Action<"utilities", "confirmationModal">,
 ): ConfirmationModalState => {
   switch (action.type) {
     case OPEN_CONFIRMATION_MODAL:
