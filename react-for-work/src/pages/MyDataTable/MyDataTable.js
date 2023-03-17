@@ -1,7 +1,7 @@
 import React, { useState, useCallback, useMemo } from "react";
 import DataTable from "react-data-table-component";
 import differenceBy from "lodash/differenceBy";
-
+import useConfirmationModal from "hooks/useConfirmationModal/useConfirmationModal";
 const columns = [
   {
     name: "Title",
@@ -51,8 +51,6 @@ export default function MyDataTable() {
   const [toggleCleared, setToggleCleared] = useState(false);
   const [data, setData] = useState(testData);
 
-  console.log(data);
-
   const handleRowSelected = useCallback((state) => {
     setSelectedRows(state.selectedRows);
   }, []);
@@ -66,16 +64,41 @@ export default function MyDataTable() {
     return <button onClick={handleDelete}>Delete</button>;
   }, [handleDelete]);
 
+  const { getConfirmation } = useConfirmationModal();
+
+  // confirmation modal demo
+  async function handleConfirm() {
+    const confirmationPromise = getConfirmation({
+      title: "test",
+      content: "dummy confirmation",
+    });
+
+    console.log(confirmationPromise);
+    const confirmation = await confirmationPromise;
+    console.log(confirmation);
+    if (confirmation === false) {
+      return;
+    }
+
+    // mock response
+    console.log("Successfully confirmed!");
+  }
+
   return (
-    <DataTable
-      title="Table"
-      columns={columns}
-      data={data}
-      selectableRows
-      contextActions={contextActions}
-      onSelectedRowsChange={handleRowSelected}
-      clearSelectedRows={toggleCleared}
-      pagination
-    />
+    <>
+      <DataTable
+        title="Table"
+        columns={columns}
+        data={data}
+        selectableRows
+        contextActions={contextActions}
+        onSelectedRowsChange={handleRowSelected}
+        clearSelectedRows={toggleCleared}
+        pagination
+      />
+
+      {/* confirmation modal demo */}
+      <button onClick={handleConfirm}>test confirmation modal</button>
+    </>
   );
 }
