@@ -47,10 +47,8 @@ function App() {
           </Suspense>
         </main>
 
-        <footer>
-          {/* globally accessible confirmation modal */}
-          <ConfirmationModal />
-        </footer>
+        {/* globally accessible confirmation modal */}
+        <ConfirmationModal />
       </BrowserRouter>
     </AppContext.Provider>
   );

@@ -69,8 +69,9 @@ export default function MyDataTable() {
   // confirmation modal demo
   async function handleConfirm() {
     const confirmationPromise = getConfirmation({
-      title: "test",
-      content: "dummy confirmation",
+      title: "Modal Title",
+      content:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
     });
 
     console.log(confirmationPromise);

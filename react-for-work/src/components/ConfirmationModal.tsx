@@ -1,6 +1,16 @@
 import React from "react";
 import { useAppContext } from "../context/context";
-
+import {
+  Background,
+  Container,
+  Header,
+  Title,
+  Body,
+  Actions,
+  CancelBtn,
+  CloseBtn,
+  ConfirmBtn,
+} from "./styles";
 export function ConfirmationModal() {
   const {
     utilities: {
@@ -15,16 +25,22 @@ export function ConfirmationModal() {
 
   if (isOpen) {
     return (
-      <div
-        style={{
-          backgroundColor: "red",
-        }}
-      >
-        <h1>{title}</h1>
-        <p>{content}</p>
-        <button onClick={handleCancel}>cancel</button>
-        <button onClick={() => handleConfirm(true)}>confirm</button>
-      </div>
+      <Background>
+        <Container>
+          <Header>
+            <CloseBtn onClick={handleCancel}> X </CloseBtn>
+          </Header>
+
+          <Title>{title}</Title>
+
+          <Body>{content}</Body>
+
+          <Actions>
+            <CancelBtn onClick={handleCancel}>Cancel</CancelBtn>
+            <ConfirmBtn onClick={() => handleConfirm(true)}>Confirm</ConfirmBtn>
+          </Actions>
+        </Container>
+      </Background>
     );
   }
   return null;
