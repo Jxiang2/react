@@ -1,7 +1,6 @@
 import React, { useState, useCallback, useMemo } from "react";
 import DataTable from "react-data-table-component";
 import differenceBy from "lodash/differenceBy";
-import useConfirmationModal from "hooks/useConfirmationModal/useConfirmationModal";
 const columns = [
   {
     name: "Title",
@@ -64,27 +63,6 @@ export default function MyDataTable() {
     return <button onClick={handleDelete}>Delete</button>;
   }, [handleDelete]);
 
-  const { getConfirmation } = useConfirmationModal();
-
-  // confirmation modal demo
-  async function handleConfirm() {
-    const confirmationPromise = getConfirmation({
-      title: "Modal Title",
-      content:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
-    });
-
-    console.log(confirmationPromise);
-    const confirmation = await confirmationPromise;
-    console.log(confirmation);
-    if (confirmation === false) {
-      return;
-    }
-
-    // mock response
-    console.log("Successfully confirmed!");
-  }
-
   return (
     <>
       <DataTable
@@ -97,9 +75,6 @@ export default function MyDataTable() {
         clearSelectedRows={toggleCleared}
         pagination
       />
-
-      {/* confirmation modal demo */}
-      <button onClick={handleConfirm}>test confirmation modal</button>
     </>
   );
 }

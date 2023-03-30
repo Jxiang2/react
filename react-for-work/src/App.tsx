@@ -2,7 +2,7 @@ import React, { Suspense } from "react";
 import { Route, Routes, BrowserRouter, Link } from "react-router-dom";
 import { useConfirmationModalManager } from "context/useConfirmationModalManager/useConfirmationModalManager";
 import { AppContext } from "context/context";
-import { ConfirmationModal } from "./components";
+import { ConfirmationModal } from "./components/ConfirmationModal";
 import {
   MyDataTable,
   MemoDemo,
@@ -10,6 +10,7 @@ import {
   Parent,
   LifeCycle,
   TimerWrapper,
+  ComponentShowCase,
 } from "./pages";
 import { Container } from "./styles";
 
@@ -32,6 +33,7 @@ function App() {
               <Link to="/fastfoward">FastFoward</Link>
               <Link to="/memo">Memo</Link>
               <Link to="/timer">Timer (useEffect)</Link>
+              <Link to="/showcase">Showcase</Link>
             </nav>
           </header>
 
@@ -45,6 +47,7 @@ function App() {
                 <Route path="/fastfoward" element={<Parent />} />
                 <Route path="/memo" element={<MemoDemo />} />
                 <Route path="/timer" element={<TimerWrapper />} />
+                <Route path="/showcase" element={<ComponentShowCase />} />
               </Routes>
             </Suspense>
           </main>

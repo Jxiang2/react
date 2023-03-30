@@ -18,3 +18,9 @@ export const MemoDemo = lazy(
 export const TimerWrapper = lazy(
   () => import("pages/EffectDemo" /* webpackChunkName: "EffectDemo" */),
 );
+export const ComponentShowCase = lazy(
+  () =>
+    import(
+      "pages/ComponentShowCase" /* webpackChunkName: "ComponentShowCase" */
+    ),
+);
