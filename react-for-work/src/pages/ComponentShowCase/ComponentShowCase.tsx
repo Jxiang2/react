@@ -20,7 +20,7 @@ export function ComponentShowCase() {
       return;
     }
 
-    // mock response
+    // onConfirm actions here...
     console.log("Successfully confirmed!");
   }
 
