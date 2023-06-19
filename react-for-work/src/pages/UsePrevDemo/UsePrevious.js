@@ -20,9 +20,10 @@ export default function UsePreviousDemo() {
   const [count, setCount] = useState(0);
 
   const prevCount = usePrevious(count);
-  console.log("rendered: ", prevCount);
+  console.log("rendered: ", prevCount, " last time");
   return (
     <div style={{ marginTop: "50px" }}>
+      {console.log("ui rendered")}
       <h1>
         Now: {count}, before: {prevCount}{" "}
       </h1>
