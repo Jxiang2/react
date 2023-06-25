@@ -1,4 +1,6 @@
 import { useConfirmationModal } from "src/hooks";
+import { Calender } from "src/components";
+import { Divide } from "./styles";
 
 export function ComponentShowCase() {
   const { getConfirmation } = useConfirmationModal();
@@ -27,6 +29,10 @@ export function ComponentShowCase() {
     <>
       <h2>Hooked confirmation modal</h2>
       <button onClick={handleConfirm}>test confirmation modal</button>
+
+      <Divide />
+
+      <Calender />
     </>
   );
 }
