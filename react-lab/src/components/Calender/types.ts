@@ -12,4 +12,17 @@ export type MonthStartCalenderDate = {
   year: number;
 };
 
+export type CalenderEvent = {
+  id: number;
+  date: CalenderDate;
+};
+
+// App sepecific types
 export const ZONE = "America/Montreal";
+
+export type MyCalenderEvent = CalenderEvent & {
+  title: string;
+  color: string;
+};
+
+export type CreateCalenderEventFormState = { title: string };
