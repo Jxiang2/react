@@ -1,11 +1,6 @@
-import { CalenderDate, ZONE } from "./types";
-import { DateTime } from "luxon";
+import { CalenderDate, MonthStartCalenderDate, ZONE } from "./types";
+import { DateTime, PossibleDaysInMonth } from "luxon";
 
-/**
- * Get number of days in a month
- * @param {DateTime} date
- * @returns {number} number of days in month
- */
 const getDaysInMonth = (date: CalenderDate) => {
   const daysInMonth = DateTime.fromObject(
     {
@@ -19,12 +14,7 @@ const getDaysInMonth = (date: CalenderDate) => {
   return daysInMonth;
 };
 
-/**
- * Get range of day counts from 1 to end
- * @param {number} end
- * @returns {number[]} from 1 to end
- */
-const range = (end: number) => {
+const range = (end: PossibleDaysInMonth) => {
   const { result } = Array.from({ length: end }).reduce(
     ({ result, current }) => ({
       result: [...result, current],
@@ -33,6 +23,28 @@ const range = (end: number) => {
     { result: [], current: 1 },
   );
   return result as number[];
+};
+
+const getSortedDays = (date: MonthStartCalenderDate) => {
+  const daysInMonth = getDaysInMonth(date);
+
+  if (!daysInMonth) {
+    return undefined;
+  }
+
+  const daysInMonthRange = range(daysInMonth);
+  const weekday = DateTime.fromObject(
+    { day: date.day, month: date.month, year: date.year },
+    { zone: ZONE },
+  ).weekday;
+
+  const lastMonthDays = weekday - 1;
+
+  if (lastMonthDays > 0) {
+    return [...Array.from({ length: lastMonthDays }), ...daysInMonthRange];
+  }
+
+  return [...daysInMonthRange];
 };
 
 const datesAreOnSameDay = (first: CalenderDate, second: CalenderDate) =>
@@ -44,7 +56,7 @@ const getMonthAndYear = (date: CalenderDate) => {
   return `${date.month} ${date.year}`;
 };
 
-const nextMonth = (date: CalenderDate, cb: (...args: any) => any) => {
+const nextMonth = (date: CalenderDate, cb: (date: CalenderDate) => void) => {
   const dateCopy = { ...date };
   const month = dateCopy.month;
   const year = dateCopy.year;
@@ -55,10 +67,11 @@ const nextMonth = (date: CalenderDate, cb: (...args: any) => any) => {
     dateCopy.month = 1;
     dateCopy.year = year + 1;
   }
+
   cb(dateCopy);
 };
 
-const prevMonth = (date: CalenderDate, cb: (...args: any) => any) => {
+const prevMonth = (date: CalenderDate, cb: (date: CalenderDate) => void) => {
   const dateCopy = { ...date };
   const month = dateCopy.month;
   const year = dateCopy.year;
@@ -69,29 +82,8 @@ const prevMonth = (date: CalenderDate, cb: (...args: any) => any) => {
     dateCopy.month = 12;
     dateCopy.year = year - 1;
   }
+
   cb(dateCopy);
-};
-
-const getSortedDays = (date: CalenderDate) => {
-  const daysInMonth = getDaysInMonth(date);
-
-  if (daysInMonth) {
-    const daysInMonthRange = range(daysInMonth);
-    const weekday = DateTime.fromObject(
-      { day: date.day, month: date.month, year: date.year },
-      { zone: ZONE },
-    ).weekday;
-
-    const lastMonthDays = weekday - 1;
-
-    if (lastMonthDays > 0) {
-      return [...Array.from({ length: lastMonthDays }), ...daysInMonthRange];
-    }
-
-    return [...daysInMonthRange];
-  }
-
-  return undefined;
 };
 
 const getDarkColor = () => {

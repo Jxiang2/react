@@ -6,4 +6,10 @@ export type CalenderDate = {
   year: number;
 };
 
+export type MonthStartCalenderDate = {
+  day: 1;
+  month: number;
+  year: number;
+};
+
 export const ZONE = "America/Montreal";
