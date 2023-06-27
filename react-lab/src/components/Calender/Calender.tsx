@@ -116,12 +116,8 @@ export function Calender() {
         {sortedMonthDays.map((day, idx) => (
           <Tippy trigger="click" key={idx} render={() => <div>hello!</div>}>
             <div
-              id={`${currentMonthStart.year}/${currentMonthStart.month}/${
-                day || -1 * idx
-              }`}
-              key={`${currentMonthStart.year}/${currentMonthStart.month}/${
-                day || -1 * idx
-              }`}
+              id={`${currentMonthStart.year}/${currentMonthStart.month}/${day}`}
+              key={idx}
               onDragOver={(e) => e.preventDefault()}
               onDragEnd={(e) => onDrop(e, setEvents)}
               onDragEnter={(e) =>
