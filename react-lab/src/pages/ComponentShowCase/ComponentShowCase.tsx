@@ -32,6 +32,7 @@ export function ComponentShowCase() {
 
       <Divide />
 
+      <h2>Calender</h2>
       <Calender />
     </>
   );

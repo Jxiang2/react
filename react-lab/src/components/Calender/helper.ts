@@ -1,4 +1,4 @@
-import { CalenderDate, MonthStartCalenderDate } from "./types";
+import { CalenderDate } from "./types";
 import { DateTime, PossibleDaysInMonth } from "luxon";
 
 export class CalenderHelper {
@@ -32,7 +32,7 @@ export class CalenderHelper {
     return result as number[];
   }
 
-  getSortedDays(date: MonthStartCalenderDate) {
+  getSortedDays(date: CalenderDate) {
     const daysInMonth = this.getDaysInMonth(date);
 
     if (!daysInMonth) {
@@ -48,10 +48,13 @@ export class CalenderHelper {
     const lastMonthDays = weekday - 1;
 
     if (lastMonthDays > 0) {
-      return [...Array.from({ length: lastMonthDays }), ...daysInMonthRange];
+      return [
+        ...Array.from({ length: lastMonthDays }),
+        ...daysInMonthRange,
+      ] as (number | undefined)[];
     }
 
-    return [...daysInMonthRange];
+    return [...daysInMonthRange] as (number | undefined)[];
   }
 
   datesAreOnSameDay(first: CalenderDate, second: CalenderDate) {

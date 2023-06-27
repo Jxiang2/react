@@ -18,8 +18,8 @@ export const StyledEvent = styled.span<{ bgColor: string }>`
 `;
 
 export const SevenColGrid = styled.div<{
-  fullHeight: number;
-  is28Days: boolean;
+  fullHeight?: boolean;
+  is28Days?: boolean;
 }>`
   display: grid;
   grid-template-columns: repeat(7, 1fr);
@@ -53,6 +53,10 @@ export const SevenColGrid = styled.div<{
       font-size: 14px;
     }
   }
+`;
+
+export const EventHeader = styled.span<{ isToday: boolean }>`
+  background-color: ${(props) => (props.isToday ? "red" : "transparent")};
 `;
 
 export const HeadDays = styled.span`
