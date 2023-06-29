@@ -41,8 +41,6 @@ export function Calender() {
     setPortalData(form);
   };
 
-  console.log(events);
-
   const handlePotalClose = () => setShowPortal(false);
 
   const handleDelete = () => {
@@ -53,7 +51,6 @@ export function Calender() {
     handlePotalClose();
   };
 
-  // Add new event
   const handleAddEvent = (
     date: CalenderDate,
     event: MouseEvent<HTMLElement>,
@@ -116,7 +113,6 @@ export function Calender() {
         {sortedMonthDays.map((day, idx) => (
           <Tippy trigger="click" key={idx} render={() => <div>hello!</div>}>
             <div
-              id={`${currentMonthStart.year}/${currentMonthStart.month}/${day}`}
               key={idx}
               onDragOver={(e) => e.preventDefault()}
               onDragEnd={(e) => onDrop(e, setEvents)}
@@ -171,7 +167,7 @@ export function Calender() {
                   }) && (
                     <StyledEvent
                       key={event.id}
-                      onDragStart={(e) => onDragStart(index, e)}
+                      onDragStart={() => onDragStart(index)}
                       onClick={() => handleOnClickEvent(event)}
                       draggable
                       className="StyledEvent"
