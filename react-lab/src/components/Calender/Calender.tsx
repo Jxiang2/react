@@ -4,9 +4,8 @@ import { CalenderHelper, getDarkColor } from "./helper";
 import { useDnd } from "./hooks";
 import { CalenderDate, DAYS, MyCalenderItem, ZONE } from "./types";
 import { MOCKAPPS } from "./example";
-import Tippy from "@tippyjs/react";
 
-import { Portal } from "./component";
+import { DeletePortal } from "./component";
 import {
   SevenColGrid,
   Wrapper,
@@ -14,6 +13,7 @@ import {
   DateControls,
   StyledEvent,
   EventHeader,
+  AddEvent,
 } from "./styles";
 
 const NOW = DateTime.now().setZone(ZONE);
@@ -73,6 +73,12 @@ export function Calender() {
   // undefined means days of previous month
   const sortedMonthDays = helper.getSortedDays(currentMonthStart) || [];
 
+  const getCurrentMonthDate = (day: number) => ({
+    year: currentMonthStart.year,
+    month: currentMonthStart.month,
+    day,
+  });
+
   return (
     <Wrapper>
       {/* Control */}
@@ -111,66 +117,52 @@ export function Calender() {
         is28Days={helper.getDaysInMonth(currentMonthStart) === 28}
       >
         {sortedMonthDays.map((day, idx) => (
-          <Tippy trigger="click" key={idx} render={() => <div>hello!</div>}>
-            <div
-              key={idx}
-              onDragOver={(e) => e.preventDefault()}
-              onDragEnd={(e) => onDrop(e, setEvents)}
-              onDragEnter={(e) =>
+          <div
+            key={idx}
+            onDragOver={(e) => e.preventDefault()}
+            onDragEnd={(e) => onDrop(e, setEvents)}
+            onDragEnter={(e) =>
+              !!day && onDragEnter(getCurrentMonthDate(day), e)
+            }
+          >
+            {/* Cell header */}
+            <EventHeader
+              isToday={
                 !!day &&
-                onDragEnter(
+                helper.datesAreOnSameDay(
+                  { year: NOW.year, month: NOW.month, day: NOW.day },
                   {
                     year: currentMonthStart.year,
                     month: currentMonthStart.month,
                     day,
                   },
-                  e,
-                )
-              }
-              onClick={(e) =>
-                !!day &&
-                handleAddEvent(
-                  {
-                    year: currentMonthStart.year,
-                    month: currentMonthStart.month,
-                    day,
-                  },
-                  e,
                 )
               }
             >
-              {/* Cell header */}
-              <EventHeader
-                isToday={
-                  !!day &&
-                  helper.datesAreOnSameDay(
-                    { year: NOW.year, month: NOW.month, day: NOW.day },
-                    {
-                      year: currentMonthStart.year,
-                      month: currentMonthStart.month,
-                      day,
-                    },
-                  )
-                }
-              >
-                {day}
-              </EventHeader>
+              {day}
+              {!!day && (
+                <AddEvent
+                  onClick={(e) => handleAddEvent(getCurrentMonthDate(day), e)}
+                >
+                  Add
+                </AddEvent>
+              )}
+            </EventHeader>
 
-              {/* Cell body (events) */}
+            {/* Cell body (events) */}
+            <>
               {events.map(
                 (event, index) =>
                   !!day &&
-                  helper.datesAreOnSameDay(event.date, {
-                    year: currentMonthStart.year,
-                    month: currentMonthStart.month,
-                    day,
-                  }) && (
+                  helper.datesAreOnSameDay(
+                    event.date,
+                    getCurrentMonthDate(day),
+                  ) && (
                     <StyledEvent
                       key={event.id}
                       onDragStart={() => onDragStart(index)}
                       onClick={() => handleOnClickEvent(event)}
                       draggable
-                      className="StyledEvent"
                       id={`${event.color} ${event.title}`}
                       bgColor={event.color}
                     >
@@ -178,14 +170,14 @@ export function Calender() {
                     </StyledEvent>
                   ),
               )}
-            </div>
-          </Tippy>
+            </>
+          </div>
         ))}
       </SevenColGrid>
 
       {/* Delete event portal */}
       {showPortal && portalData && (
-        <Portal
+        <DeletePortal
           item={portalData}
           handleDelete={handleDelete}
           handlePotalClose={handlePotalClose}

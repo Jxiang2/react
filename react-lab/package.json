@@ -10,7 +10,6 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@tippyjs/react": "^4.2.6",
     "axios": "^1.4.0",
     "lodash": "^4.17.21",
     "luxon": "^3.3.0",

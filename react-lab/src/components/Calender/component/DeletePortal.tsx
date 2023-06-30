@@ -8,7 +8,7 @@ interface Props {
   handlePotalClose: () => void;
 }
 
-export function Portal({ item, handleDelete, handlePotalClose }: Props) {
+export function DeletePortal({ item, handleDelete, handlePotalClose }: Props) {
   return (
     <PortalWrapper>
       <h2>{item.title}</h2>

@@ -5,6 +5,33 @@ export const Wrapper = styled.div`
   height: 99vh;
 `;
 
+export const SevenColGrid = styled.div<{
+  fullHeight?: boolean;
+  is28Days?: boolean;
+}>`
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  ${(props) => props.fullHeight && `height: calc(100% - 75px);`}
+  ${(props) =>
+    props.fullHeight &&
+    `grid-template-rows: repeat(${props.is28Days ? 4 : 5}, 1fr);`}
+
+  div {
+    display: grid;
+    border: 1px solid;
+
+    span {
+      text-align: right;
+      padding-right: 15px;
+      height: fit-content;
+    }
+  }
+`;
+
+export const EventHeader = styled.span<{ isToday: boolean }>`
+  background-color: ${(props) => (props.isToday ? "red" : "transparent")};
+`;
+
 export const StyledEvent = styled.span<{ bgColor: string }>`
   background: ${({ bgColor }) => bgColor};
   color: white;
@@ -17,46 +44,9 @@ export const StyledEvent = styled.span<{ bgColor: string }>`
   text-transform: capitalize;
 `;
 
-export const SevenColGrid = styled.div<{
-  fullHeight?: boolean;
-  is28Days?: boolean;
-}>`
-  display: grid;
-  grid-template-columns: repeat(7, 1fr);
-  ${(props) => props.fullHeight && `height: calc(100% - 75px);`}
-  ${(props) =>
-    props.fullHeight &&
-    `grid-template-rows: repeat(${props.is28Days ? 4 : 5}, 1fr);`}
-  div {
-    display: grid;
-    border: 1px solid;
-    ${StyledEvent} {
-      display: none;
-    }
-    ${StyledEvent}:nth-child(-n + 3) {
-      display: block;
-    }
-
-    span {
-      text-align: right;
-      padding-right: 15px;
-      height: fit-content;
-    }
-
-    span.active {
-      background-color: pink;
-      border-bottom: 2px solid red;
-      position: relative;
-    }
-    span.active::before {
-      content: "Today ";
-      font-size: 14px;
-    }
-  }
-`;
-
-export const EventHeader = styled.span<{ isToday: boolean }>`
-  background-color: ${(props) => (props.isToday ? "red" : "transparent")};
+export const AddEvent = styled.button`
+  border-radius: 25%;
+  margin-left: 5px;
 `;
 
 export const HeadDays = styled.span`
@@ -81,13 +71,6 @@ export const DateControls = styled.div`
   }
 `;
 
-export const SeeMore = styled.p`
-  font-size: 12px;
-  padding: 0 5px;
-  margin-bottom: 0;
-  cursor: pointer;
-`;
-
 export const PortalWrapper = styled.div`
   background: white;
   position: absolute;
@@ -103,25 +86,5 @@ export const PortalWrapper = styled.div`
 
   h2 {
     font-size: 3rem;
-  }
-
-  ion-icon {
-    font-size: 2rem;
-    color: red;
-    background: lightblue;
-    padding: 10px 20px;
-    border-radius: 6px;
-  }
-
-  p {
-    margin-bottom: 15px;
-  }
-
-  ion-icon[name="close-outline"] {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    background: red;
-    color: lightblue;
   }
 `;
