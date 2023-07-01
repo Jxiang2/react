@@ -64,11 +64,6 @@ export const DateControls = styled.div`
   justify-content: space-around;
   padding: 10px 0;
   align-items: center;
-
-  ion-icon {
-    font-size: 1.6rem;
-    cursor: pointer;
-  }
 `;
 
 export const PortalWrapper = styled.div`

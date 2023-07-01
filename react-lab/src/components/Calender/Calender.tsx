@@ -70,14 +70,16 @@ export function Calender() {
     }
   };
 
-  // undefined means days of previous month
-  const sortedMonthDays = helper.getSortedDays(currentMonthStart) || [];
-
   const getCurrentMonthDate = (day: number) => ({
     year: currentMonthStart.year,
     month: currentMonthStart.month,
     day,
   });
+
+  // undefined means days of previous month
+  const sortedMonthDays = helper.getSortedDays(currentMonthStart) || [];
+
+  console.log(events);
 
   return (
     <Wrapper>
@@ -116,63 +118,61 @@ export function Calender() {
         fullHeight={true}
         is28Days={helper.getDaysInMonth(currentMonthStart) === 28}
       >
-        {sortedMonthDays.map((day, idx) => (
-          <div
-            key={idx}
-            onDragOver={(e) => e.preventDefault()}
-            onDragEnd={(e) => onDrop(e, setEvents)}
-            onDragEnter={(e) =>
-              !!day && onDragEnter(getCurrentMonthDate(day), e)
-            }
-          >
-            {/* Cell header */}
-            <EventHeader
-              isToday={
-                !!day &&
-                helper.datesAreOnSameDay(
-                  { year: NOW.year, month: NOW.month, day: NOW.day },
-                  {
-                    year: currentMonthStart.year,
-                    month: currentMonthStart.month,
-                    day,
-                  },
-                )
-              }
-            >
-              {day}
-              {!!day && (
-                <AddEvent
-                  onClick={(e) => handleAddEvent(getCurrentMonthDate(day), e)}
-                >
-                  Add
-                </AddEvent>
-              )}
-            </EventHeader>
+        <>
+          {/* Previous month cells */}
+          {sortedMonthDays
+            .filter((day) => !day)
+            .map((_, idx) => (
+              <div key={idx} />
+            ))}
 
-            {/* Cell body (events) */}
-            <>
-              {events.map(
-                (event, index) =>
-                  !!day &&
-                  helper.datesAreOnSameDay(
-                    event.date,
+          {/* Current month Cells */}
+          {(sortedMonthDays.filter((day) => !!day) as number[]).map(
+            (day, idx) => (
+              <div
+                key={idx}
+                onDragOver={(e) => e.preventDefault()}
+                onDragEnd={(e) => onDrop(e, setEvents)}
+                onDragEnter={(e) => onDragEnter(getCurrentMonthDate(day), e)}
+              >
+                {/* Cell header */}
+                <EventHeader
+                  isToday={helper.datesAreOnSameDay(
+                    { year: NOW.year, month: NOW.month, day: NOW.day },
                     getCurrentMonthDate(day),
-                  ) && (
-                    <StyledEvent
-                      key={event.id}
-                      onDragStart={() => onDragStart(index)}
-                      onClick={() => handleOnClickEvent(event)}
-                      draggable
-                      id={`${event.color} ${event.title}`}
-                      bgColor={event.color}
-                    >
-                      {event.title}
-                    </StyledEvent>
-                  ),
-              )}
-            </>
-          </div>
-        ))}
+                  )}
+                >
+                  {day}
+                  <AddEvent
+                    onClick={(e) => handleAddEvent(getCurrentMonthDate(day), e)}
+                  >
+                    Add
+                  </AddEvent>
+                </EventHeader>
+
+                {/* Cell body (events) */}
+                {events.map(
+                  (event) =>
+                    helper.datesAreOnSameDay(
+                      event.date,
+                      getCurrentMonthDate(day),
+                    ) && (
+                      <StyledEvent
+                        key={event.id}
+                        onDragStart={() => onDragStart(event.id)}
+                        onClick={() => handleOnClickEvent(event)}
+                        draggable
+                        id={`${event.color} ${event.title}`}
+                        bgColor={event.color}
+                      >
+                        {event.title}
+                      </StyledEvent>
+                    ),
+                )}
+              </div>
+            ),
+          )}
+        </>
       </SevenColGrid>
 
       {/* Delete event portal */}

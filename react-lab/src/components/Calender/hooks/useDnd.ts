@@ -2,33 +2,33 @@ import { useRef, DragEvent } from "react";
 import { CalenderDate, CalenderEvent } from "../types";
 
 export function useDnd() {
-  const dragEventRef = useRef<number | null>(null);
-  const dragDateRef = useRef<CalenderDate | null>(null);
+  const eventIdRef = useRef<number | null>(null);
+  const todDateRef = useRef<CalenderDate | null>(null);
 
   const onDragStart = (index: number) => {
-    dragEventRef.current = index;
+    eventIdRef.current = index;
   };
 
   const onDragEnter = (date: CalenderDate, e: DragEvent<EventTarget>) => {
     e.preventDefault();
-    dragDateRef.current = date;
+    todDateRef.current = date;
   };
 
   const onDrop = <T extends CalenderEvent>(
     e: DragEvent<EventTarget>,
-    cb: (updater: (events: T[]) => T[]) => void,
+    setter: (updater: (events: T[]) => T[]) => void,
   ) => {
     e.preventDefault();
 
     const updaterFn = (prev: T[]) =>
-      prev.map((event, idx) => {
-        if (idx === dragEventRef.current && dragDateRef.current) {
-          event.date = dragDateRef.current;
+      prev.map((event) => {
+        if (event.id === eventIdRef.current && todDateRef.current) {
+          event.date = todDateRef.current;
         }
         return event;
       });
 
-    cb(updaterFn);
+    setter(updaterFn);
   };
 
   return {
