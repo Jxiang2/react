@@ -25,3 +25,7 @@ export const ComponentShowCase = lazy(
       "src/pages/ComponentShowCase" /* webpackChunkName: "ComponentShowCase" */
     ),
 );
+
+export const RxjsDemo = lazy(
+  () => import("src/pages/RxjsDemo" /* webpackChunkName: "RxjsDemo" */),
+);

@@ -11,6 +11,7 @@ import {
   LifeCycle,
   TimerWrapper,
   ComponentShowCase,
+  RxjsDemo,
 } from "./pages";
 import { Container } from "./styles";
 
@@ -32,6 +33,7 @@ function App() {
               <Link to="/memo">Memo</Link>
               <Link to="/timer">Timer (useEffect)</Link>
               <Link to="/showcase">Showcase</Link>
+              <Link to="/rxjs">RxjsDemo</Link>
             </nav>
           </header>
 
@@ -46,6 +48,7 @@ function App() {
                 <Route path="/memo" element={<MemoDemo />} />
                 <Route path="/timer" element={<TimerWrapper />} />
                 <Route path="/showcase" element={<ComponentShowCase />} />
+                <Route path="/rxjs" element={<RxjsDemo />} />
               </Routes>
             </Suspense>
           </main>
