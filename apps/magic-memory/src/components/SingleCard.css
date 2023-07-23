@@ -9,7 +9,7 @@
   border-radius: 6px;
 }
 
-/* front of card - the picture */
+/* Front */
 .card .front {
   transform: rotateY(90deg); /* can't see the card */
   position: absolute; /* the card front occupy the whole div*/
@@ -21,9 +21,10 @@
   transition-delay: 0.2s;
 }
 
+/* Back */
 .card .back {
+  transform: rotateY(0deg);
   transition: all ease-in 0.2s;
-  transition-delay: 0.2s;
 }
 
 .flipped .back {
